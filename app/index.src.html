@@ -14,6 +14,7 @@
   --brick-ink:#ffffff;
   --glass:#3d8fd1;
   --chip:#ffffffde;
+  --sup:#2f7fd6; --eta:#de8a2c; --oda:#3f9e4d; --eha:#8a5a44; --shaft:#9aa6ae;
   --font-ui:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --font-display:"Unbounded","Golos Text",system-ui,sans-serif;
   --font-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -65,6 +66,20 @@ label.file{position:relative;display:inline-flex;border:1px dashed var(--line);b
 label.file input{position:absolute;inset:0;opacity:0;cursor:pointer}
 .note{font-size:12px;color:var(--muted);line-height:1.45;margin:0}
 .toast{font-size:12.5px;color:var(--brick);min-height:1em}
+.legend{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:5px 10px;font-size:12.5px}
+.legend li{display:flex;gap:7px;align-items:center}
+.legend i{flex:none;width:18px;height:5px;border-radius:3px}
+.legend i.sq{height:12px;width:12px;border-radius:2px;opacity:.7}
+.vtable-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+.vtable{border-collapse:collapse;width:100%;font-size:12.5px}
+.vtable th,.vtable td{padding:5px 8px;text-align:left;border-bottom:1px solid var(--line)}
+.vtable tr:last-child td{border-bottom:0}
+.vtable td.n{text-align:right;font-family:var(--font-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.vtable th{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.vtable tr.res td{color:var(--muted)}
+.vtable tr.tot td{font-weight:600}
+.lbl.vent{font-family:var(--font-mono);font-size:10.5px;font-weight:600;padding:1px 4px;border-radius:4px;background:var(--chip);text-shadow:none}
+.lbl.vent.sup{color:var(--sup)} .lbl.vent.eta{color:var(--eta)} .lbl.vent.unit{color:var(--ink);font-size:11.5px}
 
 .stage{position:relative;min-width:0;overflow:hidden}
 .stage canvas{display:block;width:100%;height:100%;touch-action:none}
@@ -139,12 +154,23 @@ label.file input{position:absolute;inset:0;opacity:0;cursor:pointer}
       </div>
     </section>
 
-    <section aria-label="Мебель">
-      <h2>Мебель <span id="furnFloor" style="text-transform:none;letter-spacing:0"></span></h2>
-      <div class="row">
-        <select id="preset" aria-label="Тип мебели" style="flex:1"></select>
-        <button class="btn primary" id="addFurn">Добавить</button>
-      </div>
+    <section aria-label="Вентиляция">
+      <h2>Вентиляция спален</h2>
+      <label class="chk"><input type="checkbox" id="showVent" checked> Показать рекуператоры, шахты и трубы</label>
+      <label class="chk"><input type="checkbox" id="showReserve" checked> Резерв: комната 1-го этажа</label>
+      <ul class="legend" aria-label="Обозначения">
+        <li><i style="background:var(--sup)"></i>Приток в спальню</li>
+        <li><i style="background:var(--eta)"></i>Вытяжка из спальни</li>
+        <li><i style="background:var(--oda)"></i>Забор наружного воздуха</li>
+        <li><i style="background:var(--eha)"></i>Выброс на улицу</li>
+        <li><i class="sq" style="background:var(--shaft)"></i>Шахта (гофра в коробе)</li>
+      </ul>
+      <div class="vtable-wrap"><table class="vtable" id="ventTable"></table></div>
+      <p class="note">Нажмите на трубу, решётку, шахту или рекуператор — внизу появятся диаметр, расход и высота. Решётки стоят в стенах спален, трубы идут через подшивной потолок санузлов и кладовых.</p>
+    </section>
+
+    <section aria-label="Объекты" id="objSection" hidden>
+      <h2>Загруженные 3D-модели <span id="furnFloor" style="text-transform:none;letter-spacing:0"></span></h2>
       <div class="list" id="furnList"></div>
       <div class="editor" id="editor" hidden>
         <input type="text" id="fName" aria-label="Название">
@@ -159,7 +185,7 @@ label.file input{position:absolute;inset:0;opacity:0;cursor:pointer}
           <button class="btn" id="dupFurn">Копия</button>
           <button class="btn danger" id="delFurn">Удалить</button>
         </div>
-        <p class="note">Перетаскивайте мебель мышью или пальцем. Клавиши: R — повернуть, Del — удалить.</p>
+        <p class="note">Перетаскивайте модель мышью или пальцем. Клавиши: R — повернуть, Del — удалить.</p>
       </div>
     </section>
 
@@ -175,7 +201,7 @@ label.file input{position:absolute;inset:0;opacity:0;cursor:pointer}
       <label class="file">Открыть проект (.json)<input type="file" id="projFile" accept=".json,application/json"></label>
       <div class="row"><button class="btn" id="copyProj">Копировать проект (JSON)</button></div>
       <p class="toast" id="toast" role="status"></p>
-      <p class="note">Стены, окна и проёмы сняты с листов КЖ 9.1 и 9.2. Высоты условные: этаж 3,3 м, подоконник 0,85 м, верх окна 2,25 м, двери 2,1 м.</p>
+      <p class="note">Стены, окна и проёмы сняты с листов КЖ 9.1 и 9.2. Высоты условные: этаж 3,3 м, потолок 3,05 м, подоконник 0,85 м, верх окна 2,25 м, двери 2,1 м. Крыша показана плоской.</p>
     </section>
   </aside>
 
@@ -202,34 +228,14 @@ const DEFAULT_UNDERLAYS = {1: "__UNDERLAY_1__", 2: "__UNDERLAY_2__"};
 
 /* ---------- константы ---------- */
 const SILL = 0.85, HEAD = 2.25, DOOR = 2.1, GLASS_TOP = 2.7;
-const PRESETS = [
-  ["Кровать двуспальная", 160, 200, 45, "#c9b79c"],
-  ["Кровать односпальная", 90, 200, 45, "#c9b79c"],
-  ["Двухъярусная кровать", 90, 200, 160, "#b9a689"],
-  ["Диван", 220, 95, 85, "#7f8f9c"],
-  ["Угловой диван", 260, 160, 85, "#7f8f9c"],
-  ["Кресло", 85, 85, 85, "#8b9aa6"],
-  ["Шкаф-купе", 180, 60, 240, "#d8cfc2"],
-  ["Шкаф", 120, 60, 220, "#d8cfc2"],
-  ["Комод", 100, 45, 85, "#cdbfae"],
-  ["Тумбочка", 45, 40, 50, "#cdbfae"],
-  ["Обеденный стол", 160, 90, 75, "#a7835f"],
-  ["Стул", 45, 50, 90, "#8d6c4e"],
-  ["Письменный стол", 120, 60, 75, "#a7835f"],
-  ["ТВ-тумба", 180, 40, 50, "#5f666c"],
-  ["Кухня прямая", 300, 60, 90, "#e6e1d9"],
-  ["Холодильник", 60, 65, 185, "#dfe3e6"],
-  ["Стиральная машина", 60, 60, 85, "#e8ecef"],
-  ["Ковёр", 200, 300, 1, "#b88a6c"],
-  ["Дастархан / сўри", 200, 200, 45, "#9a6b45"],
-];
+
 const FLOOR_COLORS = {living:0xd9c3a2, wet:0xb9cfd8, hall:0xcfc7bb, stair:0xc4beb5, store:0xcfc7bb, outdoor:0x000000};
 
 /* ---------- состояние ---------- */
 let HOUSE = DEFAULT_HOUSE;
 let UNDERLAY_SRC = {...DEFAULT_UNDERLAYS};
 let CX = 0, CY = 0;
-const state = {mode:"3d", floor:0, explode:0, lowWalls:false, labels:true, roof:false, underlay:false, underlayOpacity:0.85,
+const state = {vent:true, reserve:true, mode:"3d", floor:0, explode:0, lowWalls:false, labels:true, roof:false, underlay:false, underlayOpacity:0.85,
   measure:false, selected:null};
 let furniture = [];
 const modelStore = new Map();   // id -> THREE.Object3D (загруженные модели, только в памяти)
@@ -427,9 +433,177 @@ function buildHouse(){
   for (const room of top.rooms) if (room.kind !== "outdoor") for (const r of room.rects) { const m = box(r, re, re + slab, mats.roof); if (m) roofGroup.add(m); }
   floorGroups[top.level].group.add(roofGroup);
 
+  buildVent();
   $("houseName").textContent = HOUSE.name + (HOUSE.source ? " · " + HOUSE.source : "");
   rebuildFurniture();
   applyView();
+}
+
+/* ---------- вентиляция ---------- */
+const VENT_COLORS = {sup:0x2f7fd6, eta:0xde8a2c, oda:0x3f9e4d, eha:0x8a5a44};
+const VENT_NAMES = {sup:"Приток", eta:"Вытяжка", oda:"Забор наружного воздуха", eha:"Выброс"};
+const ZONE_NAMES = {roof:"на кровле, в теплоизоляции 50 мм и защитном кожухе",
+  ceil2:"в подшивном потолке санузла / кладовой 2-го этажа", ceil1:"в подшивном потолке санузла 1-го этажа"};
+const ventMats = {};
+function ventMat(type, reserve){
+  const k = type + (reserve ? "r" : "");
+  if (!ventMats[k]) ventMats[k] = new THREE.MeshLambertMaterial({color:VENT_COLORS[type] || 0x999999, transparent:!!reserve, opacity:reserve ? 0.4 : 1});
+  return ventMats[k];
+}
+const shaftMat = new THREE.MeshLambertMaterial({color:0x9aa6ae, transparent:true, opacity:0.35, depthWrite:false});
+const unitMat = new THREE.MeshLambertMaterial({color:0xe9ecee});
+let ventObjs = [], ventPick = [];
+const fmt = v => String(v).replace(".", ",");
+function roomName(side, id){ const r = side.rooms.find(r => r.id === id); return r ? r.name : ""; }
+
+function V3(p){ const [X, Z] = P(p[0], p[1]); return new THREE.Vector3(X, mm(p[2]), Z); }
+function addVent(level, obj, info, reserve){
+  const fl = floorGroups[level]; if (!fl) return;
+  obj.userData.vent = info; obj.userData.reserve = !!reserve;
+  fl.group.add(obj); ventObjs.push(obj); if (info) ventPick.push(obj);
+}
+function ventLabel(level, pos, text, cls, reserve){
+  const fl = floorGroups[level]; if (!fl) return;
+  const el = document.createElement("div"); el.className = "lbl vent " + cls; el.textContent = text;
+  $("labels").appendChild(el);
+  const rec = {el, pos, level, grp:fl.group, vent:true, reserve:!!reserve};
+  labelEls.push(rec);
+}
+function tube(a, b, r, mat){
+  const dir = new THREE.Vector3().subVectors(b, a), len = dir.length();
+  const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, len, 14), mat);
+  m.position.copy(a).add(b).multiplyScalar(0.5);
+  m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.normalize());
+  m.castShadow = true; return m;
+}
+
+function buildVent(){
+  ventObjs = []; ventPick = [];
+  const V = HOUSE.vent; if (!V) return;
+  const FL2 = V.levels.fl2;
+  for (const side of V.sides){
+    // рекуператор
+    const u = side.unit;
+    const um = box(u.rect, mm(u.z[0]), mm(u.z[1]), unitMat);
+    um.add(new THREE.LineSegments(new THREE.EdgesGeometry(um.geometry), new THREE.LineBasicMaterial({color:0x2b3338})));
+    addVent(2, um, {kind:"unit", side});
+    const [ux, uz] = P((u.rect[0] + u.rect[1]) / 2, (u.rect[2] + u.rect[3]) / 2);
+    ventLabel(2, new THREE.Vector3(ux, mm(u.z[1]) + 0.25, uz), `${u.name} · ${side.total} м³/ч`, "unit");
+    // шахты
+    for (const s of side.shafts){
+      const lvl = s.z[1] <= FL2 ? 1 : 2;
+      const m = box(s.rect, mm(s.z[0]), mm(s.z[1]), shaftMat, false);
+      m.add(new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry), new THREE.LineBasicMaterial({color:0x5d6b75, transparent:true, opacity:s.reserve ? 0.4 : 0.9})));
+      addVent(lvl, m, {kind:"shaft", side, shaft:s}, s.reserve);
+      if (!s.reserve){
+        const [sx_, sz_] = P(s.rect[1] + 150, (s.rect[2] + s.rect[3]) / 2);
+        ventLabel(2, new THREE.Vector3(sx_, mm(s.z[1]) + 0.35, sz_), s.name, "unit");
+      }
+    }
+    // трубы
+    for (const d of side.ducts){
+      const lvl = d.zone === "ceil1" ? 1 : 2;
+      const r = d.d / 2000 + (d.zone === "roof" ? 0.05 : 0);
+      const mat = ventMat(d.type, d.reserve);
+      const pts = d.pts.map(V3);
+      for (let i = 0; i < pts.length - 1; i++){
+        if (pts[i].distanceTo(pts[i + 1]) < 0.01) continue;
+        addVent(lvl, tube(pts[i], pts[i + 1], r, mat), {kind:"duct", side, duct:d}, d.reserve);
+      }
+      for (let i = 1; i < pts.length - 1; i++){
+        const j = new THREE.Mesh(new THREE.SphereGeometry(r, 12, 8), mat); j.position.copy(pts[i]);
+        addVent(lvl, j, {kind:"duct", side, duct:d}, d.reserve);
+      }
+      if (d.type === "oda" || d.type === "eha"){
+        const end = pts[pts.length - 1];
+        const cap = new THREE.Mesh(new THREE.ConeGeometry(r * 2.2, 0.25, 16), mat);
+        cap.position.copy(end).add(new THREE.Vector3(0, 0.2, 0));
+        addVent(lvl, cap, {kind:"duct", side, duct:d});
+        ventLabel(2, end.clone().add(new THREE.Vector3(0, 0.55, 0)), d.type === "oda" ? "забор" : "выброс", "unit");
+      }
+    }
+    // решётки в стенах спален
+    for (const g of side.grilles){
+      const lvl = g.reserve ? 1 : 2;
+      const w = 0.25, h = 0.12, t = 0.04;
+      const along = g.n[0] === 0 ? [w, t] : [t, w];
+      const geo = new THREE.BoxGeometry(along[0], h, along[1]);
+      const m = new THREE.Mesh(geo, ventMat(g.type, g.reserve));
+      const [X, Z] = P(g.pos[0], g.pos[1]);
+      m.position.set(X + g.n[0] * t / 2, mm(g.pos[2]), Z - g.n[1] * t / 2);
+      addVent(lvl, m, {kind:"grille", side, grille:g}, g.reserve);
+      ventLabel(lvl, m.position.clone().add(new THREE.Vector3(g.n[0] * 0.35, -0.3, -g.n[1] * 0.35)),
+        `${g.type === "sup" ? "П" : "В"} ${g.flow}`, g.type, g.reserve);
+    }
+    // датчики CO2 и пульт (электрика)
+    for (const s of side.sensors){
+      const [X, Z] = P(s.pos[0], s.pos[1]);
+      const m = new THREE.Mesh(new THREE.BoxGeometry(0.09, 0.09, 0.09), new THREE.MeshLambertMaterial({color:0x6c4fb3}));
+      m.position.set(X, mm(s.pos[2]), Z);
+      addVent(2, m, {kind:"sensor", side, sensor:s});
+    }
+    for (const c of side.cables){
+      const [X, Z] = P(c.pos[0], c.pos[1]);
+      const m = c.kind === "power"
+        ? new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.5, 12), new THREE.MeshLambertMaterial({color:0x6c4fb3}))
+        : new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.1, 0.03), new THREE.MeshLambertMaterial({color:0x6c4fb3}));
+      m.position.set(X, c.pos[2] ? mm(c.pos[2]) : mm(V.levels.roof) + 0.25, Z);
+      addVent(2, m, {kind:"cable", side, cable:c});
+    }
+  }
+  renderVentTable();
+}
+
+function renderVentTable(){
+  const V = HOUSE.vent, t = $("ventTable"); if (!V || !t) return;
+  const side = V.sides[0];
+  const rows = side.rooms.map(r => `<tr class="${r.reserve ? "res" : ""}"><td></td><td class="n">${r.flow}</td></tr>`);
+  t.innerHTML = `<thead><tr><th>Спальня (на половину дома)</th><th>м³/ч</th></tr></thead><tbody>${rows.join("")}
+    <tr class="tot"><td>Итого на рекуператор</td><td class="n">${side.total}</td></tr>
+    <tr class="res"><td>С резервом 1-го этажа</td><td class="n">${side.totalWithReserve}</td></tr></tbody>`;
+  t.querySelectorAll("tbody tr").forEach((tr, i) => { if (i < side.rooms.length) tr.cells[0].textContent = side.rooms[i].name; });
+}
+
+function showVent(info){
+  const el = $("info"); el.hidden = false; el.innerHTML = "";
+  const side = info.side, lines = [];
+  let title = "";
+  if (info.kind === "unit"){
+    title = `${side.unit.name} (${HOUSE.vent.unitCapacity} м³/ч)`;
+    lines.push(`расчёт: ${side.total} м³/ч приток = ${side.total} м³/ч вытяжка`,
+      `с резервом 1-го этажа: ${side.totalWithReserve} м³/ч`,
+      `загрузка ≈ ${Math.round(side.total / HOUSE.vent.unitCapacity * 100)}% — работает тихо`,
+      "стоит над лестницей, не над спальнями");
+  } else if (info.kind === "shaft"){
+    const s = info.shaft;
+    title = s.name + (s.reserve ? " (резерв вниз)" : "");
+    lines.push(s.where, s.reserve ? "гофра Ø125 ×2 до потолка с/у 1-го эт." : "внутри: 2 трубы Ø160 + гофра Ø32 под кабели",
+      `короб в углу ${Math.round((s.rect[1] - s.rect[0]) / 10)}×${Math.round((s.rect[3] - s.rect[2]) / 10)} см`);
+  } else if (info.kind === "duct"){
+    const d = info.duct;
+    const to = d.room ? roomName(side, d.room) : d.to ? `шахта ${d.to}-${side.tag}` : "";
+    title = VENT_NAMES[d.type] + (to ? ` → ${to}` : "");
+    lines.push(`Ø${d.d} мм · ${d.flow} м³/ч · ${fmt(d.v)} м/с`, ZONE_NAMES[d.zone] || "");
+    if (d.type === "oda") lines.push("колпак сеткой вниз, низ не ниже 1 м над кровлей");
+    if (d.type === "eha") lines.push("выше забора на 1 м и в 3,5 м от него");
+    if (d.reserve) lines.push("резерв: прокладывать, если комната станет спальней");
+  } else if (info.kind === "grille"){
+    const g = info.grille;
+    title = `Решётка: ${g.type === "sup" ? "приток" : "вытяжка"} · ${roomName(side, g.room)}`;
+    lines.push(`${g.flow} м³/ч, решётка 200×100 мм или диффузор Ø125`, g.wall,
+      `центр на ${fmt((g.pos[2] - (g.reserve ? 0 : HOUSE.vent.levels.fl2)) / 1000)} м от пола`,
+      `${Math.round(g.off / 10)} см от угла: ${g.from}`);
+    if (g.type === "sup") lines.push("жалюзи направить вдоль потолка в комнату");
+  } else if (info.kind === "sensor"){
+    title = `Датчик CO₂ (по желанию) · ${roomName(side, info.sensor.room)}`;
+    lines.push("слаботочный кабель (витая пара) до шахты, h = 1,5 м");
+  } else if (info.kind === "cable"){
+    title = info.cable.kind === "power" ? "Кабели к рекуператору" : "Пульт управления";
+    lines.push(info.cable.label);
+    if (info.cable.kind === "power") lines.push("силовой 5×4 мм² от щита, управление — витая пара", "рядом ремонтный выключатель IP65");
+  }
+  const b = document.createElement("b"); b.textContent = title;
+  el.append(b, ...lines.filter(Boolean).map(t => { const s = document.createElement("span"); s.className = "mono"; s.textContent = t; return s; }));
 }
 
 /* ---------- подложка-чертёж ---------- */
@@ -500,7 +674,7 @@ function rebuildFurniture(){
   renderFurnList();
   saveFurniture();
 }
-function saveFurniture(){ store.set("uyplan.furniture", furniture.filter(f => f.kind !== "model")); }
+function saveFurniture(){ /* загруженные модели живут только в памяти */ }
 function selected(){ return furniture.find(f => f.id === state.selected) || null; }
 
 function addFurniture(p){
@@ -519,7 +693,8 @@ function renderFurnList(){
   $("furnFloor").textContent = `· ${lvl}-й этаж`;
   const list = $("furnList"); list.innerHTML = "";
   const items = furniture.filter(f => f.floor === lvl);
-  if (!items.length){ list.innerHTML = '<div class="empty">Пока пусто. Выберите предмет и нажмите «Добавить» — он появится в центре экрана.</div>'; return; }
+  $("objSection").hidden = !furniture.length;
+  if (!items.length){ list.innerHTML = '<div class="empty">На этом этаже моделей нет.</div>'; return; }
   for (const it of items){
     const b = document.createElement("button");
     b.setAttribute("aria-current", it.id === state.selected ? "true" : "false");
@@ -552,8 +727,6 @@ $("dupFurn").onclick = () => {
   if (it.kind === "model") modelStore.set(c.id, modelStore.get(it.id));
   furniture.push(c); state.selected = c.id; rebuildFurniture(); renderEditor();
 };
-PRESETS.forEach(([n, w, d, h], i) => { const o = document.createElement("option"); o.value = i; o.textContent = `${n} — ${w}×${d}`; $("preset").appendChild(o); });
-$("addFurn").onclick = () => { const [name, w, d, h, color] = PRESETS[+$("preset").value]; addFurniture({name, w, d, h, color}); };
 
 /* ---------- видимость, режимы ---------- */
 function applyVisibility(){
@@ -565,6 +738,8 @@ function applyVisibility(){
     if (fl.underlay){ fl.underlay.visible = state.underlay; fl.underlay.material.opacity = state.underlayOpacity; }
   }
   sun.castShadow = state.mode === "3d";
+  for (const o of ventObjs) o.visible = state.vent && (!o.userData.reserve || state.reserve);
+  mats.roof.transparent = state.vent; mats.roof.opacity = state.vent ? 0.45 : 1; mats.roof.depthWrite = !state.vent;
   if (roofGroup) roofGroup.visible = state.roof && state.mode === "3d" && (state.floor === 0);
   for (const o of furnGroup.children){
     const it = o.userData.furn;
@@ -641,6 +816,8 @@ $("showRoof").onchange = e => { state.roof = e.target.checked; applyView(); };
 $("showUnderlay").onchange = e => { state.underlay = e.target.checked; applyView(); };
 $("underlayOpacity").oninput = e => { state.underlayOpacity = +e.target.value; $("underlayOut").textContent = Math.round(state.underlayOpacity * 100) + "%"; applyView(); };
 $("resetBtn").onclick = resetView;
+$("showVent").onchange = e => { state.vent = e.target.checked; applyView(); };
+$("showReserve").onchange = e => { state.reserve = e.target.checked; applyView(); };
 $("menuBtn").onclick = () => { const a = $("app").classList.toggle("collapsed"); $("menuBtn").setAttribute("aria-expanded", String(!a)); setTimeout(resize, 50); };
 
 /* ---------- указатель: выбор, перетаскивание, рулетка ---------- */
@@ -680,6 +857,8 @@ canvas.addEventListener("pointerup", ev => {
   if (moved || ev.button !== 0) return;
   setNdc(ev);
   if (state.measure){ measureClick(); return; }
+  const vh = ray.intersectObjects(ventPick.filter(o => o.visible && o.parent && o.parent.visible), false);
+  if (vh.length){ showVent(vh[0].object.userData.vent); return; }
   const floors = [];
   for (const l of [1, 2]) if (floorGroups[l] && floorGroups[l].group.visible) floors.push(...floorGroups[l].floors);
   const hits = ray.intersectObjects(floors, false);
@@ -779,13 +958,12 @@ $("projFile").onchange = async e => {
     const data = JSON.parse(await readFile(file, "readAsText"));
     const house = data.house || (data.floors ? data : null);
     if (house){ HOUSE = house; UNDERLAY_SRC = data.underlays || {}; }
-    if (Array.isArray(data.furniture)) furniture = data.furniture.filter(f => f.kind !== "model");
     state.selected = null; buildHouse(); renderEditor(); resetView();
     toast("Проект открыт.");
   } catch (err){ toast("Файл не похож на проект Uy Plan (нужен JSON с полями house/floors или furniture)."); }
 };
 $("copyProj").onclick = () => {
-  const txt = JSON.stringify({app:"Uy Plan", house:HOUSE, furniture:furniture.filter(f => f.kind !== "model")});
+  const txt = JSON.stringify({app:"Uy Plan", house:HOUSE});
   navigator.clipboard.writeText(txt).then(() => toast("Проект скопирован. Вставьте в текстовый файл и сохраните как .json."),
     () => toast("Браузер не дал доступ к буферу обмена."));
 };
@@ -815,7 +993,8 @@ function tick(){
   const small = camDist > 55 || w < 640;
   const topLabel = state.floor || (state.mode === "plan" ? 1 : 2);
   for (const l of labelEls){
-    let show = l.fixed || (state.labels && l.grp && l.grp.visible && (l.level === topLabel || state.explode >= 2.5));
+    let show = l.fixed || (l.vent ? (state.vent && l.grp.visible && (!l.reserve || state.reserve) && (l.level === topLabel || state.explode >= 2.5 || state.mode === "plan"))
+      : (state.labels && l.grp && l.grp.visible && (l.level === topLabel || state.explode >= 2.5)));
     if (show && !l.fixed){
       v.copy(l.pos); v.y += l.grp.position.y;
     } else v.copy(l.pos);
@@ -825,7 +1004,7 @@ function tick(){
       if (show){ l.el.style.left = ((v.x + 1) / 2 * w) + "px"; l.el.style.top = ((1 - v.y) / 2 * h) + "px"; }
     }
     l.el.hidden = !show;
-    if (!l.fixed) l.el.querySelectorAll("span").forEach(s => s.hidden = small);
+    if (!l.fixed && !l.vent) l.el.querySelectorAll("span").forEach(s => s.hidden = small);
   }
   requestAnimationFrame(tick);
 }
@@ -836,13 +1015,8 @@ function tick(){
   Object.assign(state, {floor:v0.floor || 0, explode:v0.explode || 0, lowWalls:!!v0.lowWalls, labels:v0.labels !== false, roof:!!v0.roof});
   $("explode").value = state.explode; $("explodeOut").textContent = state.explode.toFixed(1).replace(".", ",") + " м";
   $("showLabels").checked = state.labels; $("showRoof").checked = state.roof;
-  const saved = store.get("uyplan.furniture", null);
-  furniture = Array.isArray(saved) ? saved : [
-    {id:"f1", name:"Кровать двуспальная", w:160, d:200, h:45, color:"#c9b79c", kind:"box", floor:2, x:2200, y:2200, rot:0},
-    {id:"f2", name:"Шкаф-купе", w:180, d:60, h:240, color:"#d8cfc2", kind:"box", floor:2, x:1250, y:4500, rot:0},
-    {id:"f3", name:"Диван", w:220, d:95, h:85, color:"#7f8f9c", kind:"box", floor:1, x:12700, y:7650, rot:0},
-  ];
-  if (!Array.isArray(saved)) toast("Для примера поставлены кровать, шкаф и диван — их можно двигать или удалить.");
+  furniture = [];
+  try { localStorage.removeItem("uyplan.furniture"); } catch (e) {}
   applyTheme(); resize(); buildHouse(); resetView(); tick();
 })();
 </script>

@@ -15,6 +15,7 @@ import pypdfium2 as pdfium
 from PIL import Image
 
 import make_plan as mp
+import vent
 
 APP = os.path.join(mp.ROOT, "app")
 
@@ -116,6 +117,7 @@ if __name__ == "__main__":
         "floorHeight": 3300,
         "slab": 250,
         "floors": [floor_data(1), floor_data(2)],
+        "vent": vent.data(),
         "site": {"yard": [4600, 25100, 200, 6600], "innerYard": [4600, 25100, 12400, 13900],
                  "fence": [[-205, 14400], [29905, 14175]]},
     }

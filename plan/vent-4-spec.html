@@ -1,0 +1,62 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Вентиляция — спецификация</title>
+<style>
+@page{size:A3 landscape;margin:12mm}
+body{font-family:"DejaVu Sans",Arial,sans-serif;color:#1c2830;font-size:10pt;margin:0}
+h1{font-size:20pt;margin:0 0 4mm}
+h2{font-size:12.5pt;margin:5mm 0 2mm;text-transform:uppercase;letter-spacing:.04em;color:#444}
+.grid{display:grid;grid-template-columns:1.15fr 1fr;gap:8mm}
+table{border-collapse:collapse;width:100%;font-size:9.5pt}
+th,td{border:1px solid #c9d1d6;padding:3px 6px;text-align:left;vertical-align:top}
+th{background:#eef1f3;font-weight:600}
+td.n{text-align:right;font-variant-numeric:tabular-nums}
+tr.res td{color:#777}
+ul{margin:0;padding-left:5mm} li{margin:1mm 0}
+.muted{color:#666;font-size:9pt}
+svg{display:block;width:100%;height:92mm}
+h2{margin-top:3.5mm}
+</style></head><body>
+<h1>Вентиляция спален: разрез, спецификация, электрика</h1>
+<p class="muted">Два рекуператора по 1000 м³/ч на кровле, по одному на каждую половину дома (половины зеркальны). Приточно-вытяжная система только для спален. Все цифры — на ОДНУ половину дома, на весь дом ×2.</p>
+<div class="grid">
+<div>
+<h2>Разрез: спальня — санузел — кровля (схема)</h2>
+<svg viewBox="0 0 1500 900" font-family="DejaVu Sans, Arial, sans-serif" font-size="21"><defs><marker id="arr-sup" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f7fd6"/></marker><marker id="arr-eta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#de8a2c"/></marker><marker id="arr-oda" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3f9e4d"/></marker><marker id="arr-eha" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a5a44"/></marker></defs><rect x="40" y="464.0" width="1180" height="30.0" fill="#b8b2a8"/><rect x="40" y="860.0" width="1180" height="22" fill="#b8b2a8"/><rect x="560" y="494.0" width="26" height="366.0" fill="#3a3a3a"/><line x1="586" y1="530.0" x2="1000" y2="530.0" stroke="#555" stroke-width="3" stroke-dasharray="8 5"/><text x="790" y="556.0" text-anchor="middle" fill="#555">подшивной потолок с/у, 2,75 м</text><rect x="930" y="464.0" width="70" height="66.0" fill="#cfd6db" stroke="#33414b" stroke-width="2"/><polyline points="965,434.0 965,512.0 560,512.0 520,512.0" fill="none" stroke="#2f7fd6" stroke-width="11" stroke-linejoin="round"/><polyline points="965,434.0 1180,434.0" fill="none" stroke="#1c2830" stroke-opacity=".25" stroke-width="22"/><polyline points="965,434.0 1180,434.0" fill="none" stroke="#2f7fd6" stroke-width="11"/><rect x="540" y="504.0" width="20" height="16" fill="#2f7fd6" stroke="#1c2830"/><line x1="535" y1="512.0" x2="420" y2="512.0" stroke="#2f7fd6" stroke-width="4" marker-end="url(#arr-sup)"/><rect x="1180" y="374.0" width="200" height="72.0" fill="#eef1f3" stroke="#1c2830" stroke-width="2"/><text x="1280" y="417.0" text-anchor="middle" font-weight="700" font-size="19">рекуператор</text><line x1="1190" y1="464.0" x2="1190" y2="446.0" stroke="#333" stroke-width="5"/><line x1="1370" y1="464.0" x2="1370" y2="446.0" stroke="#333" stroke-width="5"/><polyline points="1240,410.0 1120,410.0 1120,344.0" fill="none" stroke="#3f9e4d" stroke-width="13"/><path d="M1095,344.0 h50 l-25,-22 z" fill="#3f9e4d" transform="rotate(180 1120 338.0)"/><polyline points="1330,410.0 1440,410.0 1440,224.0" fill="none" stroke="#8a5a44" stroke-width="13"/><path d="M1415,224.0 h50 l-25,-22 z" fill="#8a5a44"/><text x="1090" y="334.0" text-anchor="end" fill="#3f9e4d" font-weight="700">забор ≥ 1 м над кровлей</text><text x="1430" y="194.0" text-anchor="end" fill="#8a5a44" font-weight="700">выброс ≥ на 1 м выше</text><line x1="60" y1="860.0" x2="78" y2="860.0" stroke="#c0392b" stroke-width="3"/><text x="84" y="852.0" fill="#c0392b" font-weight="700">0,00 пол 2-го эт.</text><line x1="60" y1="512.0" x2="78" y2="512.0" stroke="#c0392b" stroke-width="3"/><text x="84" y="538.0" fill="#c0392b" font-weight="700">2,90 ось трубы и решётки</text><line x1="60" y1="494.0" x2="78" y2="494.0" stroke="#c0392b" stroke-width="3"/><text x="84" y="468.0" fill="#c0392b" font-weight="700">3,05 потолок спальни</text><text x="300" y="704.0" text-anchor="middle" font-size="18" font-weight="700" fill="#555">СПАЛЬНЯ</text><text x="300" y="726.0" text-anchor="middle" fill="#555">потолок не опускается</text><text x="790" y="704.0" text-anchor="middle" font-size="18" font-weight="700" fill="#555">САНУЗЕЛ / КЛАДОВАЯ</text><text x="965" y="584.0" text-anchor="middle" fill="#33414b">шахта</text><text x="573" y="788.0" text-anchor="middle" fill="#fff" font-size="11" transform="rotate(-90 573 788.0)">стена</text><text x="300" y="546.0" fill="#2f7fd6" font-weight="700">решётка, жалюзи вдоль потолка</text><text x="760" y="502.0" fill="#2f7fd6" font-weight="700">гофра Ø125</text></svg>
+<h2>Расходы воздуха (одна половина)</h2>
+<table><tr><th>Помещение</th><th>Чел.</th><th>м²</th><th>Приток, м³/ч</th><th>Вытяжка, м³/ч</th><th>Труба</th></tr>
+<tr><td>Комната (родители)</td><td>2</td><td class=n>18,6</td><td class=n>120</td><td class=n>120</td><td>Ø125</td></tr><tr><td>Детская (крыло)</td><td>1</td><td class=n>20,0</td><td class=n>90</td><td class=n>90</td><td>Ø125</td></tr><tr><td>Детская (центр)</td><td>2</td><td class=n>15,4</td><td class=n>120</td><td class=n>120</td><td>Ø125</td></tr><tr class=res><td>Комната 1-го этажа (резерв)</td><td>2</td><td class=n>17,9</td><td class=n>120</td><td class=n>120</td><td>Ø125</td></tr>
+<tr><td><b>Итого на рекуператор</b></td><td></td><td></td><td class=n><b>330</b></td><td class=n><b>330</b></td><td>магистрали Ø160</td></tr>
+<tr class=res><td>С резервом 1-го этажа</td><td></td><td></td><td class=n>450</td><td class=n>450</td><td></td></tr></table>
+<p class="muted">Расчёт: 60 м³/ч на спящего человека (CO₂ ниже ~900 ppm при закрытой двери), не меньше одного обмена в час и не меньше 90 м³/ч на спальню. Скорость в Ø125 — до 2,7 м/с, в Ø160 — до 2,9 м/с (тихо). Рекуператор 1000 м³/ч работает на 33–45% — с большим запасом; по расчёту хватило бы агрегата на 500–600 м³/ч.</p>
+<h2>Решётки (центр на 2,90 м от пола)</h2>
+<table><tr><th>Спальня</th><th>Стена</th><th>Приток, см от угла</th><th>Вытяжка, см от угла</th><th>Угол отсчёта</th></tr><tr><td>Комната (родители)</td><td>стена с санузлом</td><td class=n>35</td><td class=n>135</td><td>угол у наружной стены (ось 1)</td></tr><tr><td>Детская (крыло)</td><td>стена с кладовой</td><td class=n>40</td><td class=n>230</td><td>угол у наружной стены (ось 1)</td></tr><tr><td>Детская (центр)</td><td>стена с общим санузлом</td><td class=n>35</td><td class=n>230</td><td>угол у окна (ось Г)</td></tr><tr><td>Комната 1-го этажа (резерв)</td><td>стена с санузлом 1-го эт.</td><td class=n>35</td><td class=n>230</td><td>угол у окна (ось Г)</td></tr></table>
+<p class="muted">Отверстие в стене Ø150 (под гофру Ø125 с уплотнением). Приток — решётка 200×100 с регулируемыми жалюзи, направить вдоль потолка в комнату; вытяжка — простая решётка 200×100. В комнате родителей решётки всего в 1 м друг от друга (короткая стена до двери санузла) — приток обязательно направить от стены в глубину комнаты.</p>
+</div>
+<div>
+<h2>Электрика — заложить сейчас (на каждый рекуператор)</h2>
+<table><tr><th>Что</th><th>Кабель</th><th>Откуда → куда</th></tr>
+<tr><td>Питание рекуператора</td><td>ВВГнг(А)-LS 5×4 мм² (подходит и для 1-фазного, и для 3-фазного агрегата с электроподогревом до ~6 кВт)</td><td>щит (отдельный автомат по паспорту) → выход на кровлю у рекуператора, гильза Ø50; у агрегата — ремонтный выключатель IP65</td></tr>
+<tr><td>Пульт управления</td><td>витая пара FTP 5e (или 4×0,75 экр., по паспорту)</td><td>пульт в холле 2-го эт., h = 1,5 м → через шахту А → агрегат</td></tr>
+<tr><td>Датчики CO₂/влажности (по желанию)</td><td>витая пара FTP 5e, по одной на спальню</td><td>каждая спальня, h = 1,5 м, на стене напротив решёток → ближайшая шахта (А или Б) → агрегат</td></tr>
+<tr><td>Обогрев дренажа конденсата</td><td>ВВГнг 3×1,5 мм²</td><td>от щита или клеммной коробки агрегата → греющий кабель в дренажной трубке на кровле</td></tr>
+<tr><td>Запас</td><td>пустая гофра ПНД Ø32 с протяжкой</td><td>в каждой шахте, от потолка 2-го эт. до кровли</td></tr></table>
+<p class="muted">Точное сечение и номинал автомата — по паспорту выбранной модели. Без электроподогревателя агрегату хватает 3×2,5 мм², но в Ташкенте зимой бывает −10…−15 °C, и пластинчатый рекуператор без подогрева обмерзает — поэтому кабель с запасом.</p>
+<h2>Шахты и трубы</h2>
+<ul>
+<li><b>Шахта А</b> — в кладовой, в углу у наружной стены (короб 40×30 см): 2 трубы Ø160 с кровли. В потолке кладовой — тройники: на детскую (крыло) и через потолок санузла на комнату родителей.</li>
+<li><b>Шахта Б</b> — в общем санузле, у стены детской (короб 30×50 см): 2 трубы Ø160 с кровли → детская (центр). При резерве продолжается вниз в санузел 1-го этажа.</li>
+<li>Внутри дома — гибкие гофрированные трубы; лучше полужёсткие с гладкой внутренней стенкой. Каждый отвод — не длиннее 3–4 м, натянут без провисов, поворотов минимум.</li>
+<li>На каждом отводе — ирисовый клапан для настройки расхода, доступ через лючок в подшивном потолке санузла или кладовой.</li>
+<li>Шумоглушители Ø160 длиной 1 м на притоке и вытяжке сразу под кровлей (в шахте или потолке кладовой). Решётки двух спален с общей магистрали разнести так, чтобы между ними было ≥ 1,5 м трубы — меньше «переговоров» между комнатами.</li>
+<li>На кровле — трубы в утеплителе 50 мм с металлическим кожухом, на опорах 15–25 см. Проходки через кровлю — заводские, с герметизацией.</li>
+</ul>
+<h2>Забор и выброс воздуха</h2>
+<ul>
+<li><b>Забор</b> — колпак сеткой вниз, низ не ниже 1 м над кровлей (пыль, жар от покрытия летом, снег), со стороны двора.</li>
+<li><b>Выброс</b> — вертикальный дефлектор на 1 м выше забора и в 3,5–4 м от него, в сторону внутреннего дворика.</li>
+<li>Забор не ближе 8 м от дымохода котла (котельная может быть во внутреннем дворике у оси Г), от выхода кухонной вытяжки и не ближе 3 м от фановых стояков (лучше выше них).</li>
+<li>Фильтры: приток — F7 (пыль, пыльца), вытяжка — G4/M5. Рекуператор нужен в уличном исполнении или в утеплённом коробе, с электроподогревателем и дренажом.</li>
+<li>Рекуператор стоит над лестницей, а не над спальнями (вибрация, шум). Раму опереть на несущие стены лестничной клетки, на виброопорах.</li>
+</ul>
+<h2>Чего эта схема не делает</h2>
+<ul><li>Санузлы и кухня вентилируются отдельно (свои вытяжные вентиляторы и трубы на кровлю); их выходы — не ближе 3 м от забора рекуператора.</li></ul>
+</div></div></body></html>
