@@ -17,6 +17,10 @@ const fs = require('fs'), path = require('path');
     .pg{width:420mm;height:296mm;display:flex;align-items:center;justify-content:center;page-break-after:always}</style></head>
     <body>${pages.map(s => `<div class="pg">${s}</div>`).join('')}</body></html>`);
   await p.pdf({ path: path.join(dir, '_vent-plans.pdf'), format: 'A3', landscape: true, printBackground: true });
+  await p.goto('file://' + path.join(dir, 'vent-6-fasad.html'));
+  await p.pdf({ path: path.join(dir, '_vent-fasad.pdf'), format: 'A3', landscape: true, printBackground: true });
+  await p.setViewportSize({ width: 1587, height: 1123 });
+  await p.screenshot({ path: path.join(dir, 'vent-6-fasad.png'), fullPage: true });
   await p.goto('file://' + path.join(dir, 'vent-4-spec.html'));
   await p.pdf({ path: path.join(dir, '_vent-spec.pdf'), format: 'A3', landscape: true, printBackground: true });
   await p.setViewportSize({ width: 1587, height: 1123 });

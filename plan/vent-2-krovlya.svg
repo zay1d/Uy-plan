@@ -30,32 +30,22 @@
 <rect class="bg" width="35300" height="19800"/>
 <rect class="yard" x="7200" y="10600" width="20500" height="6400"/>
 <rect class="yard" x="7200" y="3300" width="20500" height="1500"/>
-<rect class="room" x="2800" y="12345" width="4000" height="4655"/>
-<rect class="room" x="28100" y="12345" width="4000" height="4655"/>
-<rect class="room" x="2800" y="10320" width="2680" height="1905"/>
-<rect class="room" x="29420" y="10320" width="2680" height="1905"/>
-<rect class="room" x="2800" y="8800" width="2680" height="1400"/>
-<rect class="room" x="29420" y="8800" width="2680" height="1400"/>
-<rect class="room" x="2800" y="5200" width="4145" height="3480"/>
-<rect class="room" x="2800" y="3800" width="4000" height="1400"/>
-<rect class="room" x="27955" y="5200" width="4145" height="3480"/>
-<rect class="room" x="28100" y="3800" width="4000" height="1400"/>
-<rect class="room" x="5600" y="8800" width="1200" height="3425"/>
-<rect class="room" x="6800" y="9050" width="2800" height="3700"/>
-<rect class="room" x="9600" y="9050" width="1750" height="1150"/>
-<rect class="room" x="11350" y="8020" width="2400" height="2180"/>
-<rect class="room" x="28100" y="8800" width="1200" height="3425"/>
-<rect class="room" x="25300" y="9050" width="2800" height="3700"/>
-<rect class="room" x="23795" y="9050" width="1505" height="1150"/>
-<rect class="room" x="20650" y="8020" width="3145" height="2180"/>
+<rect class="room" x="2800" y="3800" width="4000" height="13200"/>
+<rect class="room" x="28100" y="3800" width="4000" height="13200"/>
+<rect class="room" x="7030" y="10600" width="2590" height="2170"/>
+<rect class="room" x="25280" y="10600" width="2590" height="2170"/>
+<rect class="room" x="7200" y="9050" width="6045" height="1150"/>
+<rect class="room" x="11350" y="8400" width="1895" height="650"/>
+<rect class="room" x="21150" y="9050" width="6550" height="1150"/>
+<rect class="room" x="21150" y="8400" width="2400" height="650"/>
 <rect class="room" x="7200" y="5200" width="3895" height="3850"/>
 <rect class="room" x="23795" y="5200" width="3905" height="3850"/>
-<rect class="room" x="11350" y="5200" width="2400" height="2700"/>
-<rect class="room" x="20650" y="5200" width="2900" height="2700"/>
-<rect class="room" x="14000" y="5200" width="3075" height="5000"/>
-<rect class="room" x="17325" y="5200" width="3075" height="5000"/>
-<rect class="roof" x="13105" y="3650" width="3970" height="1150"/>
-<rect class="roof" x="17325" y="3650" width="3975" height="1150"/>
+<rect class="room" x="11350" y="5200" width="1895" height="1805"/>
+<rect class="room" x="11350" y="7120" width="1895" height="1030"/>
+<rect class="room" x="21150" y="5200" width="2400" height="1805"/>
+<rect class="room" x="21150" y="7120" width="2400" height="1030"/>
+<rect class="room" x="13500" y="5200" width="3575" height="5000"/>
+<rect class="room" x="17325" y="5200" width="3575" height="5000"/>
 <g class="grid" id="grid">
 <line x1="2600" y1="17400" x2="2600" y2="3400"/>
 <line x1="3600" y1="17400" x2="3600" y2="3400"/>
@@ -106,11 +96,21 @@
 </g>
 <polyline class="fence" points="2395,2800 32505,3025"/>
 <text class="small" x="11600" y="2650">граница участка / дом соседей</text>
-<polyline class="fix" points="21402,7913 20648,7913"/>
-<polyline class="stair" points="11097,8799 9899,8799"/>
+<polyline class="stair" points="11097,8799 10600,8799"/>
+<polyline class="stair" points="10396,8799 9899,8799"/>
 <polyline class="stair" points="9600,6398 8696,6398"/>
 <polyline class="stair" points="9899,6703 9899,8799"/>
-<polyline class="stair" points="8396,8799 8396,7302"/>
+<polyline class="stair" points="8396,8799 8396,8739"/>
+<polyline class="stair" points="8396,8709 8396,8589"/>
+<polyline class="stair" points="8396,8559 8396,8440"/>
+<polyline class="stair" points="8396,8410 8396,8290"/>
+<polyline class="stair" points="8396,8260 8396,8140"/>
+<polyline class="stair" points="8396,8110 8396,7991"/>
+<polyline class="stair" points="8396,7961 8396,7841"/>
+<polyline class="stair" points="8396,7811 8396,7691"/>
+<polyline class="stair" points="8396,7661 8396,7542"/>
+<polyline class="stair" points="8396,7512 8396,7392"/>
+<polyline class="stair" points="8396,7362 8396,7302"/>
 <polyline class="stair" points="8396,7302 8396,6703"/>
 <polyline class="stair" points="9600,5200 9600,6398"/>
 <polyline class="stair" points="9300,5200 9300,6398"/>
@@ -121,22 +121,122 @@
 <polyline class="stair" points="11097,7003 9899,7003"/>
 <polyline class="stair" points="8396,7003 7199,7003"/>
 <polyline class="stair" points="11097,7302 9899,7302"/>
-<polyline class="stair" points="8396,7302 7199,7302"/>
+<polyline class="stair" points="8396,7302 8336,7302"/>
+<polyline class="stair" points="8306,7302 8187,7302"/>
+<polyline class="stair" points="8157,7302 8037,7302"/>
+<polyline class="stair" points="8007,7302 7887,7302"/>
+<polyline class="stair" points="7857,7302 7738,7302"/>
+<polyline class="stair" points="7708,7302 7588,7302"/>
+<polyline class="stair" points="7558,7302 7438,7302"/>
+<polyline class="stair" points="7408,7302 7289,7302"/>
+<polyline class="stair" points="7259,7302 7199,7302"/>
 <polyline class="stair" points="11097,7601 9899,7601"/>
-<polyline class="stair" points="8396,7601 7199,7601"/>
+<polyline class="stair" points="8396,7601 8336,7601"/>
+<polyline class="stair" points="8306,7601 8187,7601"/>
+<polyline class="stair" points="8157,7601 8037,7601"/>
+<polyline class="stair" points="8007,7601 7887,7601"/>
+<polyline class="stair" points="7857,7601 7738,7601"/>
+<polyline class="stair" points="7708,7601 7588,7601"/>
+<polyline class="stair" points="7558,7601 7438,7601"/>
+<polyline class="stair" points="7408,7601 7289,7601"/>
+<polyline class="stair" points="7259,7601 7199,7601"/>
 <polyline class="stair" points="11097,7901 9899,7901"/>
-<polyline class="stair" points="8396,7901 7199,7901"/>
+<polyline class="stair" points="8396,7901 8336,7901"/>
+<polyline class="stair" points="8306,7901 8187,7901"/>
+<polyline class="stair" points="8157,7901 8037,7901"/>
+<polyline class="stair" points="8007,7901 7887,7901"/>
+<polyline class="stair" points="7857,7901 7738,7901"/>
+<polyline class="stair" points="7708,7901 7588,7901"/>
+<polyline class="stair" points="7558,7901 7438,7901"/>
+<polyline class="stair" points="7408,7901 7289,7901"/>
+<polyline class="stair" points="7259,7901 7199,7901"/>
 <polyline class="stair" points="11097,8200 9899,8200"/>
-<polyline class="stair" points="8396,8200 7199,8200"/>
+<polyline class="stair" points="8396,8200 8336,8200"/>
+<polyline class="stair" points="8306,8200 8187,8200"/>
+<polyline class="stair" points="8157,8200 8037,8200"/>
+<polyline class="stair" points="8007,8200 7887,8200"/>
+<polyline class="stair" points="7857,8200 7738,8200"/>
+<polyline class="stair" points="7708,8200 7588,8200"/>
+<polyline class="stair" points="7558,8200 7438,8200"/>
+<polyline class="stair" points="7408,8200 7289,8200"/>
+<polyline class="stair" points="7259,8200 7199,8200"/>
 <polyline class="stair" points="11097,8500 9899,8500"/>
-<polyline class="stair" points="8396,8500 7199,8500"/>
-<polyline class="stair" points="8396,8799 7199,8799"/>
+<polyline class="stair" points="8396,8500 8336,8500"/>
+<polyline class="stair" points="8306,8500 8187,8500"/>
+<polyline class="stair" points="8157,8500 8037,8500"/>
+<polyline class="stair" points="8007,8500 7887,8500"/>
+<polyline class="stair" points="7857,8500 7738,8500"/>
+<polyline class="stair" points="7708,8500 7588,8500"/>
+<polyline class="stair" points="7558,8500 7438,8500"/>
+<polyline class="stair" points="7408,8500 7289,8500"/>
+<polyline class="stair" points="7259,8500 7199,8500"/>
+<polyline class="stair" points="8396,8799 8336,8799"/>
+<polyline class="stair" points="8306,8799 8187,8799"/>
+<polyline class="stair" points="8157,8799 8037,8799"/>
+<polyline class="stair" points="8007,8799 7887,8799"/>
+<polyline class="stair" points="7857,8799 7738,8799"/>
+<polyline class="stair" points="7708,8799 7588,8799"/>
+<polyline class="stair" points="7558,8799 7438,8799"/>
+<polyline class="stair" points="7408,8799 7289,8799"/>
+<polyline class="stair" points="7259,8799 7199,8799"/>
+<polyline class="stair" points="7199,6703 8396,7302"/>
+<polyline class="fix" points="11696,6691 11696,6859"/>
+<polyline class="fix" points="11390,7003 12007,7003"/>
+<polyline class="fix" points="11348,5248 11348,6961"/>
+<polyline class="fix" points="11827,6931 11570,6931"/>
+<polyline class="fix" points="11576,6871 11821,6871"/>
+<polyline class="fix" points="11977,6398 11977,6781"/>
+<polyline class="fix" points="11917,6398 11917,6769"/>
+<polyline class="fix" points="11480,6398 11480,6769"/>
+<polyline class="fix" points="11420,6398 11420,6781"/>
+<polyline class="fix" points="12049,5248 12049,6961"/>
+<polyline class="fix" points="11977,5589 11977,6398"/>
+<polyline class="fix" points="11917,5649 11917,6398"/>
+<polyline class="fix" points="11480,5649 11480,6398"/>
+<polyline class="fix" points="11420,5589 11420,6398"/>
+<polyline class="fix" points="12001,5200 11396,5200"/>
+<polyline class="fix" points="11696,6781 11785,6781"/>
+<polyline class="fix" points="11696,6781 11624,6781"/>
+<polyline class="fix" points="12971,5560 13049,5560"/>
+<polyline class="fix" points="12187,5560 12270,5560"/>
+<polyline class="fix" points="12139,5200 12139,5506"/>
+<polyline class="fix" points="13097,5200 12139,5200"/>
+<polyline class="fix" points="13097,5506 13097,5200"/>
+<polyline class="fix" points="12540,6709 12755,6709"/>
+<polyline class="fix" points="12534,6733 12761,6733"/>
+<polyline class="fix" points="12444,6835 12444,6949"/>
+<polyline class="fix" points="12498,6997 12797,6997"/>
+<polyline class="fix" points="12845,6949 12845,6835"/>
+<polyline class="fix" points="12785,6703 12785,6805"/>
+<polyline class="fix" points="12504,6703 12504,6805"/>
+<polyline class="fix" points="11636,7524 11636,7745"/>
+<polyline class="fix" points="11612,7524 11612,7751"/>
+<polyline class="fix" points="11510,7434 11396,7434"/>
+<polyline class="fix" points="11348,7488 11348,7787"/>
+<polyline class="fix" points="11396,7835 11510,7835"/>
+<polyline class="fix" points="11642,7775 11540,7775"/>
+<polyline class="fix" points="11642,7494 11540,7494"/>
+<polyline class="fix" points="12893,7985 12893,8068"/>
+<polyline class="fix" points="12893,7206 12893,7290"/>
+<polyline class="fix" points="13246,7152 12947,7152"/>
+<polyline class="fix" points="13246,8116 13246,7152"/>
+<polyline class="fix" points="12947,8116 13246,8116"/>
 <polyline class="stair" points="10001,8799 10001,8518"/>
 <polyline class="stair" points="23797,8799 24300,8799"/>
 <polyline class="stair" points="24498,8799 25001,8799"/>
 <polyline class="stair" points="25300,6398 26198,6398"/>
 <polyline class="stair" points="25001,6703 25001,8799"/>
-<polyline class="stair" points="26498,8799 26498,7302"/>
+<polyline class="stair" points="26498,8799 26498,8739"/>
+<polyline class="stair" points="26498,8709 26498,8589"/>
+<polyline class="stair" points="26498,8559 26498,8440"/>
+<polyline class="stair" points="26498,8410 26498,8290"/>
+<polyline class="stair" points="26498,8260 26498,8140"/>
+<polyline class="stair" points="26498,8110 26498,7991"/>
+<polyline class="stair" points="26498,7961 26498,7841"/>
+<polyline class="stair" points="26498,7811 26498,7691"/>
+<polyline class="stair" points="26498,7661 26498,7542"/>
+<polyline class="stair" points="26498,7512 26498,7392"/>
+<polyline class="stair" points="26498,7362 26498,7302"/>
 <polyline class="stair" points="26498,7302 26498,6703"/>
 <polyline class="stair" points="25300,5200 25300,6398"/>
 <polyline class="stair" points="25600,5200 25600,6398"/>
@@ -147,17 +247,107 @@
 <polyline class="stair" points="23797,7003 25001,7003"/>
 <polyline class="stair" points="26498,7003 27701,7003"/>
 <polyline class="stair" points="23797,7302 25001,7302"/>
-<polyline class="stair" points="26498,7302 27701,7302"/>
+<polyline class="stair" points="26498,7302 26558,7302"/>
+<polyline class="stair" points="26588,7302 26707,7302"/>
+<polyline class="stair" points="26737,7302 26863,7302"/>
+<polyline class="stair" points="26893,7302 27013,7302"/>
+<polyline class="stair" points="27043,7302 27162,7302"/>
+<polyline class="stair" points="27192,7302 27312,7302"/>
+<polyline class="stair" points="27342,7302 27462,7302"/>
+<polyline class="stair" points="27492,7302 27611,7302"/>
+<polyline class="stair" points="27641,7302 27701,7302"/>
 <polyline class="stair" points="23797,7601 25001,7601"/>
-<polyline class="stair" points="26498,7601 27701,7601"/>
+<polyline class="stair" points="26498,7601 26558,7601"/>
+<polyline class="stair" points="26588,7601 26707,7601"/>
+<polyline class="stair" points="26737,7601 26863,7601"/>
+<polyline class="stair" points="26893,7601 27013,7601"/>
+<polyline class="stair" points="27043,7601 27162,7601"/>
+<polyline class="stair" points="27192,7601 27312,7601"/>
+<polyline class="stair" points="27342,7601 27462,7601"/>
+<polyline class="stair" points="27492,7601 27611,7601"/>
+<polyline class="stair" points="27641,7601 27701,7601"/>
 <polyline class="stair" points="23797,7901 25001,7901"/>
-<polyline class="stair" points="26498,7901 27701,7901"/>
+<polyline class="stair" points="26498,7901 26558,7901"/>
+<polyline class="stair" points="26588,7901 26707,7901"/>
+<polyline class="stair" points="26737,7901 26863,7901"/>
+<polyline class="stair" points="26893,7901 27013,7901"/>
+<polyline class="stair" points="27043,7901 27162,7901"/>
+<polyline class="stair" points="27192,7901 27312,7901"/>
+<polyline class="stair" points="27342,7901 27462,7901"/>
+<polyline class="stair" points="27492,7901 27611,7901"/>
+<polyline class="stair" points="27641,7901 27701,7901"/>
 <polyline class="stair" points="23797,8200 25001,8200"/>
-<polyline class="stair" points="26498,8200 27701,8200"/>
+<polyline class="stair" points="26498,8200 26558,8200"/>
+<polyline class="stair" points="26588,8200 26707,8200"/>
+<polyline class="stair" points="26737,8200 26863,8200"/>
+<polyline class="stair" points="26893,8200 27013,8200"/>
+<polyline class="stair" points="27043,8200 27162,8200"/>
+<polyline class="stair" points="27192,8200 27312,8200"/>
+<polyline class="stair" points="27342,8200 27462,8200"/>
+<polyline class="stair" points="27492,8200 27611,8200"/>
+<polyline class="stair" points="27641,8200 27701,8200"/>
 <polyline class="stair" points="23797,8500 25001,8500"/>
-<polyline class="stair" points="26498,8500 27701,8500"/>
-<polyline class="stair" points="26498,8799 27701,8799"/>
+<polyline class="stair" points="26498,8500 26558,8500"/>
+<polyline class="stair" points="26588,8500 26707,8500"/>
+<polyline class="stair" points="26737,8500 26863,8500"/>
+<polyline class="stair" points="26893,8500 27013,8500"/>
+<polyline class="stair" points="27043,8500 27162,8500"/>
+<polyline class="stair" points="27192,8500 27312,8500"/>
+<polyline class="stair" points="27342,8500 27462,8500"/>
+<polyline class="stair" points="27492,8500 27611,8500"/>
+<polyline class="stair" points="27641,8500 27701,8500"/>
+<polyline class="stair" points="26498,8799 26558,8799"/>
+<polyline class="stair" points="26588,8799 26707,8799"/>
+<polyline class="stair" points="26737,8799 26863,8799"/>
+<polyline class="stair" points="26893,8799 27013,8799"/>
+<polyline class="stair" points="27043,8799 27162,8799"/>
+<polyline class="stair" points="27192,8799 27312,8799"/>
+<polyline class="stair" points="27342,8799 27462,8799"/>
+<polyline class="stair" points="27492,8799 27611,8799"/>
+<polyline class="stair" points="27641,8799 27701,8799"/>
+<polyline class="stair" points="27701,6703 26498,7302"/>
+<polyline class="fix" points="23258,7524 23258,7745"/>
+<polyline class="fix" points="23288,7524 23288,7751"/>
+<polyline class="fix" points="23390,7434 23498,7434"/>
+<polyline class="fix" points="23552,7488 23552,7787"/>
+<polyline class="fix" points="23498,7835 23390,7835"/>
+<polyline class="fix" points="23258,7775 23360,7775"/>
+<polyline class="fix" points="23252,7494 23360,7494"/>
+<polyline class="fix" points="21504,7985 21504,8068"/>
+<polyline class="fix" points="21504,7206 21504,7290"/>
+<polyline class="fix" points="21151,7152 21456,7152"/>
+<polyline class="fix" points="21151,8116 21151,7152"/>
+<polyline class="fix" points="21456,8116 21151,8116"/>
 <polyline class="stair" points="24899,8799 24899,8518"/>
+<polyline class="fix" points="23198,6691 23198,6859"/>
+<polyline class="fix" points="23510,7003 22887,7003"/>
+<polyline class="fix" points="23552,5248 23552,6961"/>
+<polyline class="fix" points="23073,6931 23330,6931"/>
+<polyline class="fix" points="23318,6871 23079,6871"/>
+<polyline class="fix" points="22917,6398 22917,6781"/>
+<polyline class="fix" points="22977,6398 22977,6769"/>
+<polyline class="fix" points="23420,6398 23420,6769"/>
+<polyline class="fix" points="23480,6398 23480,6781"/>
+<polyline class="fix" points="22851,5248 22851,6961"/>
+<polyline class="fix" points="22917,5589 22917,6398"/>
+<polyline class="fix" points="22977,5649 22977,6398"/>
+<polyline class="fix" points="23420,5649 23420,6398"/>
+<polyline class="fix" points="23480,5589 23480,6398"/>
+<polyline class="fix" points="22899,5200 23498,5200"/>
+<polyline class="fix" points="23198,6781 23115,6781"/>
+<polyline class="fix" points="23198,6781 23276,6781"/>
+<polyline class="fix" points="22671,6643 22755,6643"/>
+<polyline class="fix" points="21887,6643 21971,6643"/>
+<polyline class="fix" points="21839,7003 21839,6697"/>
+<polyline class="fix" points="22797,7003 21839,7003"/>
+<polyline class="fix" points="22797,6697 22797,7003"/>
+<polyline class="fix" points="21612,6709 21390,6709"/>
+<polyline class="fix" points="21618,6733 21390,6733"/>
+<polyline class="fix" points="21701,6835 21701,6949"/>
+<polyline class="fix" points="21654,6997 21354,6997"/>
+<polyline class="fix" points="21300,6949 21300,6835"/>
+<polyline class="fix" points="21360,6703 21360,6805"/>
+<polyline class="fix" points="21642,6703 21642,6805"/>
 <polyline class="stair" points="7199,6703 7199,6763"/>
 <polyline class="stair" points="7199,6793 7199,6913"/>
 <polyline class="stair" points="7199,6943 7199,7062"/>
@@ -188,129 +378,127 @@
 <polyline class="stair" points="27701,8440 27701,8559"/>
 <polyline class="stair" points="27701,8589 27701,8709"/>
 <polyline class="stair" points="27701,8739 27701,8799"/>
-<polyline class="fix" points="11660,5548 11486,5548"/>
-<polyline class="fix" points="11348,5242 11348,5859"/>
-<polyline class="fix" points="13097,5200 11390,5200"/>
-<polyline class="fix" points="11420,5679 11420,5422"/>
-<polyline class="fix" points="11480,5428 11480,5673"/>
-<polyline class="fix" points="11947,5829 11570,5829"/>
-<polyline class="fix" points="11947,5769 11576,5769"/>
-<polyline class="fix" points="11947,5332 11576,5332"/>
-<polyline class="fix" points="11947,5272 11570,5272"/>
-<polyline class="fix" points="13097,5901 11390,5901"/>
-<polyline class="fix" points="12761,5829 11947,5829"/>
-<polyline class="fix" points="12702,5769 11947,5769"/>
-<polyline class="fix" points="12702,5332 11947,5332"/>
-<polyline class="fix" points="12761,5272 11947,5272"/>
-<polyline class="fix" points="13151,5853 13151,5248"/>
-<polyline class="fix" points="11570,5548 11570,5637"/>
-<polyline class="fix" points="11570,5548 11570,5476"/>
-<polyline class="fix" points="11708,6080 11708,5997"/>
-<polyline class="fix" points="11708,6865 11708,6775"/>
-<polyline class="fix" points="11348,6913 11654,6913"/>
-<polyline class="fix" points="11348,5949 11348,6913"/>
-<polyline class="fix" points="11654,5949 11348,5949"/>
-<polyline class="fix" points="11642,7278 11642,7500"/>
-<polyline class="fix" points="11612,7272 11612,7500"/>
-<polyline class="fix" points="11510,7188 11402,7188"/>
-<polyline class="fix" points="11348,7236 11348,7536"/>
-<polyline class="fix" points="11402,7589 11510,7589"/>
-<polyline class="fix" points="11642,7530 11540,7530"/>
-<polyline class="fix" points="11648,7242 11540,7242"/>
-<polyline class="fix" points="3145,10631 3145,10458"/>
-<polyline class="fix" points="3456,10320 2840,10320"/>
-<polyline class="fix" points="3498,12068 3498,10362"/>
-<polyline class="fix" points="3019,10392 3277,10392"/>
-<polyline class="fix" points="3271,10452 3025,10452"/>
-<polyline class="fix" points="2869,10919 2869,10541"/>
-<polyline class="fix" points="2929,10919 2929,10547"/>
-<polyline class="fix" points="3366,10919 3366,10547"/>
-<polyline class="fix" points="3426,10919 3426,10541"/>
-<polyline class="fix" points="2798,12068 2798,10362"/>
-<polyline class="fix" points="2869,11733 2869,10919"/>
-<polyline class="fix" points="2929,11673 2929,10919"/>
-<polyline class="fix" points="3366,11673 3366,10919"/>
-<polyline class="fix" points="3426,11733 3426,10919"/>
-<polyline class="fix" points="2846,12122 3450,12122"/>
-<polyline class="fix" points="3145,10541 3061,10541"/>
-<polyline class="fix" points="3145,10541 3223,10541"/>
-<polyline class="fix" points="4480,10679 4564,10679"/>
-<polyline class="fix" points="3696,10679 3780,10679"/>
-<polyline class="fix" points="3648,10320 3648,10625"/>
-<polyline class="fix" points="4612,10320 3648,10320"/>
-<polyline class="fix" points="4612,10625 4612,10320"/>
-<polyline class="fix" points="5187,10607 4965,10607"/>
-<polyline class="fix" points="5193,10583 4965,10583"/>
-<polyline class="fix" points="5277,10482 5277,10368"/>
-<polyline class="fix" points="5229,10320 4929,10320"/>
-<polyline class="fix" points="4875,10368 4875,10482"/>
-<polyline class="fix" points="4935,10613 4935,10512"/>
-<polyline class="fix" points="5217,10613 5223,10512"/>
-<polyline class="fix" points="2798,12236 4480,12236"/>
-<polyline class="fix" points="31749,10631 31749,10458"/>
-<polyline class="fix" points="31438,10320 32060,10320"/>
-<polyline class="fix" points="31402,12068 31402,10362"/>
-<polyline class="fix" points="31881,10392 31623,10392"/>
-<polyline class="fix" points="31629,10452 31869,10452"/>
-<polyline class="fix" points="32031,10919 32031,10541"/>
-<polyline class="fix" points="31971,10919 31971,10547"/>
-<polyline class="fix" points="31534,10919 31534,10547"/>
-<polyline class="fix" points="31468,10919 31468,10541"/>
-<polyline class="fix" points="32102,12068 32102,10362"/>
-<polyline class="fix" points="32031,11733 32031,10919"/>
-<polyline class="fix" points="31971,11673 31971,10919"/>
-<polyline class="fix" points="31534,11673 31534,10919"/>
-<polyline class="fix" points="31468,11733 31468,10919"/>
-<polyline class="fix" points="32049,12122 31450,12122"/>
-<polyline class="fix" points="31749,10541 31833,10541"/>
-<polyline class="fix" points="31749,10541 31677,10541"/>
-<polyline class="fix" points="30420,10679 30336,10679"/>
-<polyline class="fix" points="31204,10679 31114,10679"/>
-<polyline class="fix" points="31252,10320 31252,10625"/>
-<polyline class="fix" points="30288,10320 31252,10320"/>
-<polyline class="fix" points="30288,10625 30288,10320"/>
-<polyline class="fix" points="29713,10607 29929,10607"/>
-<polyline class="fix" points="29707,10583 29935,10583"/>
-<polyline class="fix" points="29623,10482 29623,10368"/>
-<polyline class="fix" points="29671,10320 29971,10320"/>
-<polyline class="fix" points="30019,10368 30019,10482"/>
-<polyline class="fix" points="29959,10613 29959,10512"/>
-<polyline class="fix" points="29677,10613 29677,10512"/>
-<polyline class="fix" points="32102,12236 30420,12236"/>
-<polyline class="fix" points="23240,5548 23408,5548"/>
-<polyline class="fix" points="23552,5242 23552,5859"/>
-<polyline class="fix" points="21797,5200 23510,5200"/>
-<polyline class="fix" points="23480,5679 23480,5422"/>
-<polyline class="fix" points="23420,5428 23420,5673"/>
-<polyline class="fix" points="22947,5829 23330,5829"/>
-<polyline class="fix" points="22947,5769 23318,5769"/>
-<polyline class="fix" points="22947,5332 23318,5332"/>
-<polyline class="fix" points="22947,5272 23330,5272"/>
-<polyline class="fix" points="21797,5901 23510,5901"/>
-<polyline class="fix" points="22139,5829 22947,5829"/>
-<polyline class="fix" points="22198,5769 22947,5769"/>
-<polyline class="fix" points="22198,5332 22947,5332"/>
-<polyline class="fix" points="22139,5272 22947,5272"/>
-<polyline class="fix" points="21749,5853 21749,5248"/>
-<polyline class="fix" points="23330,5548 23330,5637"/>
-<polyline class="fix" points="23330,5548 23330,5476"/>
-<polyline class="fix" points="23192,6080 23192,5997"/>
-<polyline class="fix" points="23192,6865 23192,6775"/>
-<polyline class="fix" points="23552,6913 23246,6913"/>
-<polyline class="fix" points="23552,5949 23552,6913"/>
-<polyline class="fix" points="23246,5949 23552,5949"/>
-<polyline class="fix" points="23258,7278 23258,7500"/>
-<polyline class="fix" points="23282,7272 23282,7500"/>
-<polyline class="fix" points="23384,7188 23498,7188"/>
-<polyline class="fix" points="23546,7236 23546,7536"/>
-<polyline class="fix" points="23498,7589 23384,7589"/>
-<polyline class="fix" points="23252,7530 23354,7530"/>
-<polyline class="fix" points="23252,7242 23360,7242"/>
-<polyline class="fix" points="11348,7913 12097,7913"/>
-<polyline class="fix" points="13001,7913 13749,7913"/>
-<polyline class="fix" points="23552,7913 22300,7913"/>
-<polyline class="stair" points="10498,8703 10498,6398 10498,5799 8396,5799 7798,5799 7798,8302"/>
-<polyline class="stair" points="7798,8799 7672,8302 7923,8302 7798,8799 7798,8799"/>
+<polyline class="stair" points="10097,8796 9998,8697 9899,8796 9998,8895 10097,8796"/>
+<polyline class="stair" points="10498,8703 10498,6398 10498,5799 8396,5799 7798,5799 7798,6500"/>
+<polyline class="stair" points="7798,7003 7672,6500 7923,6500 7798,7003 7798,7003"/>
+<polyline class="fix" points="11348,6958 11387,6997"/>
+<polyline class="fix" points="12049,5245 11998,5194"/>
+<polyline class="fix" points="12004,6997 12043,6958"/>
+<polyline class="fix" points="11393,5194 11342,5245"/>
+<polyline class="fix" points="11693,6721 11636,6778 11693,6835 11750,6778 11693,6721"/>
+<polyline class="fix" points="11693,6751 11666,6778 11693,6805 11720,6778 11693,6751"/>
+<polyline class="fix" points="13045,5554 13079,5539 13091,5503"/>
+<polyline class="fix" points="12963,5554 12814,5590"/>
+<polyline class="fix" points="12413,5591 12816,5591"/>
+<polyline class="fix" points="12417,5590 12271,5554"/>
+<polyline class="fix" points="12133,5504 12146,5543 12184,5560"/>
+<polyline class="fix" points="12709,5267 12615,5254"/>
+<polyline class="fix" points="12785,5301 12712,5269"/>
+<polyline class="fix" points="12835,5359 12782,5306"/>
+<polyline class="fix" points="12851,5413 12836,5359"/>
+<polyline class="fix" points="12836,5466 12851,5413"/>
+<polyline class="fix" points="12782,5514 12835,5461"/>
+<polyline class="fix" points="12712,5551 12785,5518"/>
+<polyline class="fix" points="12615,5566 12709,5553"/>
+<polyline class="fix" points="12520,5553 12615,5566"/>
+<polyline class="fix" points="12444,5518 12518,5551"/>
+<polyline class="fix" points="12394,5461 12447,5514"/>
+<polyline class="fix" points="12378,5413 12394,5466"/>
+<polyline class="fix" points="12394,5359 12378,5413"/>
+<polyline class="fix" points="12447,5306 12394,5359"/>
+<polyline class="fix" points="12518,5269 12444,5301"/>
+<polyline class="fix" points="12615,5254 12520,5267"/>
+<polyline class="fix" points="12360,5374 12342,5437"/>
+<polyline class="fix" points="12507,5270 12423,5308"/>
+<polyline class="fix" points="12615,5254 12506,5269"/>
+<polyline class="fix" points="12723,5269 12615,5254"/>
+<polyline class="fix" points="12807,5308 12722,5270"/>
+<polyline class="fix" points="12887,5437 12869,5374"/>
+<polyline class="fix" points="12869,5499 12887,5437"/>
+<polyline class="fix" points="12722,5603 12807,5565"/>
+<polyline class="fix" points="12615,5613 12723,5599"/>
+<polyline class="fix" points="12506,5599 12615,5613"/>
+<polyline class="fix" points="12423,5565 12507,5603"/>
+<polyline class="fix" points="12342,5437 12360,5499"/>
+<polyline class="fix" points="12494,5614 12615,5631"/>
+<polyline class="fix" points="12401,5568 12496,5613"/>
+<polyline class="fix" points="12312,5419 12334,5497"/>
+<polyline class="fix" points="12334,5341 12312,5419"/>
+<polyline class="fix" points="12496,5225 12401,5270"/>
+<polyline class="fix" points="12615,5206 12494,5223"/>
+<polyline class="fix" points="12736,5223 12615,5206"/>
+<polyline class="fix" points="12828,5270 12734,5225"/>
+<polyline class="fix" points="12923,5419 12902,5341"/>
+<polyline class="fix" points="12902,5497 12923,5419"/>
+<polyline class="fix" points="12734,5613 12828,5568"/>
+<polyline class="fix" points="12615,5631 12736,5614"/>
+<polyline class="fix" points="12570,5227 12561,5218 12552,5227 12561,5236 12570,5227"/>
+<polyline class="fix" points="12630,5293 12615,5278 12600,5293 12615,5308 12630,5293"/>
+<polyline class="fix" points="12636,5293 12615,5272 12594,5293 12615,5314 12636,5293"/>
+<polyline class="fix" points="12678,5227 12669,5218 12660,5227 12669,5236 12678,5227"/>
+<polyline class="fix" points="12630,5227 12615,5212 12600,5227 12615,5242 12630,5227"/>
+<polyline class="fix" points="12624,5227 12615,5218 12606,5227 12615,5236 12624,5227"/>
+<polyline class="fix" points="12756,6701 12818,6431 12645,6266 12472,6431 12533,6701"/>
+<polyline class="fix" points="12845,6831 12445,6831"/>
+<polyline class="fix" points="12444,6946 12495,6997"/>
+<polyline class="fix" points="12794,6997 12845,6946"/>
+<polyline class="fix" points="12758,6729 12836,6430 12645,6242 12453,6430 12532,6729"/>
+<polyline class="fix" points="11638,7746 11908,7807 12073,7634 11908,7461 11638,7523"/>
+<polyline class="fix" points="11508,7835 11508,7434"/>
+<polyline class="fix" points="11393,7434 11342,7485"/>
+<polyline class="fix" points="11342,7784 11393,7835"/>
+<polyline class="fix" points="11610,7747 11909,7826 12097,7634 11909,7443 11610,7521"/>
+<polyline class="fix" points="12893,8065 12908,8099 12943,8110"/>
+<polyline class="fix" points="12893,7982 12856,7834"/>
+<polyline class="fix" points="12856,7433 12856,7836"/>
+<polyline class="fix" points="12850,7430 12886,7285"/>
+<polyline class="fix" points="12943,7147 12904,7160 12887,7198"/>
+<polyline class="fix" points="13174,7729 13187,7634"/>
+<polyline class="fix" points="13145,7799 13178,7725"/>
+<polyline class="fix" points="13088,7855 13141,7802"/>
+<polyline class="fix" points="13034,7865 13087,7849"/>
+<polyline class="fix" points="12980,7849 13034,7865"/>
+<polyline class="fix" points="12927,7802 12980,7855"/>
+<polyline class="fix" points="12890,7725 12923,7799"/>
+<polyline class="fix" points="12881,7634 12894,7729"/>
+<polyline class="fix" points="12894,7540 12881,7634"/>
+<polyline class="fix" points="12923,7464 12890,7537"/>
+<polyline class="fix" points="12980,7414 12927,7467"/>
+<polyline class="fix" points="13034,7398 12980,7414"/>
+<polyline class="fix" points="13087,7414 13034,7398"/>
+<polyline class="fix" points="13141,7467 13088,7414"/>
+<polyline class="fix" points="13178,7537 13145,7464"/>
+<polyline class="fix" points="13187,7634 13174,7540"/>
+<polyline class="fix" points="13072,7380 13010,7362"/>
+<polyline class="fix" points="13170,7521 13132,7436"/>
+<polyline class="fix" points="13187,7634 13172,7526"/>
+<polyline class="fix" points="13172,7743 13187,7634"/>
+<polyline class="fix" points="13132,7826 13170,7742"/>
+<polyline class="fix" points="13010,7901 13072,7883"/>
+<polyline class="fix" points="12947,7883 13010,7901"/>
+<polyline class="fix" points="12844,7742 12882,7826"/>
+<polyline class="fix" points="12827,7634 12842,7743"/>
+<polyline class="fix" points="12842,7526 12827,7634"/>
+<polyline class="fix" points="12882,7436 12844,7521"/>
+<polyline class="fix" points="13010,7362 12947,7380"/>
+<polyline class="fix" points="12833,7513 12815,7634"/>
+<polyline class="fix" points="12873,7415 12828,7509"/>
+<polyline class="fix" points="13028,7326 12950,7347"/>
+<polyline class="fix" points="13106,7347 13028,7326"/>
+<polyline class="fix" points="13222,7509 13177,7415"/>
+<polyline class="fix" points="13241,7634 13223,7513"/>
+<polyline class="fix" points="13223,7755 13241,7634"/>
+<polyline class="fix" points="13177,7848 13222,7753"/>
+<polyline class="fix" points="13028,7937 13106,7915"/>
+<polyline class="fix" points="12950,7915 13028,7937"/>
+<polyline class="fix" points="12828,7753 12873,7848"/>
+<polyline class="fix" points="12815,7634 12833,7755"/>
+<polyline class="fix" points="13220,7589 13229,7580 13220,7571 13211,7580 13220,7589"/>
+<polyline class="fix" points="13148,7649 13163,7634 13148,7619 13133,7634 13148,7649"/>
+<polyline class="fix" points="13148,7655 13169,7634 13148,7613 13127,7634 13148,7655"/>
+<polyline class="fix" points="13220,7691 13229,7682 13220,7673 13211,7682 13220,7691"/>
+<polyline class="fix" points="13220,7649 13235,7634 13220,7619 13205,7634 13220,7649"/>
+<polyline class="fix" points="13220,7643 13229,7634 13220,7625 13211,7634 13220,7643"/>
 <polyline class="stair" points="9600,5200 9600,6398 9684,6452 10408,5200 9600,5200"/>
 <polyline class="stair" points="9684,6452 9851,6613 11097,5895 11097,5200 10408,5200 9684,6452"/>
 <polyline class="stair" points="9899,6703 9851,6613 11097,5895 11097,6703 9899,6703"/>
@@ -324,27 +512,68 @@
 <polyline class="stair" points="9998,7332 9959,7371 9998,7410 10037,7371 9998,7332"/>
 <polyline class="stair" points="10001,7338 10001,6955 10001,6673 9929,6554 9744,6368 9624,6302 9378,6302"/>
 <polyline class="stair" points="9294,6299 9333,6338 9372,6299 9333,6260 9294,6299"/>
-<polyline class="stair" points="9300,6302 8917,6302 8672,6302 8552,6368 8366,6554 8300,6673 8300,6727"/>
+<polyline class="stair" points="9300,6302 8917,6302 8672,6302 8552,6368 8366,6554 8300,6673 8300,6733"/>
 <polyline class="stair" points="8297,6805 8336,6766 8297,6727 8259,6766 8297,6805"/>
-<polyline class="stair" points="8300,6805 8300,7188 8300,7284"/>
-<polyline class="stair" points="8297,7356 8336,7317 8297,7278 8259,7317 8297,7356"/>
-<polyline class="stair" points="8300,7356 8300,7739 8300,7835"/>
-<polyline class="stair" points="8297,7907 8336,7868 8297,7829 8259,7868 8297,7907"/>
-<polyline class="stair" points="8300,7913 8300,8290 8300,8386"/>
-<polyline class="stair" points="8297,8464 8336,8425 8297,8386 8259,8425 8297,8464"/>
-<polyline class="stair" points="8300,8464 8300,8847 8300,8901 8366,8901"/>
-<polyline class="stair" points="8438,8898 8399,8859 8360,8898 8399,8937 8438,8898"/>
-<polyline class="stair" points="8438,8901 8821,8901 8917,8901"/>
-<polyline class="stair" points="8989,8898 8950,8859 8911,8898 8950,8937 8989,8898"/>
-<polyline class="stair" points="8995,8901 9372,8901 9468,8901"/>
-<polyline class="stair" points="9546,8898 9507,8859 9468,8898 9507,8937 9546,8898"/>
-<polyline class="stair" points="9546,8901 9929,8901 10025,8901"/>
-<polyline class="stair" points="10097,8898 10058,8859 10019,8898 10058,8937 10097,8898"/>
-<polyline class="stair" points="10097,8901 10480,8901 10576,8901"/>
-<polyline class="stair" points="10648,8898 10609,8859 10570,8898 10609,8937 10648,8898"/>
-<polyline class="stair" points="10654,8901 11031,8901 11097,8901"/>
-<polyline class="stair" points="24402,8703 24402,6398 24402,5799 26498,5799 27102,5799 27102,8302"/>
-<polyline class="stair" points="27102,8799 26977,8302 27222,8302 27102,8799 27102,8799"/>
+<polyline class="stair" points="8300,6811 8300,7188 8300,7248"/>
+<polyline class="stair" points="24995,8796 24896,8697 24797,8796 24896,8895 24995,8796"/>
+<polyline class="stair" points="24402,8703 24402,6398 24402,5799 26498,5799 27102,5799 27102,6500"/>
+<polyline class="stair" points="27102,7003 26977,6500 27222,6500 27102,7003 27102,7003"/>
+<polyline class="fix" points="23256,7523 22986,7461 22821,7634 22986,7807 23256,7746"/>
+<polyline class="fix" points="23386,7434 23386,7835"/>
+<polyline class="fix" points="23546,7485 23495,7434"/>
+<polyline class="fix" points="23495,7835 23546,7784"/>
+<polyline class="fix" points="23284,7521 22985,7443 22797,7634 22985,7826 23284,7747"/>
+<polyline class="fix" points="21454,8110 21489,8099 21504,8065"/>
+<polyline class="fix" points="21541,7834 21505,7982"/>
+<polyline class="fix" points="21541,7836 21541,7433"/>
+<polyline class="fix" points="21505,7285 21541,7430"/>
+<polyline class="fix" points="21504,7198 21487,7160 21448,7147"/>
+<polyline class="fix" points="21204,7634 21217,7729"/>
+<polyline class="fix" points="21219,7725 21252,7799"/>
+<polyline class="fix" points="21250,7802 21303,7855"/>
+<polyline class="fix" points="21304,7849 21357,7865"/>
+<polyline class="fix" points="21357,7865 21411,7849"/>
+<polyline class="fix" points="21411,7855 21464,7802"/>
+<polyline class="fix" points="21468,7799 21501,7725"/>
+<polyline class="fix" points="21497,7729 21510,7634"/>
+<polyline class="fix" points="21510,7634 21497,7540"/>
+<polyline class="fix" points="21501,7537 21468,7464"/>
+<polyline class="fix" points="21464,7467 21411,7414"/>
+<polyline class="fix" points="21411,7414 21357,7398"/>
+<polyline class="fix" points="21357,7398 21304,7414"/>
+<polyline class="fix" points="21303,7414 21250,7467"/>
+<polyline class="fix" points="21252,7464 21219,7537"/>
+<polyline class="fix" points="21217,7540 21204,7634"/>
+<polyline class="fix" points="21387,7362 21325,7380"/>
+<polyline class="fix" points="21259,7436 21221,7521"/>
+<polyline class="fix" points="21219,7526 21204,7634"/>
+<polyline class="fix" points="21204,7634 21219,7743"/>
+<polyline class="fix" points="21221,7742 21259,7826"/>
+<polyline class="fix" points="21325,7883 21387,7901"/>
+<polyline class="fix" points="21387,7901 21450,7883"/>
+<polyline class="fix" points="21515,7826 21553,7742"/>
+<polyline class="fix" points="21549,7743 21564,7634"/>
+<polyline class="fix" points="21564,7634 21549,7526"/>
+<polyline class="fix" points="21553,7521 21515,7436"/>
+<polyline class="fix" points="21450,7380 21387,7362"/>
+<polyline class="fix" points="21582,7634 21564,7513"/>
+<polyline class="fix" points="21563,7509 21518,7415"/>
+<polyline class="fix" points="21447,7347 21369,7326"/>
+<polyline class="fix" points="21369,7326 21291,7347"/>
+<polyline class="fix" points="21214,7415 21169,7509"/>
+<polyline class="fix" points="21174,7513 21157,7634"/>
+<polyline class="fix" points="21157,7634 21174,7755"/>
+<polyline class="fix" points="21169,7753 21214,7848"/>
+<polyline class="fix" points="21291,7915 21369,7937"/>
+<polyline class="fix" points="21369,7937 21447,7915"/>
+<polyline class="fix" points="21518,7848 21563,7753"/>
+<polyline class="fix" points="21564,7755 21582,7634"/>
+<polyline class="fix" points="21177,7589 21186,7580 21177,7571 21168,7580 21177,7589"/>
+<polyline class="fix" points="21243,7649 21258,7634 21243,7619 21228,7634 21243,7649"/>
+<polyline class="fix" points="21243,7655 21264,7634 21243,7613 21222,7634 21243,7655"/>
+<polyline class="fix" points="21177,7691 21186,7682 21177,7673 21168,7682 21177,7691"/>
+<polyline class="fix" points="21177,7649 21192,7634 21177,7619 21163,7634 21177,7649"/>
+<polyline class="fix" points="21177,7643 21186,7634 21177,7625 21168,7634 21177,7643"/>
 <polyline class="stair" points="25300,5200 25300,6398 25216,6452 24492,5200 25300,5200"/>
 <polyline class="stair" points="25216,6452 25049,6613 23797,5895 23797,5200 24492,5200 25216,6452"/>
 <polyline class="stair" points="25001,6703 25049,6613 23797,5895 23797,6703 25001,6703"/>
@@ -358,273 +587,71 @@
 <polyline class="stair" points="24896,7332 24857,7371 24896,7410 24935,7371 24896,7332"/>
 <polyline class="stair" points="24899,7338 24899,6955 24899,6673 24971,6554 25150,6368 25270,6302 25522,6302"/>
 <polyline class="stair" points="25594,6299 25555,6260 25516,6299 25555,6338 25594,6299"/>
-<polyline class="stair" points="25600,6302 25977,6302 26228,6302 26348,6368 26528,6554 26600,6673 26600,6727"/>
+<polyline class="stair" points="25600,6302 25977,6302 26228,6302 26348,6368 26528,6554 26600,6673 26600,6733"/>
 <polyline class="stair" points="26597,6805 26635,6766 26597,6727 26558,6766 26597,6805"/>
-<polyline class="stair" points="26600,6805 26600,7188 26600,7284"/>
-<polyline class="stair" points="26597,7356 26635,7317 26597,7278 26558,7317 26597,7356"/>
-<polyline class="stair" points="26600,7356 26600,7739 26600,7835"/>
-<polyline class="stair" points="26597,7907 26635,7868 26597,7829 26558,7868 26597,7907"/>
-<polyline class="stair" points="26600,7913 26600,8290 26600,8386"/>
-<polyline class="stair" points="26597,8464 26635,8425 26597,8386 26558,8425 26597,8464"/>
-<polyline class="stair" points="26600,8464 26600,8847 26600,8901 26534,8901"/>
-<polyline class="stair" points="26456,8898 26495,8937 26534,8898 26495,8859 26456,8898"/>
-<polyline class="stair" points="26456,8901 26079,8901 25983,8901"/>
-<polyline class="stair" points="25899,8898 25938,8937 25977,8898 25938,8859 25899,8898"/>
-<polyline class="stair" points="25905,8901 25522,8901 25426,8901"/>
-<polyline class="stair" points="25348,8898 25387,8937 25426,8898 25387,8859 25348,8898"/>
-<polyline class="stair" points="25354,8901 24971,8901 24875,8901"/>
-<polyline class="stair" points="24797,8898 24836,8937 24875,8898 24836,8859 24797,8898"/>
-<polyline class="stair" points="24797,8901 24420,8901 24324,8901"/>
-<polyline class="stair" points="24246,8898 24285,8937 24324,8898 24285,8859 24246,8898"/>
-<polyline class="stair" points="24246,8901 23869,8901 23797,8901"/>
-<polyline class="fix" points="11387,5200 11348,5239"/>
-<polyline class="fix" points="13094,5901 13145,5850"/>
-<polyline class="fix" points="11348,5856 11387,5895"/>
-<polyline class="fix" points="13145,5245 13094,5194"/>
-<polyline class="fix" points="11624,5545 11567,5488 11510,5545 11567,5601 11624,5545"/>
-<polyline class="fix" points="11594,5545 11567,5518 11540,5545 11567,5571 11594,5545"/>
-<polyline class="fix" points="11702,5994 11687,5960 11651,5949"/>
-<polyline class="fix" points="11702,6077 11738,6226"/>
-<polyline class="fix" points="11739,6632 11739,6229"/>
-<polyline class="fix" points="11738,6629 11703,6774"/>
-<polyline class="fix" points="11652,6913 11691,6899 11708,6861"/>
-<polyline class="fix" points="11415,6336 11402,6431"/>
-<polyline class="fix" points="11450,6260 11417,6334"/>
-<polyline class="fix" points="11507,6210 11454,6263"/>
-<polyline class="fix" points="11561,6194 11507,6210"/>
-<polyline class="fix" points="11614,6210 11561,6194"/>
-<polyline class="fix" points="11668,6263 11615,6210"/>
-<polyline class="fix" points="11699,6334 11666,6260"/>
-<polyline class="fix" points="11714,6431 11701,6336"/>
-<polyline class="fix" points="11701,6525 11714,6431"/>
-<polyline class="fix" points="11666,6595 11699,6522"/>
-<polyline class="fix" points="11615,6645 11668,6592"/>
-<polyline class="fix" points="11561,6661 11614,6646"/>
-<polyline class="fix" points="11507,6646 11561,6661"/>
-<polyline class="fix" points="11454,6592 11507,6645"/>
-<polyline class="fix" points="11417,6522 11450,6595"/>
-<polyline class="fix" points="11402,6431 11415,6525"/>
-<polyline class="fix" points="11522,6679 11585,6697"/>
-<polyline class="fix" points="11419,6538 11456,6623"/>
-<polyline class="fix" points="11408,6431 11423,6539"/>
-<polyline class="fix" points="11423,6322 11408,6431"/>
-<polyline class="fix" points="11456,6233 11419,6317"/>
-<polyline class="fix" points="11585,6158 11522,6176"/>
-<polyline class="fix" points="11647,6176 11585,6158"/>
-<polyline class="fix" points="11751,6317 11713,6233"/>
-<polyline class="fix" points="11761,6431 11747,6322"/>
-<polyline class="fix" points="11747,6539 11761,6431"/>
-<polyline class="fix" points="11713,6623 11751,6538"/>
-<polyline class="fix" points="11585,6697 11647,6679"/>
-<polyline class="fix" points="11762,6552 11779,6431"/>
-<polyline class="fix" points="11716,6644 11761,6550"/>
-<polyline class="fix" points="11567,6733 11645,6712"/>
-<polyline class="fix" points="11489,6712 11567,6733"/>
-<polyline class="fix" points="11373,6550 11418,6644"/>
-<polyline class="fix" points="11354,6431 11371,6552"/>
-<polyline class="fix" points="11371,6310 11354,6431"/>
-<polyline class="fix" points="11418,6211 11373,6306"/>
-<polyline class="fix" points="11567,6122 11489,6144"/>
-<polyline class="fix" points="11645,6144 11567,6122"/>
-<polyline class="fix" points="11761,6306 11716,6211"/>
-<polyline class="fix" points="11779,6431 11762,6310"/>
-<polyline class="fix" points="11375,6470 11366,6479 11375,6488 11384,6479 11375,6470"/>
-<polyline class="fix" points="11447,6416 11432,6431 11447,6446 11462,6431 11447,6416"/>
-<polyline class="fix" points="11447,6410 11426,6431 11447,6452 11468,6431 11447,6410"/>
-<polyline class="fix" points="11375,6368 11366,6377 11375,6386 11384,6377 11375,6368"/>
-<polyline class="fix" points="11375,6416 11360,6431 11375,6446 11390,6431 11375,6416"/>
-<polyline class="fix" points="11375,6422 11366,6431 11375,6440 11384,6431 11375,6422"/>
-<polyline class="fix" points="11638,7494 11908,7556 12073,7383 11908,7210 11638,7272"/>
-<polyline class="fix" points="11508,7583 11508,7183"/>
-<polyline class="fix" points="11399,7182 11348,7233"/>
-<polyline class="fix" points="11348,7533 11399,7583"/>
-<polyline class="fix" points="11610,7496 11909,7575 12097,7383 11909,7191 11610,7270"/>
-<polyline class="fix" points="3492,10359 3453,10320"/>
-<polyline class="fix" points="2792,12065 2843,12116"/>
-<polyline class="fix" points="2837,10320 2798,10359"/>
-<polyline class="fix" points="3447,12116 3498,12065"/>
-<polyline class="fix" points="3142,10595 3199,10538 3142,10482 3085,10538 3142,10595"/>
-<polyline class="fix" points="3142,10565 3169,10538 3142,10512 3115,10538 3142,10565"/>
-<polyline class="fix" points="4561,10673 4594,10658 4606,10623"/>
-<polyline class="fix" points="4478,10674 4329,10710"/>
-<polyline class="fix" points="3922,10711 4326,10711"/>
-<polyline class="fix" points="3926,10710 3780,10674"/>
-<polyline class="fix" points="3642,10623 3655,10663 3693,10679"/>
-<polyline class="fix" points="4219,10392 4124,10380"/>
-<polyline class="fix" points="4295,10421 4221,10389"/>
-<polyline class="fix" points="4344,10479 4291,10426"/>
-<polyline class="fix" points="4360,10532 4345,10479"/>
-<polyline class="fix" points="4345,10586 4360,10532"/>
-<polyline class="fix" points="4291,10639 4344,10586"/>
-<polyline class="fix" points="4221,10670 4295,10638"/>
-<polyline class="fix" points="4124,10685 4219,10673"/>
-<polyline class="fix" points="4029,10673 4124,10685"/>
-<polyline class="fix" points="3959,10638 4033,10670"/>
-<polyline class="fix" points="3904,10586 3957,10639"/>
-<polyline class="fix" points="3893,10532 3909,10586"/>
-<polyline class="fix" points="3909,10479 3893,10532"/>
-<polyline class="fix" points="3957,10426 3904,10479"/>
-<polyline class="fix" points="4033,10389 3959,10421"/>
-<polyline class="fix" points="4124,10380 4029,10392"/>
-<polyline class="fix" points="3876,10494 3857,10556"/>
-<polyline class="fix" points="4017,10390 3932,10428"/>
-<polyline class="fix" points="4124,10380 4015,10394"/>
-<polyline class="fix" points="4233,10394 4124,10380"/>
-<polyline class="fix" points="4322,10428 4237,10390"/>
-<polyline class="fix" points="4396,10556 4378,10494"/>
-<polyline class="fix" points="4378,10619 4396,10556"/>
-<polyline class="fix" points="4237,10723 4322,10685"/>
-<polyline class="fix" points="4124,10733 4233,10719"/>
-<polyline class="fix" points="4015,10719 4124,10733"/>
-<polyline class="fix" points="3932,10685 4017,10723"/>
-<polyline class="fix" points="3857,10556 3876,10619"/>
-<polyline class="fix" points="4003,10734 4124,10751"/>
-<polyline class="fix" points="3910,10687 4005,10732"/>
-<polyline class="fix" points="3822,10538 3843,10616"/>
-<polyline class="fix" points="3843,10461 3822,10538"/>
-<polyline class="fix" points="4005,10345 3910,10390"/>
-<polyline class="fix" points="4124,10326 4003,10343"/>
-<polyline class="fix" points="4245,10343 4124,10326"/>
-<polyline class="fix" points="4344,10390 4249,10345"/>
-<polyline class="fix" points="4432,10538 4411,10461"/>
-<polyline class="fix" points="4411,10616 4432,10538"/>
-<polyline class="fix" points="4249,10732 4344,10687"/>
-<polyline class="fix" points="4124,10751 4245,10734"/>
-<polyline class="fix" points="4085,10347 4076,10338 4067,10347 4076,10356 4085,10347"/>
-<polyline class="fix" points="4139,10419 4124,10404 4109,10419 4124,10434 4139,10419"/>
-<polyline class="fix" points="4145,10419 4124,10398 4103,10419 4124,10440 4145,10419"/>
-<polyline class="fix" points="4187,10347 4178,10338 4169,10347 4178,10356 4187,10347"/>
-<polyline class="fix" points="4139,10347 4124,10332 4109,10347 4124,10362 4139,10347"/>
-<polyline class="fix" points="4133,10347 4124,10338 4115,10347 4124,10356 4133,10347"/>
-<polyline class="fix" points="4965,10610 4903,10880 5076,11044 5249,10880 5187,10610"/>
-<polyline class="fix" points="4876,10479 5276,10480"/>
-<polyline class="fix" points="5277,10365 5226,10314"/>
-<polyline class="fix" points="4926,10314 4875,10365"/>
-<polyline class="fix" points="4963,10582 4884,10880 5076,11068 5268,10880 5189,10582"/>
-<polyline class="fix" points="31435,10320 31396,10359"/>
-<polyline class="fix" points="32046,12116 32096,12065"/>
-<polyline class="fix" points="32096,10359 32057,10320"/>
-<polyline class="fix" points="31396,12065 31447,12116"/>
-<polyline class="fix" points="31746,10595 31803,10538 31746,10482 31689,10538 31746,10595"/>
-<polyline class="fix" points="31746,10565 31773,10538 31746,10512 31719,10538 31746,10565"/>
-<polyline class="fix" points="30288,10623 30300,10658 30333,10673"/>
-<polyline class="fix" points="30565,10710 30416,10674"/>
-<polyline class="fix" points="30562,10711 30966,10711"/>
-<polyline class="fix" points="31114,10674 30968,10710"/>
-<polyline class="fix" points="31201,10679 31239,10663 31252,10623"/>
-<polyline class="fix" points="30764,10380 30669,10392"/>
-<polyline class="fix" points="30673,10389 30599,10421"/>
-<polyline class="fix" points="30603,10426 30550,10479"/>
-<polyline class="fix" points="30549,10479 30534,10532"/>
-<polyline class="fix" points="30534,10532 30549,10586"/>
-<polyline class="fix" points="30550,10586 30603,10639"/>
-<polyline class="fix" points="30599,10638 30673,10670"/>
-<polyline class="fix" points="30669,10673 30764,10685"/>
-<polyline class="fix" points="30764,10685 30859,10673"/>
-<polyline class="fix" points="30861,10670 30935,10638"/>
-<polyline class="fix" points="30931,10639 30984,10586"/>
-<polyline class="fix" points="30985,10586 31001,10532"/>
-<polyline class="fix" points="31001,10532 30985,10479"/>
-<polyline class="fix" points="30984,10479 30931,10426"/>
-<polyline class="fix" points="30935,10421 30861,10389"/>
-<polyline class="fix" points="30859,10392 30764,10380"/>
-<polyline class="fix" points="31037,10556 31018,10494"/>
-<polyline class="fix" points="30962,10428 30877,10390"/>
-<polyline class="fix" points="30873,10394 30764,10380"/>
-<polyline class="fix" points="30764,10380 30655,10394"/>
-<polyline class="fix" points="30657,10390 30572,10428"/>
-<polyline class="fix" points="30516,10494 30498,10556"/>
-<polyline class="fix" points="30498,10556 30516,10619"/>
-<polyline class="fix" points="30572,10685 30657,10723"/>
-<polyline class="fix" points="30655,10719 30764,10733"/>
-<polyline class="fix" points="30764,10733 30873,10719"/>
-<polyline class="fix" points="30877,10723 30962,10685"/>
-<polyline class="fix" points="31018,10619 31037,10556"/>
-<polyline class="fix" points="30764,10751 30885,10734"/>
-<polyline class="fix" points="30889,10732 30984,10687"/>
-<polyline class="fix" points="31051,10616 31072,10538"/>
-<polyline class="fix" points="31072,10538 31051,10461"/>
-<polyline class="fix" points="30984,10390 30889,10345"/>
-<polyline class="fix" points="30885,10343 30764,10326"/>
-<polyline class="fix" points="30764,10326 30643,10343"/>
-<polyline class="fix" points="30645,10345 30551,10390"/>
-<polyline class="fix" points="30483,10461 30462,10538"/>
-<polyline class="fix" points="30462,10538 30483,10616"/>
-<polyline class="fix" points="30551,10687 30645,10732"/>
-<polyline class="fix" points="30643,10734 30764,10751"/>
-<polyline class="fix" points="30809,10347 30818,10356 30827,10347 30818,10338 30809,10347"/>
-<polyline class="fix" points="30749,10419 30764,10434 30779,10419 30764,10404 30749,10419"/>
-<polyline class="fix" points="30743,10419 30764,10440 30785,10419 30764,10398 30743,10419"/>
-<polyline class="fix" points="30707,10347 30716,10356 30725,10347 30716,10338 30707,10347"/>
-<polyline class="fix" points="30749,10347 30764,10362 30779,10347 30764,10332 30749,10347"/>
-<polyline class="fix" points="30755,10347 30764,10356 30773,10347 30764,10338 30755,10347"/>
-<polyline class="fix" points="29707,10610 29645,10880 29818,11044 29991,10880 29929,10610"/>
-<polyline class="fix" points="29618,10480 30018,10479"/>
-<polyline class="fix" points="29668,10314 29617,10365"/>
-<polyline class="fix" points="30019,10365 29968,10314"/>
-<polyline class="fix" points="29705,10582 29626,10880 29818,11068 30010,10880 29931,10582"/>
-<polyline class="fix" points="23546,5239 23507,5200"/>
-<polyline class="fix" points="21743,5850 21794,5901"/>
-<polyline class="fix" points="23507,5895 23546,5856"/>
-<polyline class="fix" points="21794,5194 21743,5245"/>
-<polyline class="fix" points="23270,5545 23327,5601 23384,5545 23327,5488 23270,5545"/>
-<polyline class="fix" points="23300,5545 23327,5571 23354,5545 23327,5518 23300,5545"/>
-<polyline class="fix" points="23243,5949 23207,5960 23192,5994"/>
-<polyline class="fix" points="23156,6226 23192,6077"/>
-<polyline class="fix" points="23155,6229 23155,6632"/>
-<polyline class="fix" points="23192,6774 23156,6629"/>
-<polyline class="fix" points="23186,6861 23203,6899 23242,6913"/>
-<polyline class="fix" points="23486,6431 23473,6336"/>
-<polyline class="fix" points="23477,6334 23444,6260"/>
-<polyline class="fix" points="23440,6263 23387,6210"/>
-<polyline class="fix" points="23387,6210 23333,6194"/>
-<polyline class="fix" points="23333,6194 23280,6210"/>
-<polyline class="fix" points="23279,6210 23226,6263"/>
-<polyline class="fix" points="23222,6260 23189,6334"/>
-<polyline class="fix" points="23193,6336 23180,6431"/>
-<polyline class="fix" points="23180,6431 23193,6525"/>
-<polyline class="fix" points="23189,6522 23222,6595"/>
-<polyline class="fix" points="23226,6592 23279,6645"/>
-<polyline class="fix" points="23280,6646 23333,6661"/>
-<polyline class="fix" points="23333,6661 23387,6646"/>
-<polyline class="fix" points="23387,6645 23440,6592"/>
-<polyline class="fix" points="23444,6595 23477,6522"/>
-<polyline class="fix" points="23473,6525 23486,6431"/>
-<polyline class="fix" points="23309,6697 23372,6679"/>
-<polyline class="fix" points="23438,6623 23476,6538"/>
-<polyline class="fix" points="23471,6539 23486,6431"/>
-<polyline class="fix" points="23486,6431 23471,6322"/>
-<polyline class="fix" points="23476,6317 23438,6233"/>
-<polyline class="fix" points="23372,6176 23309,6158"/>
-<polyline class="fix" points="23309,6158 23247,6176"/>
-<polyline class="fix" points="23181,6233 23143,6317"/>
-<polyline class="fix" points="23141,6322 23127,6431"/>
-<polyline class="fix" points="23127,6431 23141,6539"/>
-<polyline class="fix" points="23143,6538 23181,6623"/>
-<polyline class="fix" points="23247,6679 23309,6697"/>
-<polyline class="fix" points="23115,6431 23132,6552"/>
-<polyline class="fix" points="23133,6550 23178,6644"/>
-<polyline class="fix" points="23249,6712 23327,6733"/>
-<polyline class="fix" points="23327,6733 23405,6712"/>
-<polyline class="fix" points="23476,6644 23521,6550"/>
-<polyline class="fix" points="23523,6552 23540,6431"/>
-<polyline class="fix" points="23540,6431 23523,6310"/>
-<polyline class="fix" points="23521,6306 23476,6211"/>
-<polyline class="fix" points="23405,6144 23327,6122"/>
-<polyline class="fix" points="23327,6122 23249,6144"/>
-<polyline class="fix" points="23178,6211 23133,6306"/>
-<polyline class="fix" points="23132,6310 23115,6431"/>
-<polyline class="fix" points="23519,6470 23510,6479 23519,6488 23528,6479 23519,6470"/>
-<polyline class="fix" points="23447,6416 23432,6431 23447,6446 23462,6431 23447,6416"/>
-<polyline class="fix" points="23447,6410 23426,6431 23447,6452 23468,6431 23447,6410"/>
-<polyline class="fix" points="23519,6368 23510,6377 23519,6386 23528,6377 23519,6368"/>
-<polyline class="fix" points="23519,6416 23504,6431 23519,6446 23534,6431 23519,6416"/>
-<polyline class="fix" points="23519,6422 23510,6431 23519,6440 23528,6431 23519,6422"/>
-<polyline class="fix" points="23250,7272 22980,7210 22815,7383 22980,7556 23250,7494"/>
-<polyline class="fix" points="23380,7183 23380,7583"/>
-<polyline class="fix" points="23546,7233 23495,7182"/>
-<polyline class="fix" points="23495,7583 23546,7533"/>
-<polyline class="fix" points="23278,7270 22979,7191 22791,7383 22979,7575 23278,7496"/>
+<polyline class="stair" points="26600,6811 26600,7188 26600,7248"/>
+<polyline class="fix" points="23507,6997 23546,6958"/>
+<polyline class="fix" points="22896,5194 22845,5245"/>
+<polyline class="fix" points="22845,6958 22884,6997"/>
+<polyline class="fix" points="23546,5245 23495,5194"/>
+<polyline class="fix" points="23195,6721 23139,6778 23195,6835 23252,6778 23195,6721"/>
+<polyline class="fix" points="23195,6751 23168,6778 23195,6805 23222,6778 23195,6751"/>
+<polyline class="fix" points="22797,6693 22786,6658 22752,6643"/>
+<polyline class="fix" points="22520,6607 22669,6643"/>
+<polyline class="fix" points="22517,6606 22114,6606"/>
+<polyline class="fix" points="21971,6642 22117,6606"/>
+<polyline class="fix" points="21885,6637 21847,6654 21833,6693"/>
+<polyline class="fix" points="22315,6937 22410,6924"/>
+<polyline class="fix" points="22412,6928 22486,6895"/>
+<polyline class="fix" points="22483,6891 22535,6838"/>
+<polyline class="fix" points="22536,6838 22552,6784"/>
+<polyline class="fix" points="22552,6784 22536,6730"/>
+<polyline class="fix" points="22535,6730 22483,6677"/>
+<polyline class="fix" points="22486,6673 22412,6640"/>
+<polyline class="fix" points="22410,6644 22315,6631"/>
+<polyline class="fix" points="22315,6631 22220,6644"/>
+<polyline class="fix" points="22218,6640 22144,6673"/>
+<polyline class="fix" points="22148,6677 22095,6730"/>
+<polyline class="fix" points="22094,6730 22079,6784"/>
+<polyline class="fix" points="22079,6784 22094,6838"/>
+<polyline class="fix" points="22095,6838 22148,6891"/>
+<polyline class="fix" points="22144,6895 22218,6928"/>
+<polyline class="fix" points="22220,6924 22315,6937"/>
+<polyline class="fix" points="22049,6760 22067,6823"/>
+<polyline class="fix" points="22123,6888 22208,6926"/>
+<polyline class="fix" points="22206,6922 22315,6937"/>
+<polyline class="fix" points="22315,6937 22424,6922"/>
+<polyline class="fix" points="22423,6926 22507,6888"/>
+<polyline class="fix" points="22569,6823 22588,6760"/>
+<polyline class="fix" points="22588,6760 22569,6698"/>
+<polyline class="fix" points="22507,6632 22423,6594"/>
+<polyline class="fix" points="22424,6592 22315,6577"/>
+<polyline class="fix" points="22315,6577 22206,6592"/>
+<polyline class="fix" points="22208,6594 22123,6632"/>
+<polyline class="fix" points="22067,6698 22049,6760"/>
+<polyline class="fix" points="22315,6565 22194,6583"/>
+<polyline class="fix" points="22196,6584 22102,6629"/>
+<polyline class="fix" points="22034,6700 22013,6778"/>
+<polyline class="fix" points="22013,6778 22034,6856"/>
+<polyline class="fix" points="22102,6927 22196,6972"/>
+<polyline class="fix" points="22194,6973 22315,6991"/>
+<polyline class="fix" points="22315,6991 22436,6973"/>
+<polyline class="fix" points="22434,6972 22529,6927"/>
+<polyline class="fix" points="22602,6856 22624,6778"/>
+<polyline class="fix" points="22624,6778 22602,6700"/>
+<polyline class="fix" points="22529,6629 22434,6584"/>
+<polyline class="fix" points="22436,6583 22315,6565"/>
+<polyline class="fix" points="22270,6970 22261,6961 22252,6970 22261,6979 22270,6970"/>
+<polyline class="fix" points="22330,6898 22315,6883 22300,6898 22315,6913 22330,6898"/>
+<polyline class="fix" points="22336,6898 22315,6877 22294,6898 22315,6919 22336,6898"/>
+<polyline class="fix" points="22378,6970 22369,6961 22360,6970 22369,6979 22378,6970"/>
+<polyline class="fix" points="22330,6970 22315,6955 22300,6970 22315,6985 22330,6970"/>
+<polyline class="fix" points="22324,6970 22315,6961 22306,6970 22315,6979 22324,6970"/>
+<polyline class="fix" points="21612,6701 21674,6431 21501,6266 21328,6431 21390,6701"/>
+<polyline class="fix" points="21701,6831 21301,6831"/>
+<polyline class="fix" points="21651,6997 21701,6946"/>
+<polyline class="fix" points="21300,6946 21351,6997"/>
+<polyline class="fix" points="21614,6729 21692,6430 21501,6242 21309,6430 21388,6729"/>
 <polyline class="stair" points="7211,5380 7965,5380 7965,5781 7211,5781 7211,5380"/>
 <polyline class="stair" points="26935,5380 27683,5380 27683,5781 26935,5781 26935,5380"/>
 <rect class="ext" x="2395" y="3400" width="405" height="14000"/>
@@ -633,46 +660,37 @@
 <rect class="ext" x="27700" y="17000" width="4805" height="400"/>
 <rect class="ext" x="2395" y="3400" width="4655" height="400"/>
 <rect class="ext" x="27850" y="3400" width="4655" height="400"/>
-<rect class="ext" x="6800" y="12225" width="400" height="5175"/>
-<rect class="ext" x="27700" y="12225" width="400" height="5175"/>
+<rect class="ext" x="6800" y="12600" width="400" height="4800"/>
+<rect class="ext" x="27700" y="12600" width="400" height="4800"/>
 <rect class="ext" x="6800" y="3400" width="400" height="1800"/>
 <rect class="ext" x="27700" y="3400" width="400" height="1800"/>
-<rect class="ext" x="7200" y="4800" width="10000" height="400"/>
-<rect class="ext" x="17200" y="4800" width="10500" height="400"/>
-<rect class="ext" x="9450" y="10200" width="7750" height="400"/>
-<rect class="ext" x="17200" y="10200" width="8250" height="400"/>
-<rect class="ext" x="17075" y="5200" width="250" height="5400"/>
-<rect class="ext" x="6945" y="5200" width="255" height="3850"/>
-<rect class="ext" x="13750" y="9950" width="250" height="250"/>
-<rect class="ext" x="13750" y="5200" width="250" height="3850"/>
-<rect class="ext" x="27700" y="5200" width="255" height="3850"/>
-<rect class="ext" x="20400" y="9950" width="250" height="250"/>
-<rect class="ext" x="20400" y="5200" width="250" height="3850"/>
-<rect class="part" x="11095" y="5200" width="255" height="2900"/>
-<rect class="part" x="11350" y="7900" width="745" height="120"/>
-<rect class="part" x="13000" y="7900" width="750" height="120"/>
-<rect class="part" x="2800" y="12225" width="1680" height="120"/>
-<rect class="part" x="5380" y="12225" width="420" height="120"/>
-<rect class="part" x="6695" y="12225" width="105" height="120"/>
-<rect class="part" x="5480" y="9960" width="120" height="2265"/>
-<rect class="part" x="5480" y="8800" width="120" height="410"/>
-<rect class="part" x="2800" y="10200" width="2680" height="120"/>
-<rect class="part" x="2800" y="8680" width="3000" height="120"/>
-<rect class="part" x="6695" y="8680" width="250" height="120"/>
+<rect class="ext" x="7200" y="4800" width="250" height="400"/>
+<rect class="ext" x="8350" y="4800" width="8850" height="400"/>
+<rect class="ext" x="17200" y="4800" width="9350" height="400"/>
+<rect class="ext" x="27450" y="4800" width="250" height="400"/>
+<rect class="ext" x="6800" y="10200" width="650" height="400"/>
+<rect class="ext" x="8945" y="10200" width="8255" height="400"/>
+<rect class="ext" x="17200" y="10200" width="8755" height="400"/>
+<rect class="ext" x="27450" y="10200" width="650" height="400"/>
+<rect class="ext" x="17075" y="3230" width="250" height="7370"/>
+<rect class="ext" x="13245" y="9950" width="255" height="250"/>
+<rect class="ext" x="13245" y="5200" width="255" height="3850"/>
+<rect class="ext" x="20900" y="9950" width="250" height="250"/>
+<rect class="ext" x="20900" y="5200" width="250" height="3850"/>
+<rect class="ext" x="13095" y="4675" width="255" height="125"/>
+<rect class="ext" x="13095" y="3210" width="255" height="720"/>
+<rect class="ext" x="21050" y="4675" width="250" height="125"/>
+<rect class="ext" x="21050" y="3210" width="250" height="720"/>
+<rect class="part" x="11095" y="5200" width="255" height="3600"/>
+<rect class="part" x="11350" y="8150" width="650" height="250"/>
+<rect class="part" x="12795" y="8150" width="450" height="250"/>
+<rect class="part" x="11350" y="7005" width="1895" height="115"/>
 <rect class="part" x="23550" y="5200" width="245" height="3600"/>
-<rect class="part" x="20650" y="7900" width="750" height="120"/>
-<rect class="part" x="22300" y="7900" width="1250" height="120"/>
-<rect class="part" x="28100" y="12225" width="100" height="120"/>
-<rect class="part" x="29100" y="12225" width="420" height="120"/>
-<rect class="part" x="30420" y="12225" width="1680" height="120"/>
-<rect class="part" x="29300" y="9960" width="120" height="2265"/>
-<rect class="part" x="29300" y="8800" width="120" height="410"/>
-<rect class="part" x="29420" y="10200" width="2680" height="120"/>
-<rect class="part" x="27955" y="8680" width="245" height="120"/>
-<rect class="part" x="29100" y="8680" width="3000" height="120"/>
+<rect class="part" x="21150" y="8150" width="450" height="250"/>
+<rect class="part" x="22400" y="8150" width="1150" height="250"/>
+<rect class="part" x="21150" y="7005" width="2400" height="115"/>
 <rect class="col" x="9450" y="12600" width="400" height="400"/>
 <rect class="col" x="25050" y="12600" width="400" height="400"/>
-<rect class="col" x="11095" y="8920" width="255" height="130"/>
 <rect class="win" x="3800" y="17000" width="2000" height="400"/>
 <line class="winl" x1="3800" y1="17200.0" x2="5800" y2="17200.0"/>
 <rect class="win" x="29100" y="17000" width="2000" height="400"/>
@@ -697,147 +715,128 @@
 <line class="winl" x1="18150" y1="10400.0" x2="20150" y2="10400.0"/>
 <rect class="win" x="22175" y="10200" width="2000" height="400"/>
 <line class="winl" x1="22175" y1="10400.0" x2="24175" y2="10400.0"/>
-<rect class="win" x="7200" y="12750" width="2250" height="105"/>
-<line class="winl" x1="7200" y1="12802.5" x2="9450" y2="12802.5"/>
-<rect class="win" x="25450" y="12750" width="2250" height="105"/>
-<line class="winl" x1="25450" y1="12802.5" x2="27700" y2="12802.5"/>
-<rect class="win" x="9600" y="10600" width="95" height="2000"/>
-<line class="winl" x1="9647.5" y1="12600" x2="9647.5" y2="10600"/>
-<rect class="win" x="25200" y="10600" width="100" height="2000"/>
-<line class="winl" x1="25250.0" y1="12600" x2="25250.0" y2="10600"/>
+<rect class="win" x="6965" y="12050" width="65" height="550"/>
+<line class="winl" x1="6997.5" y1="12600" x2="6997.5" y2="12050"/>
+<rect class="win" x="6965" y="10600" width="65" height="550"/>
+<line class="winl" x1="6997.5" y1="11150" x2="6997.5" y2="10600"/>
+<rect class="win" x="9620" y="12050" width="65" height="550"/>
+<line class="winl" x1="9652.5" y1="12600" x2="9652.5" y2="12050"/>
+<rect class="win" x="9620" y="10600" width="65" height="550"/>
+<line class="winl" x1="9652.5" y1="11150" x2="9652.5" y2="10600"/>
+<rect class="win" x="25220" y="12050" width="65" height="550"/>
+<line class="winl" x1="25252.5" y1="12600" x2="25252.5" y2="12050"/>
+<rect class="win" x="25220" y="10600" width="65" height="550"/>
+<line class="winl" x1="25252.5" y1="11150" x2="25252.5" y2="10600"/>
+<rect class="win" x="27870" y="12050" width="65" height="550"/>
+<line class="winl" x1="27902.5" y1="12600" x2="27902.5" y2="12050"/>
+<rect class="win" x="27870" y="10600" width="65" height="550"/>
+<line class="winl" x1="27902.5" y1="11150" x2="27902.5" y2="10600"/>
+<rect class="win" x="7200" y="12770" width="2250" height="60"/>
+<line class="winl" x1="7200" y1="12800.0" x2="9450" y2="12800.0"/>
+<rect class="win" x="25450" y="12770" width="2250" height="60"/>
+<line class="winl" x1="25450" y1="12800.0" x2="27700" y2="12800.0"/>
 <text class="small" x="4800.0" y="17630" text-anchor="middle" fill="#2f8fd8">окно 200</text>
 <text class="small" x="30100.0" y="17630" text-anchor="middle" fill="#2f8fd8">окно 200</text>
 <text class="small" x="7430" y="4300.0" text-anchor="middle" fill="#2f8fd8" transform="rotate(-90 7430 4300.0)">окно 100</text>
 <text class="small" x="28330" y="4300.0" text-anchor="middle" fill="#2f8fd8" transform="rotate(-90 28330 4300.0)">окно 100</text>
 <text class="small" x="11975.0" y="4550" text-anchor="middle" fill="#2f8fd8">окно 75</text>
-<text class="small" x="15245.0" y="5450" text-anchor="middle" fill="#2f8fd8">окно 200</text>
-<text class="small" x="19150.0" y="5450" text-anchor="middle" fill="#2f8fd8">окно 200</text>
+<text class="small" x="15245.0" y="4550" text-anchor="middle" fill="#2f8fd8">окно 200</text>
+<text class="small" x="19150.0" y="4550" text-anchor="middle" fill="#2f8fd8">окно 200</text>
 <text class="small" x="22422.5" y="4550" text-anchor="middle" fill="#2f8fd8">окно 74</text>
 <text class="small" x="11225.0" y="10830" text-anchor="middle" fill="#2f8fd8">окно 200</text>
 <text class="small" x="15245.0" y="10830" text-anchor="middle" fill="#2f8fd8">окно 200</text>
 <text class="small" x="19150.0" y="10830" text-anchor="middle" fill="#2f8fd8">окно 200</text>
 <text class="small" x="23175.0" y="10830" text-anchor="middle" fill="#2f8fd8">окно 200</text>
-<text class="small" x="8325.0" y="13085" text-anchor="middle" fill="#2f8fd8">окно 225</text>
-<text class="small" x="26575.0" y="13085" text-anchor="middle" fill="#2f8fd8">окно 225</text>
-<text class="small" x="9925" y="11600.0" text-anchor="middle" fill="#2f8fd8" transform="rotate(-90 9925 11600.0)">окно 200</text>
-<text class="small" x="25530" y="11600.0" text-anchor="middle" fill="#2f8fd8" transform="rotate(-90 25530 11600.0)">окно 200</text>
-<text class="small" x="12550" y="8025" text-anchor="middle" fill="#8e44ad" font-weight="700">↕90</text>
-<text class="small" x="13875" y="9565" text-anchor="middle" fill="#8e44ad" font-weight="700">↔90</text>
-<text class="small" x="4930" y="12350" text-anchor="middle" fill="#8e44ad" font-weight="700">↕90</text>
-<text class="small" x="6250" y="12350" text-anchor="middle" fill="#8e44ad" font-weight="700">↕90</text>
-<text class="small" x="5540" y="9650" text-anchor="middle" fill="#8e44ad" font-weight="700">↔75</text>
-<text class="small" x="6250" y="8805" text-anchor="middle" fill="#8e44ad" font-weight="700">↕90</text>
-<text class="small" x="21850" y="8025" text-anchor="middle" fill="#8e44ad" font-weight="700">↕90</text>
-<text class="small" x="20525" y="9565" text-anchor="middle" fill="#8e44ad" font-weight="700">↔90</text>
-<text class="small" x="29970" y="12350" text-anchor="middle" fill="#8e44ad" font-weight="700">↕90</text>
-<text class="small" x="28650" y="12350" text-anchor="middle" fill="#8e44ad" font-weight="700">↕90</text>
-<text class="small" x="29360" y="9650" text-anchor="middle" fill="#8e44ad" font-weight="700">↔75</text>
-<text class="small" x="28650" y="8805" text-anchor="middle" fill="#8e44ad" font-weight="700">↕90</text>
+<text class="small" x="8325.0" y="13060" text-anchor="middle" fill="#2f8fd8">окно 225</text>
+<text class="small" x="26575.0" y="13060" text-anchor="middle" fill="#2f8fd8">окно 225</text>
+<text class="small" x="7900" y="5065" text-anchor="middle" fill="#8e44ad" font-weight="700">↕90</text>
+<text class="small" x="27000" y="5065" text-anchor="middle" fill="#8e44ad" font-weight="700">↕90</text>
+<text class="small" x="8200" y="10465" text-anchor="middle" fill="#8e44ad" font-weight="700">↕150</text>
+<text class="small" x="26700" y="10465" text-anchor="middle" fill="#8e44ad" font-weight="700">↕150</text>
+<text class="small" x="7000" y="11665" text-anchor="middle" fill="#8e44ad" font-weight="700">↔90</text>
+<text class="small" x="9650" y="11665" text-anchor="middle" fill="#8e44ad" font-weight="700">↔90</text>
+<text class="small" x="25250" y="11665" text-anchor="middle" fill="#8e44ad" font-weight="700">↔90</text>
+<text class="small" x="27900" y="11665" text-anchor="middle" fill="#8e44ad" font-weight="700">↔90</text>
+<text class="small" x="12400" y="8340" text-anchor="middle" fill="#8e44ad" font-weight="700">↕80</text>
+<text class="small" x="13370" y="9565" text-anchor="middle" fill="#8e44ad" font-weight="700">↔90</text>
+<text class="small" x="22000" y="8340" text-anchor="middle" fill="#8e44ad" font-weight="700">↕80</text>
+<text class="small" x="21025" y="9565" text-anchor="middle" fill="#8e44ad" font-weight="700">↔90</text>
+<text class="small" x="13220" y="4365" text-anchor="middle" fill="#8e44ad" font-weight="700">↔74</text>
+<text class="small" x="21175" y="4365" text-anchor="middle" fill="#8e44ad" font-weight="700">↔74</text>
 <g class="dim"><line x1="2800" y1="16670" x2="6800" y2="16670"/><line x1="2710" y1="16760" x2="2890" y2="16580"/><line x1="6710" y1="16760" x2="6890" y2="16580"/><text x="4800.0" y="16600" text-anchor="middle">400</text></g>
-<g class="dim"><line x1="3130" y1="17000" x2="3130" y2="12345"/><line x1="3040" y1="17090" x2="3220" y2="16910"/><line x1="3040" y1="12435" x2="3220" y2="12255"/><text x="3060" y="14672.5" text-anchor="middle" transform="rotate(-90 3060 14672.5)">466</text></g>
-<text class="name" x="4800" y="14500" text-anchor="middle">Комната (родители)</text>
-<text class="sub" x="4800" y="14800" text-anchor="middle">18.6 м²</text>
+<g class="dim"><line x1="3130" y1="17000" x2="3130" y2="3800"/><line x1="3040" y1="17090" x2="3220" y2="16910"/><line x1="3040" y1="3890" x2="3220" y2="3710"/><text x="3060" y="10400.0" text-anchor="middle" transform="rotate(-90 3060 10400.0)">1320</text></g>
+<text class="name" x="4800" y="7400" text-anchor="middle">Крыло</text>
+<text class="small" x="4800" y="7700" text-anchor="middle">кирпичных перегородок нет</text>
+<text class="sub" x="4800" y="7960" text-anchor="middle">52.8 м²</text>
 <g class="dim"><line x1="28100" y1="16670" x2="32100" y2="16670"/><line x1="28010" y1="16760" x2="28190" y2="16580"/><line x1="32010" y1="16760" x2="32190" y2="16580"/><text x="30100.0" y="16600" text-anchor="middle">400</text></g>
-<g class="dim"><line x1="28430" y1="17000" x2="28430" y2="12345"/><line x1="28340" y1="17090" x2="28520" y2="16910"/><line x1="28340" y1="12435" x2="28520" y2="12255"/><text x="28360" y="14672.5" text-anchor="middle" transform="rotate(-90 28360 14672.5)">466</text></g>
-<text class="name" x="30100" y="14500" text-anchor="middle">Комната (родители)</text>
-<text class="sub" x="30100" y="14800" text-anchor="middle">18.6 м²</text>
-<text class="name" x="4140" y="11500" text-anchor="middle">С/у</text>
-<text class="sub" x="4140" y="11800" text-anchor="middle">268×190 · 5.1 м²</text>
-<text class="name" x="30760" y="11500" text-anchor="middle">С/у</text>
-<text class="sub" x="30760" y="11800" text-anchor="middle">268×190 · 5.1 м²</text>
-<text class="name" x="4140" y="9500" text-anchor="middle">Кладовая</text>
-<text class="sub" x="4140" y="9800" text-anchor="middle">268×140 · 3.8 м²</text>
-<text class="name" x="30760" y="9500" text-anchor="middle">Кладовая</text>
-<text class="sub" x="30760" y="9800" text-anchor="middle">268×140 · 3.8 м²</text>
-<g class="dim"><line x1="2800" y1="8350" x2="6800" y2="8350"/><line x1="2710" y1="8440" x2="2890" y2="8260"/><line x1="6710" y1="8440" x2="6890" y2="8260"/><text x="4800.0" y="8280" text-anchor="middle">400</text></g>
-<g class="dim"><line x1="3130" y1="8680" x2="3130" y2="3800"/><line x1="3040" y1="8770" x2="3220" y2="8590"/><line x1="3040" y1="3890" x2="3220" y2="3710"/><text x="3060" y="6240.0" text-anchor="middle" transform="rotate(-90 3060 6240.0)">488</text></g>
-<text class="name" x="4800" y="6600" text-anchor="middle">Детская</text>
-<text class="sub" x="4800" y="6900" text-anchor="middle">20.0 м²</text>
-<g class="dim"><line x1="28100" y1="8350" x2="32100" y2="8350"/><line x1="28010" y1="8440" x2="28190" y2="8260"/><line x1="32010" y1="8440" x2="32190" y2="8260"/><text x="30100.0" y="8280" text-anchor="middle">400</text></g>
-<g class="dim"><line x1="28430" y1="8680" x2="28430" y2="3800"/><line x1="28340" y1="8770" x2="28520" y2="8590"/><line x1="28340" y1="3890" x2="28520" y2="3710"/><text x="28360" y="6240.0" text-anchor="middle" transform="rotate(-90 28360 6240.0)">488</text></g>
-<text class="name" x="30100" y="6600" text-anchor="middle">Детская</text>
-<text class="sub" x="30100" y="6900" text-anchor="middle">20.0 м²</text>
-<text class="name" x="8200" y="11200" text-anchor="middle">Холл</text>
-<text class="sub" x="8200" y="11500" text-anchor="middle">21.7 м²</text>
-<text class="name" x="26700" y="11200" text-anchor="middle">Холл</text>
-<text class="sub" x="26700" y="11500" text-anchor="middle">23.1 м²</text>
+<g class="dim"><line x1="28430" y1="17000" x2="28430" y2="3800"/><line x1="28340" y1="17090" x2="28520" y2="16910"/><line x1="28340" y1="3890" x2="28520" y2="3710"/><text x="28360" y="10400.0" text-anchor="middle" transform="rotate(-90 28360 10400.0)">1320</text></g>
+<text class="name" x="30100" y="7400" text-anchor="middle">Крыло</text>
+<text class="small" x="30100" y="7700" text-anchor="middle">кирпичных перегородок нет</text>
+<text class="sub" x="30100" y="7960" text-anchor="middle">52.8 м²</text>
+<text class="name" x="8325" y="11900" text-anchor="middle">Тамбур (витраж)</text>
+<text class="sub" x="8325" y="12200" text-anchor="middle">259×217 · 5.6 м²</text>
+<text class="name" x="26575" y="11900" text-anchor="middle">Тамбур (витраж)</text>
+<text class="sub" x="26575" y="12200" text-anchor="middle">259×217 · 5.6 м²</text>
+<text class="name" x="9600" y="9600" text-anchor="middle">Холл</text>
+<text class="sub" x="9600" y="9900" text-anchor="middle">8.2 м²</text>
+<text class="name" x="25200" y="9600" text-anchor="middle">Холл</text>
+<text class="sub" x="25200" y="9900" text-anchor="middle">9.1 м²</text>
 <text class="name" x="9150" y="6700" text-anchor="middle">Лестница</text>
 <text class="sub" x="9150" y="7000" text-anchor="middle">15.0 м²</text>
 <text class="name" x="25750" y="6700" text-anchor="middle">Лестница</text>
 <text class="sub" x="25750" y="7000" text-anchor="middle">15.0 м²</text>
-<text class="name" x="12550" y="6300" text-anchor="middle">С/у общий</text>
-<text class="sub" x="12550" y="6600" text-anchor="middle">240×270 · 6.5 м²</text>
-<g class="dim"><line x1="20650" y1="7570" x2="23550" y2="7570"/><line x1="20560" y1="7660" x2="20740" y2="7480"/><line x1="23460" y1="7660" x2="23640" y2="7480"/><text x="22100.0" y="7500" text-anchor="middle">290</text></g>
-<g class="dim"><line x1="20980" y1="7900" x2="20980" y2="5200"/><line x1="20890" y1="7990" x2="21070" y2="7810"/><line x1="20890" y1="5290" x2="21070" y2="5110"/><text x="20910" y="6550.0" text-anchor="middle" transform="rotate(-90 20910 6550.0)">270</text></g>
-<text class="name" x="22100" y="6300" text-anchor="middle">С/у общий</text>
-<text class="sub" x="22100" y="6600" text-anchor="middle">7.8 м²</text>
-<g class="dim"><line x1="14000" y1="9870" x2="17075" y2="9870"/><line x1="13910" y1="9960" x2="14090" y2="9780"/><line x1="16985" y1="9960" x2="17165" y2="9780"/><text x="15537.5" y="9800" text-anchor="middle">308</text></g>
-<g class="dim"><line x1="14330" y1="10200" x2="14330" y2="5200"/><line x1="14240" y1="10290" x2="14420" y2="10110"/><line x1="14240" y1="5290" x2="14420" y2="5110"/><text x="14260" y="7700.0" text-anchor="middle" transform="rotate(-90 14260 7700.0)">500</text></g>
-<text class="name" x="15540" y="7500" text-anchor="middle">Детская</text>
-<text class="sub" x="15540" y="7800" text-anchor="middle">15.4 м²</text>
-<g class="dim"><line x1="17325" y1="9870" x2="20400" y2="9870"/><line x1="17235" y1="9960" x2="17415" y2="9780"/><line x1="20310" y1="9960" x2="20490" y2="9780"/><text x="18862.5" y="9800" text-anchor="middle">308</text></g>
+<text class="name" x="12300" y="6100" text-anchor="middle">С/у (ванна)</text>
+<text class="sub" x="12300" y="6400" text-anchor="middle">190×180 · 3.4 м²</text>
+<text class="name" x="12300" y="7640" text-anchor="middle">С/у</text>
+<text class="sub" x="12300" y="7940" text-anchor="middle">190×103 · 2.0 м²</text>
+<text class="name" x="22350" y="6100" text-anchor="middle">С/у (ванна)</text>
+<text class="sub" x="22350" y="6400" text-anchor="middle">240×180 · 4.3 м²</text>
+<text class="name" x="22350" y="7640" text-anchor="middle">С/у</text>
+<text class="sub" x="22350" y="7940" text-anchor="middle">240×103 · 2.5 м²</text>
+<g class="dim"><line x1="13500" y1="9870" x2="17075" y2="9870"/><line x1="13410" y1="9960" x2="13590" y2="9780"/><line x1="16985" y1="9960" x2="17165" y2="9780"/><text x="15287.5" y="9800" text-anchor="middle">358</text></g>
+<g class="dim"><line x1="13830" y1="10200" x2="13830" y2="5200"/><line x1="13740" y1="10290" x2="13920" y2="10110"/><line x1="13740" y1="5290" x2="13920" y2="5110"/><text x="13760" y="7700.0" text-anchor="middle" transform="rotate(-90 13760 7700.0)">500</text></g>
+<text class="name" x="15290" y="7500" text-anchor="middle">Комната</text>
+<text class="sub" x="15290" y="7800" text-anchor="middle">17.9 м²</text>
+<g class="dim"><line x1="17325" y1="9870" x2="20900" y2="9870"/><line x1="17235" y1="9960" x2="17415" y2="9780"/><line x1="20810" y1="9960" x2="20990" y2="9780"/><text x="19112.5" y="9800" text-anchor="middle">358</text></g>
 <g class="dim"><line x1="17655" y1="10200" x2="17655" y2="5200"/><line x1="17565" y1="10290" x2="17745" y2="10110"/><line x1="17565" y1="5290" x2="17745" y2="5110"/><text x="17585" y="7700.0" text-anchor="middle" transform="rotate(-90 17585 7700.0)">500</text></g>
-<text class="name" x="18860" y="7500" text-anchor="middle">Детская</text>
-<text class="sub" x="18860" y="7800" text-anchor="middle">15.4 м²</text>
+<text class="name" x="19110" y="7500" text-anchor="middle">Комната</text>
+<text class="sub" x="19110" y="7800" text-anchor="middle">17.9 м²</text>
 
 
-<text class="name" x="15100" y="4200" text-anchor="middle">кровля 1 эт.</text>
-<text class="name" x="19300" y="4200" text-anchor="middle">кровля 1 эт.</text>
+
+
+<text class="name" x="17450" y="14200" text-anchor="middle">Двор (открытый)</text>
 <g class="dim"><line x1="2395" y1="18300" x2="32505" y2="18300"/><line x1="2305" y1="18390" x2="2485" y2="18210"/><line x1="32415" y1="18390" x2="32595" y2="18210"/><text x="17450.0" y="18230" text-anchor="middle">3011 см (по наружным стенам)</text></g>
 <g class="dim"><line x1="1700" y1="17400" x2="1700" y2="3400"/><line x1="1610" y1="17490" x2="1790" y2="17310"/><line x1="1610" y1="3490" x2="1790" y2="3310"/><text x="1630" y="10400.0" text-anchor="middle" transform="rotate(-90 1630 10400.0)">1400 см</text></g>
 
-<rect x="0" y="0" width="35300" height="19800" fill="#fff" opacity="0.55"/><text class="title" x="2395" y="700">ВЕНТИЛЯЦИЯ — КРОВЛЯ И ЗАДНИЙ ДВОР: РЕКУПЕРАТОРЫ И ВОЗДУХОВОДЫ</text><text class="note" x="2395" y="1400">Рекуператоры — в заднем дворе у стены по оси Г. Трубы поднимаются в утеплённом коробе по фасаду и по кровле идут к шахтам А и Б.</text><text class="note" x="2395" y="1730">Забор — во дворе на высоте 2 м. Выброс — коробом вверх на 1 м выше кровли: забор и выброс разнесены, выброс не засасывается обратно.</text>
+<text class="title" x="2395" y="700">ВЕНТИЛЯЦИЯ — ЗАДНИЙ ДВОР: РЕКУПЕРАТОРЫ И КОРОБ ПО ФАСАДУ</text><text class="note" x="2395" y="1400">Рекуператоры — во дворе у стены по оси Г. Трубы поднимаются в утеплённом коробе по фасаду и входят в дом сквозь стену Г на уровне потолка 2-го этажа.</text><text class="note" x="2395" y="1730">Кровлю не сверлим. Забор — во дворе на 2 м. Выброс — по фасаду снаружи на 1 м выше кровли: забор и выброс разнесены, выброс не засасывается.</text>
 <defs><marker id="arr-sup" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f7fd6"/></marker><marker id="arr-eta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#de8a2c"/></marker><marker id="arr-oda" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3f9e4d"/></marker><marker id="arr-eha" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a5a44"/></marker></defs>
-<rect x="10150" y="4400" width="950" height="400" fill="#e3e7ea" stroke="#33414b" stroke-width="25"/>
-<polyline points="10000,4600 10300,4600 10300,4600 10300,5300" fill="none" stroke="#1c2830" stroke-width="340" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-<polyline points="10000,4600 10300,4600 10300,4600 10300,5300" fill="none" stroke="#2f7fd6" stroke-width="200" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-<polyline points="10000,4200 10600,4200 10600,4625 10600,4625 10600,5100" fill="none" stroke="#1c2830" stroke-width="340" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-<polyline points="10000,4200 10600,4200 10600,4625 10600,4625 10600,5100" fill="none" stroke="#de8a2c" stroke-width="200" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-<polyline points="10300,5300 7350,5300 7350,10100 2940,10100 2940,10100" fill="none" stroke="#1c2830" stroke-width="300" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-<polyline points="10300,5300 7350,5300 7350,10100 2940,10100 2940,10100" fill="none" stroke="#2f7fd6" stroke-width="160" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-<polyline points="10600,5100 7150,5100 7150,9960 3100,9960 3100,9960" fill="none" stroke="#1c2830" stroke-width="300" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-<polyline points="10600,5100 7150,5100 7150,9960 3100,9960 3100,9960" fill="none" stroke="#de8a2c" stroke-width="160" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-<polyline points="10300,5300 13020,5300 13020,6650 13020,6650" fill="none" stroke="#1c2830" stroke-width="300" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-<polyline points="10300,5300 13020,5300 13020,6650 13020,6650" fill="none" stroke="#2f7fd6" stroke-width="160" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-<polyline points="10600,5100 13170,5100 13170,6650 13170,6650" fill="none" stroke="#1c2830" stroke-width="300" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-<polyline points="10600,5100 13170,5100 13170,6650 13170,6650" fill="none" stroke="#de8a2c" stroke-width="160" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-<polyline points="10000,4000 10900,4000 10900,4600 10900,4600" fill="none" stroke="#1c2830" stroke-width="390" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-<polyline points="10000,4000 10900,4000 10900,4600 10900,4600" fill="none" stroke="#8a5a44" stroke-width="250" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-<rect x="2820" y="9880" width="400" height="300" fill="#cfd6db" stroke="#33414b" stroke-width="22" opacity="1"/><line x1="2820" y1="9880" x2="3220" y2="10180" stroke="#33414b" stroke-width="14"/><line x1="2820" y1="10180" x2="3220" y2="9880" stroke="#33414b" stroke-width="14"/>
-<rect x="12945" y="6400" width="300" height="500" fill="#cfd6db" stroke="#33414b" stroke-width="22" opacity="1"/><line x1="12945" y1="6400" x2="13245" y2="6900" stroke="#33414b" stroke-width="14"/><line x1="12945" y1="6900" x2="13245" y2="6400" stroke="#33414b" stroke-width="14"/>
-<rect x="8600" y="3900" width="1400" height="850" fill="#eef1f3" stroke="#1c2830" stroke-width="40"/>
-<text x="9300.0" y="4395.0" font-size="220" fill="#1c2830" text-anchor="middle" font-weight="700">Р-Л</text>
+<rect x="10050" y="4400" width="1200" height="400" fill="#e3e7ea" stroke="#33414b" stroke-width="25" opacity="1"/><rect x="8600" y="3900" width="1400" height="850" fill="#eef1f3" stroke="#1c2830" stroke-width="35" opacity="1"/><text x="9300.0" y="4395.0" font-size="220" fill="#1c2830" text-anchor="middle" font-weight="700">Р-Л</text>
+<polyline points="10000,4600 10350,4600 10350,4600" fill="none" stroke="#2f7fd6" stroke-width="200" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="10000,4200 10850,4200 10850,4450 10850,4450" fill="none" stroke="#de8a2c" stroke-width="200" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="8900,4325 8900,4325" fill="none" stroke="#3f9e4d" stroke-width="250" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="10000,4000 11150,4000 11150,4600 11150,4600" fill="none" stroke="#8a5a44" stroke-width="250" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
 <circle cx="8900" cy="4325" r="190" fill="#3f9e4d" stroke="#1c2830" stroke-width="20"/>
-<circle cx="10900" cy="4600" r="190" fill="#8a5a44" stroke="#1c2830" stroke-width="20"/>
-<rect x="7400" y="10950" width="9300" height="1950" fill="#fff" stroke="#1c2830" stroke-width="18" rx="60"/><text x="7600" y="11300" font-size="190" fill="#1c2830" text-anchor="start" font-weight="700">Задний двор (Л): рекуператор 1000 м³/ч, 140×85 см</text><text x="7600" y="11630" font-size="190" fill="#333" text-anchor="start" font-weight="400">стоит у стены по оси Г, 25 см от двери во двор, на подушке</text><text x="7600" y="11960" font-size="190" fill="#3f9e4d" text-anchor="start" font-weight="700">забор Ø250 — колпак сеткой вниз, 2,0 м от земли</text><text x="7600" y="12290" font-size="190" fill="#8a5a44" text-anchor="start" font-weight="700">выброс Ø250 — в коробе по фасаду, +1,0 м над кровлей</text><text x="7600" y="12620" font-size="190" fill="#333" text-anchor="start" font-weight="400">приток/вытяжка Ø200 — в том же коробе на кровлю</text><line x1="9300.0" y1="4750" x2="9100" y2="10950" stroke="#1c2830" stroke-width="14" stroke-dasharray="60 40"/>
-<text x="5145.0" y="10520" font-size="180" fill="#1c2830" text-anchor="middle" font-weight="700" paint-order="stroke" stroke="#fff" stroke-width="45" stroke-linejoin="round">П+В 2×Ø160 → шахта А-Л</text>
-<text x="11660.0" y="5680" font-size="180" fill="#1c2830" text-anchor="middle" font-weight="700" paint-order="stroke" stroke="#fff" stroke-width="45" stroke-linejoin="round">П+В 2×Ø160 → шахта Б-Л</text>
-<rect x="23800" y="4400" width="950" height="400" fill="#e3e7ea" stroke="#33414b" stroke-width="25"/>
-<polyline points="24900,4600 24600,4600 24600,4600 24600,5300" fill="none" stroke="#1c2830" stroke-width="340" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-<polyline points="24900,4600 24600,4600 24600,4600 24600,5300" fill="none" stroke="#2f7fd6" stroke-width="200" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-<polyline points="24900,4200 24300,4200 24300,4625 24300,4625 24300,5100" fill="none" stroke="#1c2830" stroke-width="340" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-<polyline points="24900,4200 24300,4200 24300,4625 24300,4625 24300,5100" fill="none" stroke="#de8a2c" stroke-width="200" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-<polyline points="24600,5300 27550,5300 27550,10100 31960,10100 31960,10100" fill="none" stroke="#1c2830" stroke-width="300" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-<polyline points="24600,5300 27550,5300 27550,10100 31960,10100 31960,10100" fill="none" stroke="#2f7fd6" stroke-width="160" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-<polyline points="24300,5100 27750,5100 27750,9960 31800,9960 31800,9960" fill="none" stroke="#1c2830" stroke-width="300" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-<polyline points="24300,5100 27750,5100 27750,9960 31800,9960 31800,9960" fill="none" stroke="#de8a2c" stroke-width="160" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-<polyline points="24600,5300 21380,5300 21380,6650 21380,6650" fill="none" stroke="#1c2830" stroke-width="300" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-<polyline points="24600,5300 21380,5300 21380,6650 21380,6650" fill="none" stroke="#2f7fd6" stroke-width="160" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-<polyline points="24300,5100 21230,5100 21230,6650 21230,6650" fill="none" stroke="#1c2830" stroke-width="300" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-<polyline points="24300,5100 21230,5100 21230,6650 21230,6650" fill="none" stroke="#de8a2c" stroke-width="160" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-<polyline points="24900,4000 24000,4000 24000,4600 24000,4600" fill="none" stroke="#1c2830" stroke-width="390" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-<polyline points="24900,4000 24000,4000 24000,4600 24000,4600" fill="none" stroke="#8a5a44" stroke-width="250" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-<rect x="31680" y="9880" width="400" height="300" fill="#cfd6db" stroke="#33414b" stroke-width="22" opacity="1"/><line x1="31680" y1="9880" x2="32080" y2="10180" stroke="#33414b" stroke-width="14"/><line x1="31680" y1="10180" x2="32080" y2="9880" stroke="#33414b" stroke-width="14"/>
-<rect x="21155" y="6400" width="300" height="500" fill="#cfd6db" stroke="#33414b" stroke-width="22" opacity="1"/><line x1="21155" y1="6400" x2="21455" y2="6900" stroke="#33414b" stroke-width="14"/><line x1="21155" y1="6900" x2="21455" y2="6400" stroke="#33414b" stroke-width="14"/>
-<rect x="24900" y="3900" width="1400" height="850" fill="#eef1f3" stroke="#1c2830" stroke-width="40"/>
-<text x="25600.0" y="4395.0" font-size="220" fill="#1c2830" text-anchor="middle" font-weight="700">Р-П</text>
+<circle cx="11150" cy="4600" r="190" fill="#8a5a44" stroke="#1c2830" stroke-width="20"/>
+<circle cx="10100" cy="5000" r="120.0" fill="#fff" fill-opacity=".85" stroke="#111" stroke-width="22"/>
+<circle cx="10350" cy="5000" r="120.0" fill="#fff" fill-opacity=".85" stroke="#111" stroke-width="22"/>
+<circle cx="10650" cy="5000" r="120.0" fill="#fff" fill-opacity=".85" stroke="#111" stroke-width="22"/>
+<circle cx="10950" cy="5000" r="120.0" fill="#fff" fill-opacity=".85" stroke="#111" stroke-width="22"/>
+<rect x="7400" y="10950" width="9300" height="1950" fill="#fff" stroke="#1c2830" stroke-width="18" rx="60"/><text x="7600" y="11300" font-size="190" fill="#1c2830" text-anchor="start" font-weight="700">Задний двор (Л): рекуператор 1000 м³/ч, 140×85 см</text><text x="7600" y="11630" font-size="190" fill="#333" text-anchor="start" font-weight="400">стоит у стены по оси Г, 25 см от двери во двор, на подушке</text><text x="7600" y="11960" font-size="190" fill="#3f9e4d" text-anchor="start" font-weight="700">забор Ø250 — колпак сеткой вниз, 2,0 м от земли</text><text x="7600" y="12290" font-size="190" fill="#8a5a44" text-anchor="start" font-weight="700">выброс Ø250 — в коробе по фасаду, снаружи на 1,0 м выше кровли</text><text x="7600" y="12620" font-size="190" fill="#333" text-anchor="start" font-weight="400">приток/вытяжка Ø200 — в коробе вверх до 2-го эт., сквозь стену Г</text><line x1="9300.0" y1="4750" x2="9100" y2="10950" stroke="#1c2830" stroke-width="14" stroke-dasharray="60 40"/>
+<rect x="23650" y="4400" width="1200" height="400" fill="#e3e7ea" stroke="#33414b" stroke-width="25" opacity="1"/><rect x="24900" y="3900" width="1400" height="850" fill="#eef1f3" stroke="#1c2830" stroke-width="35" opacity="1"/><text x="25600.0" y="4395.0" font-size="220" fill="#1c2830" text-anchor="middle" font-weight="700">Р-П</text>
+<polyline points="24900,4600 24550,4600 24550,4600" fill="none" stroke="#2f7fd6" stroke-width="200" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="24900,4200 24050,4200 24050,4450 24050,4450" fill="none" stroke="#de8a2c" stroke-width="200" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="26000,4325 26000,4325" fill="none" stroke="#3f9e4d" stroke-width="250" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="24900,4000 23750,4000 23750,4600 23750,4600" fill="none" stroke="#8a5a44" stroke-width="250" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
 <circle cx="26000" cy="4325" r="190" fill="#3f9e4d" stroke="#1c2830" stroke-width="20"/>
-<circle cx="24000" cy="4600" r="190" fill="#8a5a44" stroke="#1c2830" stroke-width="20"/>
-<rect x="17800" y="10950" width="9300" height="1950" fill="#fff" stroke="#1c2830" stroke-width="18" rx="60"/><text x="18000" y="11300" font-size="190" fill="#1c2830" text-anchor="start" font-weight="700">Задний двор (П): рекуператор 1000 м³/ч, 140×85 см</text><text x="18000" y="11630" font-size="190" fill="#333" text-anchor="start" font-weight="400">стоит у стены по оси Г, 25 см от двери во двор, на подушке</text><text x="18000" y="11960" font-size="190" fill="#3f9e4d" text-anchor="start" font-weight="700">забор Ø250 — колпак сеткой вниз, 2,0 м от земли</text><text x="18000" y="12290" font-size="190" fill="#8a5a44" text-anchor="start" font-weight="700">выброс Ø250 — в коробе по фасаду, +1,0 м над кровлей</text><text x="18000" y="12620" font-size="190" fill="#333" text-anchor="start" font-weight="400">приток/вытяжка Ø200 — в том же коробе на кровлю</text><line x1="25600.0" y1="4750" x2="25600" y2="10950" stroke="#1c2830" stroke-width="14" stroke-dasharray="60 40"/>
-<text x="29755.0" y="10520" font-size="180" fill="#1c2830" text-anchor="middle" font-weight="700" paint-order="stroke" stroke="#fff" stroke-width="45" stroke-linejoin="round">П+В 2×Ø160 → шахта А-П</text>
-<text x="22990.0" y="5680" font-size="180" fill="#1c2830" text-anchor="middle" font-weight="700" paint-order="stroke" stroke="#fff" stroke-width="45" stroke-linejoin="round">П+В 2×Ø160 → шахта Б-П</text>
+<circle cx="23750" cy="4600" r="190" fill="#8a5a44" stroke="#1c2830" stroke-width="20"/>
+<circle cx="24800" cy="5000" r="120.0" fill="#fff" fill-opacity=".85" stroke="#111" stroke-width="22"/>
+<circle cx="24550" cy="5000" r="120.0" fill="#fff" fill-opacity=".85" stroke="#111" stroke-width="22"/>
+<circle cx="24250" cy="5000" r="120.0" fill="#fff" fill-opacity=".85" stroke="#111" stroke-width="22"/>
+<circle cx="23950" cy="5000" r="120.0" fill="#fff" fill-opacity=".85" stroke="#111" stroke-width="22"/>
+<rect x="17800" y="10950" width="9300" height="1950" fill="#fff" stroke="#1c2830" stroke-width="18" rx="60"/><text x="18000" y="11300" font-size="190" fill="#1c2830" text-anchor="start" font-weight="700">Задний двор (П): рекуператор 1000 м³/ч, 140×85 см</text><text x="18000" y="11630" font-size="190" fill="#333" text-anchor="start" font-weight="400">стоит у стены по оси Г, 25 см от двери во двор, на подушке</text><text x="18000" y="11960" font-size="190" fill="#3f9e4d" text-anchor="start" font-weight="700">забор Ø250 — колпак сеткой вниз, 2,0 м от земли</text><text x="18000" y="12290" font-size="190" fill="#8a5a44" text-anchor="start" font-weight="700">выброс Ø250 — в коробе по фасаду, снаружи на 1,0 м выше кровли</text><text x="18000" y="12620" font-size="190" fill="#333" text-anchor="start" font-weight="400">приток/вытяжка Ø200 — в коробе вверх до 2-го эт., сквозь стену Г</text><line x1="25600.0" y1="4750" x2="25600" y2="10950" stroke="#1c2830" stroke-width="14" stroke-dasharray="60 40"/>
 <g class="dim"><line x1="8350" y1="3550" x2="8600" y2="3550"/><line x1="8260" y1="3640" x2="8440" y2="3460"/><line x1="8510" y1="3640" x2="8690" y2="3460"/><text x="8475.0" y="3480" text-anchor="middle">25</text></g>
 <g class="dim"><line x1="8600" y1="3550" x2="10000" y2="3550"/><line x1="8510" y1="3640" x2="8690" y2="3460"/><line x1="9910" y1="3640" x2="10090" y2="3460"/><text x="9300.0" y="3480" text-anchor="middle">140</text></g>
-<line x1="2395" y1="18780" x2="2995" y2="18780" stroke="#2f7fd6" stroke-width="120" stroke-linecap="round"/><text x="3145" y="19000" font-size="210" fill="#333" text-anchor="start" font-weight="400">приток</text><line x1="4353" y1="18780" x2="4953" y2="18780" stroke="#de8a2c" stroke-width="120" stroke-linecap="round"/><text x="5103" y="19000" font-size="210" fill="#333" text-anchor="start" font-weight="400">вытяжка</text><circle cx="6729" cy="18780" r="110" fill="#3f9e4d"/><text x="7179" y="19000" font-size="210" fill="#333" text-anchor="start" font-weight="400">забор наружного воздуха</text><circle cx="10693" cy="18780" r="110" fill="#8a5a44"/><text x="11143" y="19000" font-size="210" fill="#333" text-anchor="start" font-weight="400">выброс</text>
-<text x="2395" y="19550" font-size="210" fill="#444" text-anchor="start" font-weight="400">Привязка рекуператора — от края двери во двор (ось Г), см; от стены — 5 см. Правый — зеркально.</text>
+<line x1="2395" y1="18780" x2="2995" y2="18780" stroke="#2f7fd6" stroke-width="120" stroke-linecap="round"/><text x="3145" y="19000" font-size="210" fill="#333" text-anchor="start" font-weight="400">приток</text><line x1="4353" y1="18780" x2="4953" y2="18780" stroke="#de8a2c" stroke-width="120" stroke-linecap="round"/><text x="5103" y="19000" font-size="210" fill="#333" text-anchor="start" font-weight="400">вытяжка</text><circle cx="6729" cy="18780" r="110" fill="#3f9e4d"/><text x="7179" y="19000" font-size="210" fill="#333" text-anchor="start" font-weight="400">забор</text><circle cx="8569" cy="18780" r="110" fill="#8a5a44"/><text x="9019" y="19000" font-size="210" fill="#333" text-anchor="start" font-weight="400">выброс</text><circle cx="10527" cy="18780" r="110" fill="#111"/><text x="10977" y="19000" font-size="210" fill="#333" text-anchor="start" font-weight="400">○ отверстия в стене Г (на уровне 2-го этажа)</text>
+<text x="2395" y="19550" font-size="210" fill="#444" text-anchor="start" font-weight="400">Привязка — от края двери во двор, см; от стены 5 см. Вид на стену со двора — на листе «Фасад и разрез».</text>
 </svg>
