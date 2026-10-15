@@ -631,7 +631,8 @@ function showVent(info){
     lines.push(`${g.flow} м³/ч, решётка 200×100 мм или диффузор Ø125`, g.wall,
       `центр на ${fmt((g.pos[2] - (g.reserve ? 0 : HOUSE.vent.levels.fl2)) / 1000)} м от пола`,
       `${Math.round(g.off / 10)} см от угла: ${g.from}`);
-    if (g.type === "sup") lines.push("жалюзи направить вдоль потолка в комнату");
+    if (g.type === "sup") lines.push("дальнобойная решётка: жалюзи горизонтально, струя вдоль потолка к дальней стене");
+    else lines.push("внизу стены: воздух проходит всю комнату (потолок → дальняя стена → пол) и уходит сюда");
   } else if (info.kind === "elec"){
     const e = info.elec;
     title = `⚡${e.n} ${e.name}`;
