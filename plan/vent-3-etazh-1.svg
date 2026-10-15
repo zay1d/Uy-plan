@@ -801,15 +801,15 @@
 <g class="dim"><line x1="17655" y1="10200" x2="17655" y2="5200"/><line x1="17565" y1="10290" x2="17745" y2="10110"/><line x1="17565" y1="5290" x2="17745" y2="5110"/><text x="17585" y="7700.0" text-anchor="middle" transform="rotate(-90 17585 7700.0)">500</text></g>
 <text class="name" x="19110" y="7500" text-anchor="middle">Комната</text>
 <text class="sub" x="19110" y="7800" text-anchor="middle">17.9 м²</text>
-<text class="name" x="10150" y="4050" text-anchor="middle">Внутр. дворик (открыт)</text>
-<text class="name" x="24250" y="4050" text-anchor="middle">Внутр. дворик (открыт)</text>
-<text class="name" x="15200" y="4050" text-anchor="middle">Дворик / котельная</text>
-<text class="name" x="19200" y="4050" text-anchor="middle">Дворик / котельная</text>
+
+
+
+
 <text class="name" x="17450" y="14200" text-anchor="middle">Двор (открытый)</text>
 <g class="dim"><line x1="2395" y1="18300" x2="32505" y2="18300"/><line x1="2305" y1="18390" x2="2485" y2="18210"/><line x1="32415" y1="18390" x2="32595" y2="18210"/><text x="17450.0" y="18230" text-anchor="middle">3011 см (по наружным стенам)</text></g>
 <g class="dim"><line x1="1700" y1="17400" x2="1700" y2="3400"/><line x1="1610" y1="17490" x2="1790" y2="17310"/><line x1="1610" y1="3490" x2="1790" y2="3310"/><text x="1630" y="10400.0" text-anchor="middle" transform="rotate(-90 1630 10400.0)">1400 см</text></g>
 
-<text class="title" x="2395" y="700">ВЕНТИЛЯЦИЯ — 1-й ЭТАЖ: РЕЗЕРВ ПОД СПАЛЬНЮ</text><text class="note" x="2395" y="1400">Делается, только если центральная комната 1-го этажа станет спальней. Шахта Б продолжается вниз до потолка санузла.</text><text class="note" x="2395" y="1730">Если не сейчас — оставьте в перекрытии гильзу 2×Ø150 под шахтой Б и заглушите.</text>
+<text class="title" x="2395" y="700">ВЕНТИЛЯЦИЯ — 1-й ЭТАЖ: РЕЗЕРВ ПОД СПАЛЬНЮ</text><text class="note" x="2395" y="1400">Делается, только если центральная комната 1-го этажа станет спальней. Шахта Б продолжается вниз до потолка санузла.</text><text class="note" x="2395" y="1730">Если не сейчас — оставьте в перекрытии гильзу 2×Ø150 под шахтой Б и заглушите. Во дворе показаны рекуператоры (на земле).</text>
 <defs><marker id="arr-sup" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f7fd6"/></marker><marker id="arr-eta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#de8a2c"/></marker><marker id="arr-oda" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3f9e4d"/></marker><marker id="arr-eha" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a5a44"/></marker></defs>
 <polyline points="13020,6650 13020,6650 13020,5550 13500,5550" fill="none" stroke="#2f7fd6" stroke-width="125" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" stroke-dasharray="260 160"/>
 <polyline points="13170,6650 13170,6650 13170,7500 13500,7500" fill="none" stroke="#de8a2c" stroke-width="125" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" stroke-dasharray="260 160"/>
@@ -827,6 +827,12 @@
 <rect x="20830" y="7375.0" width="70" height="250.0" fill="#de8a2c" stroke="#1c2830" stroke-width="10"/><line x1="20380" y1="7500" x2="20780" y2="7500" stroke="#de8a2c" stroke-width="28" marker-end="url(#arr-eta)"/><text x="20200" y="7270" font-size="200" fill="#de8a2c" text-anchor="middle" font-weight="700" paint-order="stroke" stroke="#fff" stroke-width="45" stroke-linejoin="round">В 120</text>
 <g class="dim"><line x1="13920" y1="5550" x2="13920" y2="5200"/><line x1="13830" y1="5640" x2="14010" y2="5460"/><line x1="13830" y1="5290" x2="14010" y2="5110"/><text x="13850" y="5375.0" text-anchor="middle" transform="rotate(-90 13850 5375.0)">35</text></g>
 <g class="dim"><line x1="13920" y1="7500" x2="13920" y2="5550"/><line x1="13830" y1="7590" x2="14010" y2="7410"/><line x1="13830" y1="5640" x2="14010" y2="5460"/><text x="13850" y="6525.0" text-anchor="middle" transform="rotate(-90 13850 6525.0)">195</text></g>
+<rect x="8600" y="3900" width="1400" height="850" fill="#eef1f3" stroke="#1c2830" stroke-width="35"/>
+<text x="9300.0" y="4395.0" font-size="220" fill="#1c2830" text-anchor="middle" font-weight="700">Р-Л</text>
+<rect x="10150" y="4400" width="950" height="400" fill="#e3e7ea" stroke="#33414b" stroke-width="25"/>
+<rect x="24900" y="3900" width="1400" height="850" fill="#eef1f3" stroke="#1c2830" stroke-width="35"/>
+<text x="25600.0" y="4395.0" font-size="220" fill="#1c2830" text-anchor="middle" font-weight="700">Р-П</text>
+<rect x="23800" y="4400" width="950" height="400" fill="#e3e7ea" stroke="#33414b" stroke-width="25"/>
 <line x1="2395" y1="18780" x2="2995" y2="18780" stroke="#2f7fd6" stroke-width="90" stroke-dasharray="150 110"/><text x="3145" y="19000" font-size="210" fill="#333" text-anchor="start" font-weight="400">приток (резерв)</text><line x1="5415" y1="18780" x2="6015" y2="18780" stroke="#de8a2c" stroke-width="90" stroke-dasharray="150 110"/><text x="6165" y="19000" font-size="210" fill="#333" text-anchor="start" font-weight="400">вытяжка (резерв)</text><rect x="8703" y="18770" width="300" height="300" fill="#cfd6db" stroke="#33414b" stroke-width="22" opacity="1"/><line x1="8703" y1="18770" x2="9003" y2="19070" stroke="#33414b" stroke-width="14"/><line x1="8703" y1="19070" x2="9003" y2="18770" stroke="#33414b" stroke-width="14"/><text x="9303" y="19000" font-size="210" fill="#333" text-anchor="start" font-weight="400">шахта Б (продолжение)</text>
 <text x="2395" y="19550" font-size="210" fill="#444" text-anchor="start" font-weight="400">Центр решёток — 2,90 м от пола 1-го этажа. Размеры в см.</text>
 </svg>

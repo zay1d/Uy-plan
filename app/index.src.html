@@ -458,6 +458,7 @@ function buildHouse(){
 const VENT_COLORS = {sup:0x2f7fd6, eta:0xde8a2c, oda:0x3f9e4d, eha:0x8a5a44};
 const VENT_NAMES = {sup:"Приток", eta:"Вытяжка", oda:"Забор наружного воздуха", eha:"Выброс"};
 const ZONE_NAMES = {roof:"на кровле, в теплоизоляции 50 мм и защитном кожухе",
+  riser:"в утеплённом коробе на фасаде (задний двор) и на кровле", yard:"во дворе, колпак сеткой вниз на высоте 2 м",
   ceil2:"в подшивном потолке санузла / кладовой 2-го этажа", ceil1:"в подшивном потолке санузла 1-го этажа"};
 const ventMats = {};
 function ventMat(type, reserve){
@@ -466,7 +467,7 @@ function ventMat(type, reserve){
   return ventMats[k];
 }
 const WIRE_COLORS = {power:0xc0392b, lv:0x6c4fb3, heat:0xe67e22};
-const ELEC_COLORS = {riser:0xc0392b, isolator:0xc0392b, socket:0xc0392b, heat:0xe67e22, pult:0x6c4fb3, sensor:0x6c4fb3};
+const ELEC_COLORS = {entry:0xc0392b, riser:0xc0392b, isolator:0xc0392b, socket:0xc0392b, heat:0xe67e22, pult:0x6c4fb3, sensor:0x6c4fb3};
 const shaftMat = new THREE.MeshLambertMaterial({color:0x9aa6ae, transparent:true, opacity:0.35, depthWrite:false});
 const unitMat = new THREE.MeshLambertMaterial({color:0xe9ecee});
 let ventObjs = [], ventPick = [];
@@ -503,9 +504,15 @@ function buildVent(){
     const u = side.unit;
     const um = box(u.rect, mm(u.z[0]), mm(u.z[1]), unitMat);
     um.add(new THREE.LineSegments(new THREE.EdgesGeometry(um.geometry), new THREE.LineBasicMaterial({color:0x2b3338})));
-    addVent(2, um, {kind:"unit", side});
+    const ul = u.z[1] < FL2 ? 1 : 2;
+    addVent(ul, um, {kind:"unit", side});
     const [ux, uz] = P((u.rect[0] + u.rect[1]) / 2, (u.rect[2] + u.rect[3]) / 2);
-    ventLabel(2, new THREE.Vector3(ux, mm(u.z[1]) + 0.25, uz), `${u.name} · ${side.total} м³/ч`, "unit");
+    ventLabel(ul, new THREE.Vector3(ux, mm(u.z[1]) + 0.25, uz), `${u.name} · ${side.total} м³/ч`, "unit");
+    if (side.riser){
+      const rm = box(side.riser.rect, mm(side.riser.z[0]), mm(side.riser.z[1]), shaftMat, false);
+      rm.add(new THREE.LineSegments(new THREE.EdgesGeometry(rm.geometry), new THREE.LineBasicMaterial({color:0x5d6b75})));
+      addVent(1, rm, {kind:"riser", side});
+    }
     // шахты
     for (const s of side.shafts){
       const lvl = s.z[1] <= FL2 ? 1 : 2;
@@ -519,8 +526,8 @@ function buildVent(){
     }
     // трубы
     for (const d of side.ducts){
-      const lvl = d.zone === "ceil1" ? 1 : 2;
-      const r = d.d / 2000 + (d.zone === "roof" ? 0.05 : 0);
+      const lvl = (d.zone === "ceil1" || d.zone === "riser" || d.zone === "yard") ? 1 : 2;
+      const r = d.d / 2000 + ((d.zone === "roof" || d.zone === "riser") ? 0.05 : 0);
       const mat = ventMat(d.type, d.reserve);
       const pts = d.pts.map(V3);
       for (let i = 0; i < pts.length - 1; i++){
@@ -536,7 +543,7 @@ function buildVent(){
         const cap = new THREE.Mesh(new THREE.ConeGeometry(r * 2.2, 0.25, 16), mat);
         cap.position.copy(end).add(new THREE.Vector3(0, 0.2, 0));
         addVent(lvl, cap, {kind:"duct", side, duct:d});
-        ventLabel(2, end.clone().add(new THREE.Vector3(0, 0.55, 0)), d.type === "oda" ? "забор" : "выброс", "unit");
+        ventLabel(lvl, end.clone().add(new THREE.Vector3(0, 0.55, 0)), d.type === "oda" ? "забор, 2 м" : "выброс, +1 м над кровлей", "unit");
       }
     }
     // решётки в стенах спален
@@ -599,7 +606,12 @@ function showVent(info){
     lines.push(`расчёт: ${side.total} м³/ч приток = ${side.total} м³/ч вытяжка`,
       `с резервом 1-го этажа: ${side.totalWithReserve} м³/ч`,
       `загрузка ≈ ${Math.round(side.total / HOUSE.vent.unitCapacity * 100)}% — работает тихо`,
-      "стоит над лестницей, не над спальнями");
+      "задний двор, у стены по оси Г, на подушке и виброопорах",
+      "забор во дворе на 2 м, выброс — над кровлей");
+  } else if (info.kind === "riser"){
+    title = `Короб на фасаде (${side.tag})`;
+    lines.push("приток и вытяжка Ø200 + выброс Ø250 от рекуператора на кровлю",
+      "утеплённый, примерно 95×40 см", side.riser.where);
   } else if (info.kind === "shaft"){
     const s = info.shaft;
     title = s.name + (s.reserve ? " (резерв вниз)" : "");
@@ -607,11 +619,11 @@ function showVent(info){
       `короб в углу ${Math.round((s.rect[1] - s.rect[0]) / 10)}×${Math.round((s.rect[3] - s.rect[2]) / 10)} см`);
   } else if (info.kind === "duct"){
     const d = info.duct;
-    const to = d.room ? roomName(side, d.room) : d.to ? `шахта ${d.to}-${side.tag}` : "";
+    const to = d.room ? roomName(side, d.room) : d.to === "main" ? "магистраль на кровлю" : d.to ? `шахта ${d.to}-${side.tag}` : "";
     title = VENT_NAMES[d.type] + (to ? ` → ${to}` : "");
     lines.push(`Ø${d.d} мм · ${d.flow} м³/ч · ${fmt(d.v)} м/с`, ZONE_NAMES[d.zone] || "");
-    if (d.type === "oda") lines.push("колпак сеткой вниз, низ не ниже 1 м над кровлей");
-    if (d.type === "eha") lines.push("выше забора на 1 м и в 3,5 м от него");
+    if (d.type === "oda") lines.push("во дворе, колпак сеткой вниз на высоте 2 м от земли");
+    if (d.type === "eha") lines.push("в коробе по фасаду вверх, дефлектор на 1 м выше кровли — далеко от забора");
     if (d.reserve) lines.push("резерв: прокладывать, если комната станет спальней");
   } else if (info.kind === "grille"){
     const g = info.grille;
