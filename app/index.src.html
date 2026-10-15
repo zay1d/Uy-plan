@@ -376,6 +376,38 @@ function buildHouse(){
     // кровли над пристройками (отметка этажа)
     for (const r of f.roofs || []) { const s = box(r, e - slab, e - 0.04, mats.roofLow); if (s) grp.add(s); }
 
+    // отверстия в стенах этого этажа (из схемы вентиляции), z — относительно пола этажа, в метрах
+    const holesF = [];
+    for (const sd of (HOUSE.vent ? HOUSE.vent.sides : []))
+      for (const h of sd.holes || []){
+        const zr = mm(h.pos[2] - f.elevation), hz = h.d / 2000 + 0.01;
+        if (zr - hz > 0 && zr + hz < H) holesF.push({x:h.pos[0], y:h.pos[1], a:h.d / 2 + 10, z0:zr - hz, z1:zr + hz});
+      }
+    // стена с вырезанными отверстиями: колонка над/под отверстием, куски слева и справа
+    const cutHoles = (r, z0, z1, mat) => {
+      const horiz = (r[1] - r[0]) >= (r[3] - r[2]);
+      const a0 = horiz ? r[0] : r[2], a1 = horiz ? r[1] : r[3];
+      const sub = (s, t) => horiz ? [s, t, r[2], r[3]] : [r[0], r[1], s, t];
+      const hs = holesF.filter(h => h.x >= r[0] - 1 && h.x <= r[1] + 1 && h.y >= r[2] - 1 && h.y <= r[3] + 1 && h.z1 > z0 && h.z0 < z1)
+        .map(h => ({a0:Math.max(a0, (horiz ? h.x : h.y) - h.a), a1:Math.min(a1, (horiz ? h.x : h.y) + h.a), z0:Math.max(z0, h.z0), z1:Math.min(z1, h.z1)}))
+        .sort((p, q) => p.a0 - q.a0);
+      const out = [];
+      const add = m => m && out.push(m);
+      if (!hs.length){ add(box(r, z0, z1, mat)); return out; }
+      const cols = [];
+      for (const h of hs){ const c = cols[cols.length - 1]; if (c && h.a0 <= c.a1){ c.a1 = Math.max(c.a1, h.a1); c.hs.push(h); } else cols.push({a0:h.a0, a1:h.a1, hs:[h]}); }
+      let cur = a0;
+      for (const c of cols){
+        if (c.a0 > cur) add(box(sub(cur, c.a0), z0, z1, mat));
+        let zz = z0;
+        for (const h of c.hs.sort((p, q) => p.z0 - q.z0)){ if (h.z0 > zz) add(box(sub(c.a0, c.a1), zz, h.z0, mat)); zz = Math.max(zz, h.z1); }
+        if (zz < z1) add(box(sub(c.a0, c.a1), zz, z1, mat));
+        cur = c.a1;
+      }
+      if (cur < a1) add(box(sub(cur, a1), z0, z1, mat));
+      return out;
+    };
+
     // стены с окнами
     const used = new Set();
     const addWall = (r, mat) => {
@@ -389,16 +421,17 @@ function buildHouse(){
       let cur = horiz ? r[0] : r[2];
       const end = horiz ? r[1] : r[3];
       const put = m => m && walls.add(m);
+      const putCut = (rr, z0, z1) => cutHoles(rr, z0, z1, mat).forEach(put);
       for (const [s, t] of ws){
-        if (s > cur) put(box(sub(cur, s), 0, H, mat));
-        put(box(sub(s, t), 0, SILL, mat)); put(box(sub(s, t), HEAD, H, mat));
+        if (s > cur) putCut(sub(cur, s), 0, H);
+        putCut(sub(s, t), 0, SILL); putCut(sub(s, t), HEAD, H);
         put(box(pane(s, t), SILL, HEAD, mats.glass, false));
         cur = Math.max(cur, t);
       }
-      if (cur < end) put(box(sub(cur, end), 0, H, mat));
+      if (cur < end) putCut(sub(cur, end), 0, H);
     };
     f.walls.forEach(r => addWall(r, mats.wall));
-    f.columns.forEach(r => { const m = box(r, 0, H, mats.wall); if (m) walls.add(m); });
+    f.columns.forEach(r => cutHoles(r, 0, H, mats.wall).forEach(m => walls.add(m)));
     f.partitions.forEach(r => addWall(r, mats.part));
     // витражи и стеклянные двери вне стен
     f.windows.forEach((w, i) => {
@@ -407,7 +440,7 @@ function buildHouse(){
       const t = box(w, GLASS_TOP, H, mats.wall); if (t) walls.add(t);
     });
     // перемычки над проёмами
-    f.gaps.forEach(r => { const m = box(r, DOOR, H, mats.wall); if (m) walls.add(m); });
+    f.gaps.forEach(r => cutHoles(r, DOOR, H, mats.wall).forEach(m => walls.add(m)));
 
     // линии: лестницы и сантехника
     for (const [kind, mat] of [["stair", mats.stair], ["fix", mats.lines]]){
@@ -559,8 +592,25 @@ function buildVent(){
       ventLabel(lvl, m.position.clone().add(new THREE.Vector3(g.n[0] * 0.35, -0.3, -g.n[1] * 0.35)),
         `${g.type === "sup" ? "П" : "В"} ${g.flow}`, g.type, g.reserve);
     }
-    // электрика: кабели и точки
+    // гильзы в отверстиях стен
     const FLv = V.levels.fl2;
+    const sleeveMat = new THREE.MeshLambertMaterial({color:0x2b3338, side:THREE.DoubleSide});
+    for (const h of side.holes || []){
+      const lvl = h.pos[2] < FLv ? 1 : 2;
+      const fl = HOUSE.floors.find(ff => ff.level === lvl);
+      const wall = fl && fl.walls.concat(fl.partitions, fl.columns).find(r => h.pos[0] >= r[0] - 1 && h.pos[0] <= r[1] + 1 && h.pos[1] >= r[2] - 1 && h.pos[1] <= r[3] + 1);
+      if (!wall) continue;
+      const horiz = (wall[1] - wall[0]) >= (wall[3] - wall[2]);
+      const thick = mm(horiz ? wall[3] - wall[2] : wall[1] - wall[0]);
+      const r = h.d / 2000;
+      const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, thick + 0.08, 20, 1, true), sleeveMat);
+      const [X, Z] = P(h.pos[0], h.pos[1]);
+      m.position.set(X, mm(h.pos[2]), Z);
+      if (horiz) m.rotation.x = Math.PI / 2; else m.rotation.z = Math.PI / 2;
+      addVent(lvl, m, {kind:"hole", side, hole:h}, false);
+      if (h.cable) m.userData.elec = true;
+    }
+    // электрика: кабели и точки
     for (const wi of side.wires || []){
       const col = WIRE_COLORS[wi.kind] || 0x6c4fb3;
       const mat = new THREE.MeshLambertMaterial({color:col, transparent:!!wi.reserve, opacity:wi.reserve ? 0.4 : 1});
@@ -607,7 +657,7 @@ function showVent(info){
       `с резервом 1-го этажа: ${side.totalWithReserve} м³/ч`,
       `загрузка ≈ ${Math.round(side.total / HOUSE.vent.unitCapacity * 100)}% — работает тихо`,
       "задний двор, у стены по оси Г, на подушке и виброопорах",
-      "забор во дворе на 2 м, выброс — по стене над кровлей", "трубы в дом — сквозь стену Г, кровлю не сверлим");
+      "забор во дворе на 2 м, выброс — по стене над кровлей", "трубы в дом — через 4 отверстия в стене Г на 2,90 м, кровлю не сверлим");
   } else if (info.kind === "riser"){
     title = `Короб на фасаде (${side.tag})`;
     lines.push("приток и вытяжка Ø200 — до уровня потолка 2-го эт., дальше сквозь стену Г",
@@ -632,6 +682,12 @@ function showVent(info){
       `${Math.round(g.off / 10)} см от угла: ${g.from}`);
     if (g.type === "sup") lines.push("дальнобойная решётка: жалюзи горизонтально, струя вдоль потолка к дальней стене");
     else lines.push("внизу стены: воздух проходит всю комнату (потолок → дальняя стена → пол) и уходит сюда");
+  } else if (info.kind === "hole"){
+    const h = info.hole;
+    const base = h.pos[2] < HOUSE.vent.levels.fl2 ? [0, "1-го"] : [HOUSE.vent.levels.fl2, "2-го"];
+    title = `Отверстие Ø${h.d} — ${h.what}`;
+    lines.push(h.wall, `центр на ${fmt(Math.round((h.pos[2] - base[0]) / 10) / 100)} м от пола ${base[1]} эт.`,
+      h.cable ? "гильза ПНД, после протяжки заделать" : "гильза из стальной/ПВХ трубы, зазор запенить; снаружи — герметик");
   } else if (info.kind === "elec"){
     const e = info.elec;
     title = `⚡${e.n} ${e.name}`;

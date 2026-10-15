@@ -142,6 +142,8 @@ def box_svg(b, faded=False):
 
 def hole_svg(h):
     x, y = h["pos"][:2]
+    if h.get("cable"):
+        return (f'<circle cx="{mp.sx(x)}" cy="{mp.sy(y)}" r="60" fill="{PURPLE}" stroke="#fff" stroke-width="14"/>')
     return (f'<circle cx="{mp.sx(x)}" cy="{mp.sy(y)}" r="{h["d"] / 2 + 30}" fill="#fff" fill-opacity=".85" '
             f'stroke="#111" stroke-width="22"/>')
 
@@ -199,7 +201,8 @@ def sheet_floor2():
             if s_["kind"] == "node":
                 o.append(node_svg(s_))
         for h in side["holes"]:
-            o.append(hole_svg(h))
+            if h.get("floor", 2) == 2:
+                o.append(hole_svg(h))
         for g in side["grilles"]:
             if not g.get("reserve"):
                 o.append(grille_svg(g))
@@ -227,14 +230,14 @@ def sheet_floor2():
     o.append(mp.dim_v(11400 + 800, g[("D2", "eta")]["pos"][1], g[("D2", "sup")]["pos"][1]))
     lines = [("Как идут трубы (каждая половина, вторая зеркально):", "#1c2830", 700),
              ("1. Рекуператор во дворе → короб по фасаду вверх до 2-го этажа", "#333", 400),
-             ("2. 4 отверстия в стене Г под потолком лестницы (○) — трубы входят в дом", "#333", 400),
+             ("2. 4 отверстия Ø180 в ряд в стене Г на 2,90 м (○) — трубы входят в дом; ● — гильзы под кабели", "#333", 400),
              ("3. Короб 50×25 см под потолком лестницы, холла и коридора → кладовая (узел А)", "#333", 400),
              ("4. Узел А → родители и детская (крыло); узел Б (с/у) → детская (центр)", "#333", 400),
              ("Спальни: потолок не опускается. В кладовой и с/у потолок 2,45 м.", "#333", 400)]
     o.append(callout(L, lines, []))
     o.append(legend(-1650, [(COL["sup"], "приток", "line"), (COL["eta"], "вытяжка", "line"),
-                            ("#cfd6db", "короб под потолком", "line"), ("#111", "○ отверстие в стене", "dot"),
-                            (PURPLE, "электроточка", "dot")]))
+                            ("#cfd6db", "короб под потолком", "line"), ("#111", "○ отверстие в стене под трубу", "dot"),
+                            (PURPLE, "● гильза под кабель / электроточка", "dot")]))
     o.append(text(-205, -2350, "Отверстия: Ø180 под трубу Ø160, Ø150 под Ø125. Узлы А и Б — тройники и ирисовые клапаны, доступ через лючок в потолке.",
                   210, "#444", "start", 400, halo=False))
     return svg.replace("</svg>", "\n".join(o) + "\n</svg>")
@@ -368,14 +371,13 @@ def section_svg():
     g.append(f'<rect x="500" y="{Y(zc) - 8}" width="20" height="16" fill="{COL["sup"]}" stroke="#1c2830"/>')
     g.append(f'<line x1="495" y1="{Y(zc)}" x2="380" y2="{Y(zc)}" stroke="{COL["sup"]}" stroke-width="4" marker-end="url(#arr-sup)"/>')
     # вытяжка: решётка у пола -> короб в углу с/у -> потолок (2,60) -> сквозь стену -> короб -> рекуператор
-    g.append(f'<polyline points="505,{Y(fl2 + 300)} 575,{Y(fl2 + 300)} 575,{Y(ze)} 1145,{Y(ze)} 1145,{Y(380)} 1215,{Y(380)}" '
+    g.append(f'<polyline points="505,{Y(fl2 + 300)} 575,{Y(fl2 + 300)} 575,{Y(ze)} 960,{Y(ze)} 960,{Y(zc - 110)} 1145,{Y(zc - 110)} 1145,{Y(500)} 1215,{Y(500)}" '
              f'fill="none" stroke="{COL["eta"]}" stroke-width="10" stroke-linejoin="round"/>')
     g.append(f'<rect x="500" y="{Y(fl2 + 300) - 8}" width="20" height="16" fill="{COL["eta"]}" stroke="#1c2830"/>')
     g.append(f'<line x1="380" y1="{Y(fl2 + 300)}" x2="495" y2="{Y(fl2 + 300)}" stroke="{COL["eta"]}" stroke-width="4" marker-end="url(#arr-eta)"/>')
     g.append(f'<path d="M380,{Y(zc) + 6} C 120,{Y(zc) + 6} 90,{Y(fl2 + 300) - 6} 360,{Y(fl2 + 300) - 6}" fill="none" stroke="#888" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arr-eta)"/>')
     # отверстия в стене Г
-    for z in (zc, ze):
-        g.append(f'<circle cx="1080" cy="{Y(z)}" r="11" fill="#fff" stroke="#111" stroke-width="3"/>')
+    g.append(f'<circle cx="1080" cy="{Y(zc) - 2}" r="13" fill="#fff" stroke="#111" stroke-width="3"/>')
     # рекуператор
     u0, u1 = vent.GROUND, vent.GROUND + vent.UNIT_H
     g.append(f'<rect x="1215" y="{Y(u1)}" width="170" height="{Y(u0) - Y(u1)}" fill="#eef1f3" stroke="#1c2830" stroke-width="2"/>')
@@ -398,7 +400,8 @@ def section_svg():
     g.append(f'<text x="800" y="{Y(fl2 + 1300)}" text-anchor="middle" font-size="19" font-weight="700" fill="#555">САНУЗЕЛ / КЛАДОВАЯ</text>')
     g.append(f'<text x="560" y="{Y(1500)}" text-anchor="middle" font-size="19" font-weight="700" fill="#555">1-й ЭТАЖ</text>')
     g.append(f'<text x="800" y="{Y(roof) - 12}" text-anchor="middle" fill="#555" font-size="17">кровля — без отверстий</text>')
-    g.append(f'<text x="1080" y="{Y(zc) - 22}" text-anchor="middle" fill="#111" font-size="16">отверстия в стене Г</text>')
+    g.append(f'<text x="1040" y="{Y(zc) - 26}" text-anchor="end" fill="#111" font-size="16">4 отверстия в стене Г в ряд, 2,90 м →</text>')
+    g.append(f'<text x="770" y="{Y(ze) - 8}" text-anchor="middle" fill="{COL["eta"]}" font-size="15">вытяжка опускается на 2,60</text>')
     g.append(f'<text x="1300" y="{Y(-150) + 30}" text-anchor="middle" fill="#555" font-size="17">ЗАДНИЙ ДВОР</text>')
     g.append("</svg>")
     return "".join(g)
@@ -406,8 +409,8 @@ def section_svg():
 
 def facade_svg():
     """Вид со двора на стену по оси Г (левая половина): рекуператор, короб, отверстия, выброс над кровлей."""
-    x0, x1 = 4300, 13600
-    z0, z1 = -300, vent.ROOF + 1500
+    x0, x1 = 4300, 14600
+    z0, z1 = -600, vent.ROOF + 1500
     k = 0.11
     W, H = (x1 - x0) * k + 120, (z1 - z0) * k + 40
 
@@ -437,14 +440,16 @@ def facade_svg():
     # короб
     r = L["riser"]["rect"]
     g.append(f'<rect x="{X(r[0])}" y="{Y(c + 100)}" width="{(r[1] - r[0]) * k}" height="{(c + 100) * k}" fill="#e3e7ea" stroke="#33414b" stroke-width="2" opacity=".9"/>')
-    g.append(f'<text x="{X((r[0] + r[1]) / 2)}" y="{Y(2600)}" text-anchor="middle" fill="#33414b" font-size="17" transform="rotate(-90 {X((r[0] + r[1]) / 2)} {Y(2600)})">короб ~120×40 см</text>')
+    g.append(f'<text x="{X((r[0] + r[1]) / 2)}" y="{Y(2600)}" text-anchor="middle" fill="#33414b" font-size="17" transform="rotate(-90 {X((r[0] + r[1]) / 2)} {Y(2600)})">короб ~130×50 см</text>')
     # отверстия
     for h in L["holes"]:
         if "Г" in h["wall"]:
-            col = COL["sup"] if "приток" in h["what"] else COL["eta"]
-            g.append(f'<circle cx="{X(h["pos"][0])}" cy="{Y(h["pos"][2])}" r="{h["d"] / 2 * k + 2}" fill="#fff" stroke="{col}" stroke-width="4"/>')
-    g.append(f'<text x="{X(10700)}" y="{Y(vent.Z_CEIL2) + 6}" fill="#111" font-size="18">← 4 отверстия в стене:</text>')
-    g.append(f'<text x="{X(10700)}" y="{Y(vent.Z_CEIL2) + 28}" fill="#111" font-size="18">2,60–2,90 м над полом 2-го эт.</text>')
+            col = PURPLE if h.get("cable") else COL["sup"] if "приток" in h["what"] else COL["eta"]
+            g.append(f'<circle cx="{X(h["pos"][0])}" cy="{Y(h["pos"][2])}" r="{max(h["d"] / 2 * k, 4) + 2}" fill="#fff" stroke="{col}" stroke-width="4"/>')
+    g.append(f'<text x="{X(10700)}" y="{Y(vent.Z_CEIL2) - 4}" fill="#111" font-size="18">← 4 отверстия Ø180 в ряд, шаг 30 см,</text>')
+    g.append(f'<text x="{X(10700)}" y="{Y(vent.Z_CEIL2) + 18}" fill="#111" font-size="18">центр 2,90 м над полом 2-го эт.</text>')
+    g.append(f'<text x="{X(10700)}" y="{Y(vent.Z_CEIL2) + 40}" fill="{PURPLE}" font-size="17">● ниже — гильза Ø32 под витую пару</text>')
+    g.append(f'<text x="{X(7000)}" y="{Y(-250)}" text-anchor="middle" fill="{PURPLE}" font-size="16">● гильзы Ø50 под силовые кабели, 0,3 м от земли</text>')
     # выброс над кровлей
     g.append(f'<line x1="{X(8550)}" y1="{Y(c + 100)}" x2="{X(8550)}" y2="{Y(roof + 1000)}" stroke="{COL["eha"]}" stroke-width="{250 * k}"/>')
     g.append(f'<path d="M{X(8550) - 22},{Y(roof + 1000)} h44 l-22,-20 z" fill="{COL["eha"]}"/>')
@@ -471,7 +476,8 @@ def spec_html():
                 f'<td class=n>{round(s["off"] / 10)}</td><td class=n>{round(e["off"] / 10)}</td><td>{s["from"]}</td></tr>')
     rows_grilles = "".join(gline(r) for r in ("R", "D1", "D2", "K1"))
     rows_holes = "".join(
-        f'<tr><td>{h["wall"]}</td><td>{h["what"]}</td><td class=n>{h["d"]}</td><td class=n>{str(round((h["pos"][2] - vent.FL2) / 1000, 2)).replace(".", ",")} м</td></tr>'
+        f'<tr{" class=res" if h.get("cable") else ""}><td>{h["wall"]}</td><td>{h["what"]}</td><td class=n>{h["d"]}</td>'
+        f'<td class=n>{str(round((h["pos"][2] - (0 if h.get("floor") == 1 else vent.FL2)) / 1000, 2)).replace(".", ",")} м</td></tr>'
         for h in L["holes"])
     rows_elec = "".join(
         f'<tr{" class=res" if e.get("reserve") else ""}><td class=n>{e["n"]}</td><td>{e["name"]}</td>'
@@ -520,10 +526,10 @@ h2{{margin-top:3.5mm}}
 <table><tr><th>Спальня</th><th>Стена</th><th>Приток, см от угла</th><th>Вытяжка, см от угла</th><th>Угол отсчёта</th></tr>{rows_grilles}</table>
 <p class="muted">Обе решётки на одной стене (трубы приходят из соседнего санузла/кладовой), поэтому их разнесли по высоте: приток вверху дует вдоль потолка до дальней стены, воздух опускается и по полу возвращается к вытяжке внизу — проходит через всю комнату и не уходит сразу в вытяжку. Приток — дальнобойная решётка 200×100 с регулируемыми жалюзи (струя 4–5 м), жалюзи — горизонтально к дальней стене. Вытяжка — решётка 200×100 у пола. Вытяжная труба опускается к ней в коробе ~20×20 см в углу санузла/кладовой. Отверстия в стене — Ø150.</p>
 <h2>Отверстия в стенах (на половину дома)</h2>
-<table><tr><th>Стена</th><th>Что</th><th>Ø отв.</th><th>Высота от пола 2-го эт.</th></tr>{rows_holes}</table>
+<table><tr><th>Стена</th><th>Что</th><th>Ø отв.</th><th>Центр от пола этажа</th></tr>{rows_holes}</table>
 <h2>Трасса, короба и узлы</h2>
 <ul>
-<li><b>Кровлю не сверлим.</b> Трубы входят в дом сквозь стену Г со двора: 4 отверстия на 2,60–2,90 м над полом 2-го эт. (см. таблицу).</li>
+<li><b>Кровлю не сверлим.</b> Трубы входят в дом сквозь стену Г со двора: 4 отверстия Ø180 в ряд (шаг 30 см) на 2,90 м над полом 2-го эт.; ниже — гильза Ø32 под витую пару (см. таблицу).</li>
 <li><b>Короб на фасаде</b> ~120×40 см, утеплённый: приток и вытяжка Ø200 от рекуператора до отверстий; выброс Ø250 — дальше вверх по стене, над кровлей.</li>
 <li><b>Короб под потолком</b> лестницы, холла и коридора ~50×25 см: 2 трубы Ø160 к кладовой. В лестнице — ещё короб 2×Ø160 к общему санузлу.</li>
 <li><b>Узел А</b> (кладовая) и <b>узел Б</b> (общий с/у): подшивной потолок 2,45 м, трубы в два яруса (приток 2,90, вытяжка 2,60), тройники и ирисовые клапаны, лючок.</li>
