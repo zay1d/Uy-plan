@@ -14,6 +14,7 @@
   --brick-ink:#ffffff;
   --glass:#3d8fd1;
   --chip:#ffffffde;
+  --power:#c0392b; --lv:#6c4fb3;
   --sup:#2f7fd6; --eta:#de8a2c; --oda:#3f9e4d; --eha:#8a5a44; --shaft:#9aa6ae;
   --font-ui:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --font-display:"Unbounded","Golos Text",system-ui,sans-serif;
@@ -79,6 +80,7 @@ label.file input{position:absolute;inset:0;opacity:0;cursor:pointer}
 .vtable tr.res td{color:var(--muted)}
 .vtable tr.tot td{font-weight:600}
 .lbl.vent{font-family:var(--font-mono);font-size:10.5px;font-weight:600;padding:1px 4px;border-radius:4px;background:var(--chip);text-shadow:none}
+.lbl.vent.elec{color:var(--lv)}
 .lbl.vent.sup{color:var(--sup)} .lbl.vent.eta{color:var(--eta)} .lbl.vent.unit{color:var(--ink);font-size:11.5px}
 
 .stage{position:relative;min-width:0;overflow:hidden}
@@ -157,6 +159,7 @@ label.file input{position:absolute;inset:0;opacity:0;cursor:pointer}
     <section aria-label="Вентиляция">
       <h2>Вентиляция спален</h2>
       <label class="chk"><input type="checkbox" id="showVent" checked> Показать рекуператоры, шахты и трубы</label>
+      <label class="chk"><input type="checkbox" id="showElec" checked> Электрика: кабели, розетка, пульт, датчики</label>
       <label class="chk"><input type="checkbox" id="showReserve" checked> Резерв: комната 1-го этажа</label>
       <ul class="legend" aria-label="Обозначения">
         <li><i style="background:var(--sup)"></i>Приток в спальню</li>
@@ -164,9 +167,11 @@ label.file input{position:absolute;inset:0;opacity:0;cursor:pointer}
         <li><i style="background:var(--oda)"></i>Забор наружного воздуха</li>
         <li><i style="background:var(--eha)"></i>Выброс на улицу</li>
         <li><i class="sq" style="background:var(--shaft)"></i>Шахта (гофра в коробе)</li>
+        <li><i style="background:var(--power)"></i>Силовой кабель</li>
+        <li><i style="background:var(--lv)"></i>Витая пара</li>
       </ul>
       <div class="vtable-wrap"><table class="vtable" id="ventTable"></table></div>
-      <p class="note">Нажмите на трубу, решётку, шахту или рекуператор — внизу появятся диаметр, расход и высота. Решётки стоят в стенах спален, трубы идут через подшивной потолок санузлов и кладовых.</p>
+      <p class="note">Нажмите на трубу, решётку, шахту, рекуператор или точку ⚡ — внизу появятся диаметр, расход, высота или кабель. Решётки стоят в стенах спален, трубы идут через подшивной потолок санузлов и кладовых.</p>
     </section>
 
     <section aria-label="Объекты" id="objSection" hidden>
@@ -235,7 +240,7 @@ const FLOOR_COLORS = {living:0xd9c3a2, wet:0xb9cfd8, hall:0xcfc7bb, stair:0xc4be
 let HOUSE = DEFAULT_HOUSE;
 let UNDERLAY_SRC = {...DEFAULT_UNDERLAYS};
 let CX = 0, CY = 0;
-const state = {vent:true, reserve:true, mode:"3d", floor:0, explode:0, lowWalls:false, labels:true, roof:false, underlay:false, underlayOpacity:0.85,
+const state = {vent:true, elec:true, reserve:true, mode:"3d", floor:0, explode:0, lowWalls:false, labels:true, roof:false, underlay:false, underlayOpacity:0.85,
   measure:false, selected:null};
 let furniture = [];
 const modelStore = new Map();   // id -> THREE.Object3D (загруженные модели, только в памяти)
@@ -450,6 +455,8 @@ function ventMat(type, reserve){
   if (!ventMats[k]) ventMats[k] = new THREE.MeshLambertMaterial({color:VENT_COLORS[type] || 0x999999, transparent:!!reserve, opacity:reserve ? 0.4 : 1});
   return ventMats[k];
 }
+const WIRE_COLORS = {power:0xc0392b, lv:0x6c4fb3, heat:0xe67e22};
+const ELEC_COLORS = {riser:0xc0392b, isolator:0xc0392b, socket:0xc0392b, heat:0xe67e22, pult:0x6c4fb3, sensor:0x6c4fb3};
 const shaftMat = new THREE.MeshLambertMaterial({color:0x9aa6ae, transparent:true, opacity:0.35, depthWrite:false});
 const unitMat = new THREE.MeshLambertMaterial({color:0xe9ecee});
 let ventObjs = [], ventPick = [];
@@ -535,20 +542,29 @@ function buildVent(){
       ventLabel(lvl, m.position.clone().add(new THREE.Vector3(g.n[0] * 0.35, -0.3, -g.n[1] * 0.35)),
         `${g.type === "sup" ? "П" : "В"} ${g.flow}`, g.type, g.reserve);
     }
-    // датчики CO2 и пульт (электрика)
-    for (const s of side.sensors){
-      const [X, Z] = P(s.pos[0], s.pos[1]);
-      const m = new THREE.Mesh(new THREE.BoxGeometry(0.09, 0.09, 0.09), new THREE.MeshLambertMaterial({color:0x6c4fb3}));
-      m.position.set(X, mm(s.pos[2]), Z);
-      addVent(2, m, {kind:"sensor", side, sensor:s});
+    // электрика: кабели и точки
+    const FLv = V.levels.fl2;
+    for (const wi of side.wires || []){
+      const col = WIRE_COLORS[wi.kind] || 0x6c4fb3;
+      const mat = new THREE.MeshLambertMaterial({color:col, transparent:!!wi.reserve, opacity:wi.reserve ? 0.4 : 1});
+      const pts = wi.pts.map(V3);
+      for (let i = 0; i < pts.length - 1; i++){
+        if (pts[i].distanceTo(pts[i + 1]) < 0.01) continue;
+        const lvl = Math.max(wi.pts[i][2], wi.pts[i + 1][2]) <= FLv ? 1 : 2;
+        const t = tube(pts[i], pts[i + 1], wi.kind === "power" ? 0.016 : 0.011, mat);
+        addVent(lvl, t, {kind:"wire", side, wire:wi}, wi.reserve); t.userData.elec = true;
+      }
     }
-    for (const c of side.cables){
-      const [X, Z] = P(c.pos[0], c.pos[1]);
-      const m = c.kind === "power"
-        ? new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.5, 12), new THREE.MeshLambertMaterial({color:0x6c4fb3}))
-        : new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.1, 0.03), new THREE.MeshLambertMaterial({color:0x6c4fb3}));
-      m.position.set(X, c.pos[2] ? mm(c.pos[2]) : mm(V.levels.roof) + 0.25, Z);
-      addVent(2, m, {kind:"cable", side, cable:c});
+    for (const e of side.elec || []){
+      const [X, Z] = P(e.pos[0], e.pos[1]);
+      const lvl = e.pos[2] < FLv ? 1 : 2;
+      const geo = e.kind === "riser" ? new THREE.CylinderGeometry(0.05, 0.05, 0.4, 12) : new THREE.BoxGeometry(0.12, 0.12, 0.12);
+      const m = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({color:ELEC_COLORS[e.kind] || 0x6c4fb3, transparent:!!e.reserve, opacity:e.reserve ? 0.4 : 1}));
+      const off = e.nrm ? [e.nrm[0] * 0.06, -e.nrm[1] * 0.06] : [0, 0];
+      m.position.set(X + off[0], mm(e.pos[2]), Z + off[1]);
+      addVent(lvl, m, {kind:"elec", side, elec:e}, e.reserve); m.userData.elec = true;
+      ventLabel(lvl, m.position.clone().add(new THREE.Vector3(0, 0.22, 0)), "⚡" + e.n, "elec", e.reserve);
+      labelEls[labelEls.length - 1].elec = true;
     }
   }
   renderVentTable();
@@ -594,13 +610,16 @@ function showVent(info){
       `центр на ${fmt((g.pos[2] - (g.reserve ? 0 : HOUSE.vent.levels.fl2)) / 1000)} м от пола`,
       `${Math.round(g.off / 10)} см от угла: ${g.from}`);
     if (g.type === "sup") lines.push("жалюзи направить вдоль потолка в комнату");
-  } else if (info.kind === "sensor"){
-    title = `Датчик CO₂ (по желанию) · ${roomName(side, info.sensor.room)}`;
-    lines.push("слаботочный кабель (витая пара) до шахты, h = 1,5 м");
-  } else if (info.kind === "cable"){
-    title = info.cable.kind === "power" ? "Кабели к рекуператору" : "Пульт управления";
-    lines.push(info.cable.label);
-    if (info.cable.kind === "power") lines.push("силовой 5×4 мм² от щита, управление — витая пара", "рядом ремонтный выключатель IP65");
+  } else if (info.kind === "elec"){
+    const e = info.elec;
+    title = `⚡${e.n} ${e.name}`;
+    lines.push(e.where, e.h, e.cable, e.route);
+    if (e.reserve) lines.push("резерв: если комната 1-го этажа станет спальней");
+  } else if (info.kind === "wire"){
+    const w = info.wire;
+    title = w.kind === "power" ? "Силовой кабель" : w.kind === "heat" ? "Греющий кабель дренажа" : "Слаботочный кабель (витая пара)";
+    lines.push(w.kind === "power" ? "5×4 мм² к рекуператору, 3×2,5 мм² к розетке; в гофре/металлорукаве" :
+      w.kind === "heat" ? "саморегулирующийся, 10–20 Вт/м, внутри дренажной трубки" : "FTP 5e, отдельно от силовых кабелей");
   }
   const b = document.createElement("b"); b.textContent = title;
   el.append(b, ...lines.filter(Boolean).map(t => { const s = document.createElement("span"); s.className = "mono"; s.textContent = t; return s; }));
@@ -738,7 +757,7 @@ function applyVisibility(){
     if (fl.underlay){ fl.underlay.visible = state.underlay; fl.underlay.material.opacity = state.underlayOpacity; }
   }
   sun.castShadow = state.mode === "3d";
-  for (const o of ventObjs) o.visible = state.vent && (!o.userData.reserve || state.reserve);
+  for (const o of ventObjs) o.visible = state.vent && (!o.userData.reserve || state.reserve) && (!o.userData.elec || state.elec);
   mats.roof.transparent = state.vent; mats.roof.opacity = state.vent ? 0.45 : 1; mats.roof.depthWrite = !state.vent;
   if (roofGroup) roofGroup.visible = state.roof && state.mode === "3d" && (state.floor === 0);
   for (const o of furnGroup.children){
@@ -818,6 +837,7 @@ $("underlayOpacity").oninput = e => { state.underlayOpacity = +e.target.value; $
 $("resetBtn").onclick = resetView;
 $("showVent").onchange = e => { state.vent = e.target.checked; applyView(); };
 $("showReserve").onchange = e => { state.reserve = e.target.checked; applyView(); };
+$("showElec").onchange = e => { state.elec = e.target.checked; applyView(); };
 $("menuBtn").onclick = () => { const a = $("app").classList.toggle("collapsed"); $("menuBtn").setAttribute("aria-expanded", String(!a)); setTimeout(resize, 50); };
 
 /* ---------- указатель: выбор, перетаскивание, рулетка ---------- */
@@ -993,7 +1013,7 @@ function tick(){
   const small = camDist > 55 || w < 640;
   const topLabel = state.floor || (state.mode === "plan" ? 1 : 2);
   for (const l of labelEls){
-    let show = l.fixed || (l.vent ? (state.vent && l.grp.visible && (!l.reserve || state.reserve) && (l.level === topLabel || state.explode >= 2.5 || state.mode === "plan"))
+    let show = l.fixed || (l.vent ? (state.vent && (!l.elec || state.elec) && l.grp.visible && (!l.reserve || state.reserve) && (l.level === topLabel || state.explode >= 2.5 || state.mode === "plan"))
       : (state.labels && l.grp && l.grp.visible && (l.level === topLabel || state.explode >= 2.5)));
     if (show && !l.fixed){
       v.copy(l.pos); v.y += l.grp.position.y;

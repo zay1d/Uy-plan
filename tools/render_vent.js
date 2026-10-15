@@ -3,7 +3,7 @@ const { chromium } = require('playwright');
 const fs = require('fs'), path = require('path');
 (async () => {
   const dir = path.join(__dirname, '..', 'plan');
-  const names = ['vent-1-etazh-2', 'vent-2-krovlya', 'vent-3-etazh-1'];
+  const names = ['vent-1-etazh-2', 'vent-2-krovlya', 'vent-5-elektrika', 'vent-3-etazh-1'];
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: 3300, height: 1980 } });
   const pages = [];

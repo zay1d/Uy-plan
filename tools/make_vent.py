@@ -79,6 +79,31 @@ def grille_svg(g):
     return o
 
 
+WIRE = {"power": ("#c0392b", 55, None), "lv": (PURPLE, 38, "140 90"), "heat": ("#e67e22", 45, "60 60")}
+
+
+def marker(x, y, n, reserve=False):
+    op = 0.5 if reserve else 1
+    return (f'<circle cx="{mp.sx(x)}" cy="{mp.sy(y)}" r="190" fill="#fff" stroke="{PURPLE}" stroke-width="45" opacity="{op}"/>'
+            f'<text x="{mp.sx(x)}" y="{mp.sy(y) + 72}" font-size="210" font-weight="700" fill="{PURPLE}" '
+            f'text-anchor="middle" opacity="{op}">{n}</text>')
+
+
+def wire_svg(wi, faded=False):
+    color, width, dash = WIRE[wi["kind"]]
+    pts = wi["pts"]
+    if len(pts) < 2:
+        return ""
+    return poly(pts, color, width, dash=("200 150" if wi.get("reserve") else dash), opacity=0.35 if faded else 0.95)
+
+
+def elec_marker_pos(e):
+    """Смещение номера от точки, чтобы не закрывать стену."""
+    x, y = e["pos"][:2]
+    nx, ny = e.get("nrm") or [0, 0]
+    return x + nx * 420, y + ny * 420
+
+
 DEFS = "".join(
     f'<marker id="arr-{k}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">'
     f'<path d="M0,0 L10,5 L0,10 z" fill="{c}"/></marker>' for k, c in COL.items())
@@ -122,16 +147,10 @@ def sheet_floor2():
         for g in side["grilles"]:
             if not g.get("reserve"):
                 o.append(grille_svg(g))
-        for s in side["sensors"]:
-            x, y = s["pos"][:2]
-            left = side["side"] == "L"
-            o.append(f'<circle cx="{mp.sx(x)}" cy="{mp.sy(y)}" r="130" fill="{PURPLE}"/>')
-            o.append(text(x + (-180 if left else 180), y - 330, "CO₂", 170, PURPLE, "end" if left else "start"))
-        for c in side["cables"]:
-            if c["kind"] == "panel":
-                x, y = c["pos"][:2]
-                o.append(f'<rect x="{mp.sx(x) - 120}" y="{mp.sy(y) - 140}" width="240" height="140" fill="{PURPLE}"/>')
-                o.append(text(x, y + 300, "пульт h=1,5 м", 170, PURPLE))
+        for e in side["elec"]:
+            if e["kind"] in ("sensor", "pult") and not e.get("reserve"):
+                mx, my = elec_marker_pos(e)
+                o.append(marker(mx, my, e["n"]))
     # подписи шахт и труб (левая и правая)
     for side in (L, R):
         sh = [s for s in side["shafts"] if not s.get("reserve")]
@@ -155,7 +174,7 @@ def sheet_floor2():
     o.append(mp.dim_v(11400 + 800, g[("D2", "sup")]["pos"][1], 12000))
     o.append(mp.dim_v(11400 + 800, g[("D2", "eta")]["pos"][1], g[("D2", "sup")]["pos"][1]))
     o.append(legend(-1650, [(COL["sup"], "приток в спальню", "line"), (COL["eta"], "вытяжка из спальни", "line"),
-                            ("#33414b", "шахта (короб с гофрой)", "shaft"), (PURPLE, "датчик CO₂ / пульт (электрика)", "dot")]))
+                            ("#33414b", "шахта (короб с гофрой)", "shaft"), (PURPLE, "электроточки — см. лист «Электрика»", "dot")]))
     o.append(text(-205, -2350, "○ — место опуска трубы с кровли (проходка через перекрытие Ø200). "
                   "П/В 120 — приток/вытяжка, м³/ч.", 210, "#444", "start", 400, halo=False))
     return svg.replace("</svg>", "\n".join(o) + "\n</svg>")
@@ -189,12 +208,12 @@ def sheet_roof():
                 h = (d["pts"][-1][2] - vent.ROOF) / 1000
                 lbl = f'{"забор" if d["type"] == "oda" else "выброс"} Ø{d["d"]}, +{str(h).replace(".", ",")} м'
                 o.append(text(x, y + (-560 if d["type"] == "oda" else 420), lbl, 190, COL[d["type"]]))
-        for c in side["cables"]:
-            if c["kind"] == "power":
-                x, y = c["pos"][:2]
-                o.append(f'<circle cx="{mp.sx(x)}" cy="{mp.sy(y)}" r="110" fill="{PURPLE}"/>')
-                o.append(text(x + (-180 if x < 14850 else 180), y - 60, "кабели (гильза Ø50)", 170, PURPLE,
-                              "end" if x < 14850 else "start"))
+        for wi in side["wires"]:
+            if wi["pts"][-1][2] > vent.ROOF and wi["pts"][0][2] > vent.FL2 and wi["kind"] != "lv":
+                o.append(wire_svg(wi))
+        for e in side["elec"]:
+            if e["kind"] in ("riser", "isolator", "socket", "heat"):
+                o.append(marker(*e["pos"][:2], e["n"]))
         # подписи трасс
         for d in side["ducts"]:
             if d["zone"] == "roof" and d.get("to") and d["type"] == "sup":
@@ -210,7 +229,7 @@ def sheet_roof():
     o.append(mp.dim_v(x1 + 450, 8150, y0))
     o.append(legend(-1650, [(COL["sup"], "приток", "line"), (COL["eta"], "вытяжка", "line"),
                             (COL["oda"], "забор наружного воздуха", "dot"), (COL["eha"], "выброс", "dot"),
-                            (PURPLE, "выход кабелей", "dot")]))
+                            (PURPLE, "электроточки (номера — лист «Электрика»)", "dot")]))
     o.append(text(-205, -2350, "Привязка рекуператора — от внутренних граней стен лестничной клетки, см. Правый — зеркально.",
                   210, "#444", "start", 400, halo=False))
     return svg.replace("</svg>", "\n".join(o) + "\n</svg>")
@@ -244,6 +263,44 @@ def sheet_floor1():
     o.append(legend(-1650, [(COL["sup"], "приток (резерв)", "dash"), (COL["eta"], "вытяжка (резерв)", "dash"),
                             ("#33414b", "шахта Б (продолжение)", "shaft")]))
     o.append(text(-205, -2350, "Центр решёток — 2,90 м от пола 1-го этажа. Размеры в см.", 210, "#444", "start", 400, halo=False))
+    return svg.replace("</svg>", "\n".join(o) + "\n</svg>")
+
+
+# ------------------------------------------------------------------ электрика
+def sheet_elec():
+    fade = f'<rect x="0" y="0" width="{mp.VB[2] - mp.VB[0]}" height="{mp.VB[3] - mp.VB[1]}" fill="#fff" opacity="0.45"/>'
+    svg = base(2, "ЭЛЕКТРИКА ДЛЯ ВЕНТИЛЯЦИИ — 2-й ЭТАЖ И КРОВЛЯ", [
+        "Номера точек — как в таблице «Электрика» (последний лист). Правая половина — зеркально, номера те же.",
+        "Красное — силовые кабели, фиолетовое — слаботочные (витая пара), оранжевое — греющий кабель дренажа. Пунктир на кровле — кабели в гофре/металлорукаве.",
+    ], pre=fade)
+    o = [f"<defs>{DEFS}</defs>"]
+    for side in (L, R):
+        for d in side["ducts"]:          # трубы — бледным фоном
+            if d["zone"] in ("ceil2", "roof") and d["type"] in ("sup", "eta"):
+                o.append(poly(d["pts"], COL[d["type"]], d["d"], opacity=0.18))
+        for s in side["shafts"]:
+            if not s.get("reserve"):
+                o.append(shaft_svg(s, faded=True))
+        u = side["unit"]
+        x0, x1, y0, y1 = u["rect"]
+        o.append(f'<rect x="{mp.sx(x0)}" y="{mp.sy(y1)}" width="{x1 - x0}" height="{y1 - y0}" fill="#fff" fill-opacity=".7" '
+                 f'stroke="#1c2830" stroke-width="30" stroke-dasharray="120 80"/>')
+        o.append(text((x0 + x1) / 2, (y0 + y1) / 2 - 60, "рекуператор", 170, "#1c2830", weight=600))
+        o.append(text((x0 + x1) / 2, (y0 + y1) / 2 - 260, "(на кровле)", 150, "#555", weight=400))
+        for wi in side["wires"]:
+            if not wi.get("reserve"):
+                o.append(wire_svg(wi))
+        for e in side["elec"]:
+            if e.get("reserve"):
+                continue
+            mx, my = elec_marker_pos(e) if e["kind"] in ("sensor", "pult") else e["pos"][:2]
+            if e["kind"] == "riser":
+                mx += 0
+            o.append(marker(mx, my, e["n"]))
+    o.append(legend(-1650, [("#c0392b", "силовой кабель (линии 1 и 2)", "line"), (PURPLE, "витая пара (пульт, датчики)", "dash"),
+                            ("#e67e22", "греющий кабель дренажа", "line"), (PURPLE, "точка — номер в таблице", "dot")]))
+    o.append(text(-205, -2350, "1 — стояк от щита идёт с 1-го этажа (штроба у оси 1) через шахту А на кровлю. "
+                  "Все подрозетники — на 1,5 м от пола.", 210, "#444", "start", 400, halo=False))
     return svg.replace("</svg>", "\n".join(o) + "\n</svg>")
 
 
@@ -320,21 +377,24 @@ def spec_html():
         return (f'<tr><td>{next(r["name"] for r in L["rooms"] if r["id"] == rid)}</td><td>{s["wall"]}</td>'
                 f'<td class=n>{round(s["off"] / 10)}</td><td class=n>{round(e["off"] / 10)}</td><td>{s["from"]}</td></tr>')
     rows_grilles = "".join(gline(r) for r in ("R", "D1", "D2", "K1"))
+    rows_elec = "".join(
+        f'<tr{" class=res" if e.get("reserve") else ""}><td class=n>{e["n"]}</td><td>{e["name"]}</td>'
+        f'<td>{e["where"]}; {e["h"]}</td><td>{e["cable"]}</td></tr>' for e in L["elec"])
     return f"""<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Вентиляция — спецификация</title>
 <style>
 @page{{size:A3 landscape;margin:12mm}}
-body{{font-family:"DejaVu Sans",Arial,sans-serif;color:#1c2830;font-size:10pt;margin:0}}
+body{{font-family:"DejaVu Sans",Arial,sans-serif;color:#1c2830;font-size:9.5pt;margin:0}}
 h1{{font-size:20pt;margin:0 0 4mm}}
 h2{{font-size:12.5pt;margin:5mm 0 2mm;text-transform:uppercase;letter-spacing:.04em;color:#444}}
-.grid{{display:grid;grid-template-columns:1.15fr 1fr;gap:8mm}}
-table{{border-collapse:collapse;width:100%;font-size:9.5pt}}
+.grid{{display:grid;grid-template-columns:1.1fr 1fr 1.1fr;gap:7mm}}
+table{{border-collapse:collapse;width:100%;font-size:8.6pt}}
 th,td{{border:1px solid #c9d1d6;padding:3px 6px;text-align:left;vertical-align:top}}
 th{{background:#eef1f3;font-weight:600}}
 td.n{{text-align:right;font-variant-numeric:tabular-nums}}
 tr.res td{{color:#777}}
 ul{{margin:0;padding-left:5mm}} li{{margin:1mm 0}}
-.muted{{color:#666;font-size:9pt}}
-svg{{display:block;width:100%;height:92mm}}
+.muted{{color:#666;font-size:8.3pt}}
+svg{{display:block;width:100%;height:60mm}}
 h2{{margin-top:3.5mm}}
 </style></head><body>
 <h1>Вентиляция спален: разрез, спецификация, электрика</h1>
@@ -349,28 +409,6 @@ h2{{margin-top:3.5mm}}
 <tr><td><b>Итого на рекуператор</b></td><td></td><td></td><td class=n><b>{L["total"]}</b></td><td class=n><b>{L["total"]}</b></td><td>магистрали Ø160</td></tr>
 <tr class=res><td>С резервом 1-го этажа</td><td></td><td></td><td class=n>{L["totalWithReserve"]}</td><td class=n>{L["totalWithReserve"]}</td><td></td></tr></table>
 <p class="muted">Расчёт: 60 м³/ч на спящего человека (CO₂ ниже ~900 ppm при закрытой двери), не меньше одного обмена в час и не меньше 90 м³/ч на спальню. Скорость в Ø125 — до 2,7 м/с, в Ø160 — до 2,9 м/с (тихо). Рекуператор 1000 м³/ч работает на 33–45% — с большим запасом; по расчёту хватило бы агрегата на 500–600 м³/ч.</p>
-<h2>Решётки (центр на 2,90 м от пола)</h2>
-<table><tr><th>Спальня</th><th>Стена</th><th>Приток, см от угла</th><th>Вытяжка, см от угла</th><th>Угол отсчёта</th></tr>{rows_grilles}</table>
-<p class="muted">Отверстие в стене Ø150 (под гофру Ø125 с уплотнением). Приток — решётка 200×100 с регулируемыми жалюзи, направить вдоль потолка в комнату; вытяжка — простая решётка 200×100. В комнате родителей решётки всего в 1 м друг от друга (короткая стена до двери санузла) — приток обязательно направить от стены в глубину комнаты.</p>
-</div>
-<div>
-<h2>Электрика — заложить сейчас (на каждый рекуператор)</h2>
-<table><tr><th>Что</th><th>Кабель</th><th>Откуда → куда</th></tr>
-<tr><td>Питание рекуператора</td><td>ВВГнг(А)-LS 5×4 мм² (подходит и для 1-фазного, и для 3-фазного агрегата с электроподогревом до ~6 кВт)</td><td>щит (отдельный автомат по паспорту) → выход на кровлю у рекуператора, гильза Ø50; у агрегата — ремонтный выключатель IP65</td></tr>
-<tr><td>Пульт управления</td><td>витая пара FTP 5e (или 4×0,75 экр., по паспорту)</td><td>пульт в холле 2-го эт., h = 1,5 м → через шахту А → агрегат</td></tr>
-<tr><td>Датчики CO₂/влажности (по желанию)</td><td>витая пара FTP 5e, по одной на спальню</td><td>каждая спальня, h = 1,5 м, на стене напротив решёток → ближайшая шахта (А или Б) → агрегат</td></tr>
-<tr><td>Обогрев дренажа конденсата</td><td>ВВГнг 3×1,5 мм²</td><td>от щита или клеммной коробки агрегата → греющий кабель в дренажной трубке на кровле</td></tr>
-<tr><td>Запас</td><td>пустая гофра ПНД Ø32 с протяжкой</td><td>в каждой шахте, от потолка 2-го эт. до кровли</td></tr></table>
-<p class="muted">Точное сечение и номинал автомата — по паспорту выбранной модели. Без электроподогревателя агрегату хватает 3×2,5 мм², но в Ташкенте зимой бывает −10…−15 °C, и пластинчатый рекуператор без подогрева обмерзает — поэтому кабель с запасом.</p>
-<h2>Шахты и трубы</h2>
-<ul>
-<li><b>Шахта А</b> — в кладовой, в углу у наружной стены (короб 40×30 см): 2 трубы Ø160 с кровли. В потолке кладовой — тройники: на детскую (крыло) и через потолок санузла на комнату родителей.</li>
-<li><b>Шахта Б</b> — в общем санузле, у стены детской (короб 30×50 см): 2 трубы Ø160 с кровли → детская (центр). При резерве продолжается вниз в санузел 1-го этажа.</li>
-<li>Внутри дома — гибкие гофрированные трубы; лучше полужёсткие с гладкой внутренней стенкой. Каждый отвод — не длиннее 3–4 м, натянут без провисов, поворотов минимум.</li>
-<li>На каждом отводе — ирисовый клапан для настройки расхода, доступ через лючок в подшивном потолке санузла или кладовой.</li>
-<li>Шумоглушители Ø160 длиной 1 м на притоке и вытяжке сразу под кровлей (в шахте или потолке кладовой). Решётки двух спален с общей магистрали разнести так, чтобы между ними было ≥ 1,5 м трубы — меньше «переговоров» между комнатами.</li>
-<li>На кровле — трубы в утеплителе 50 мм с металлическим кожухом, на опорах 15–25 см. Проходки через кровлю — заводские, с герметизацией.</li>
-</ul>
 <h2>Забор и выброс воздуха</h2>
 <ul>
 <li><b>Забор</b> — колпак сеткой вниз, низ не ниже 1 м над кровлей (пыль, жар от покрытия летом, снег), со стороны двора.</li>
@@ -381,13 +419,36 @@ h2{{margin-top:3.5mm}}
 </ul>
 <h2>Чего эта схема не делает</h2>
 <ul><li>Санузлы и кухня вентилируются отдельно (свои вытяжные вентиляторы и трубы на кровлю); их выходы — не ближе 3 м от забора рекуператора.</li></ul>
+</div>
+<div>
+<h2>Решётки (центр на 2,90 м от пола)</h2>
+<table><tr><th>Спальня</th><th>Стена</th><th>Приток, см от угла</th><th>Вытяжка, см от угла</th><th>Угол отсчёта</th></tr>{rows_grilles}</table>
+<p class="muted">Отверстие в стене Ø150 (под гофру Ø125 с уплотнением). Приток — решётка 200×100 с регулируемыми жалюзи, направить вдоль потолка в комнату; вытяжка — простая решётка 200×100. В комнате родителей решётки всего в 1 м друг от друга (короткая стена до двери санузла) — приток обязательно направить от стены в глубину комнаты.</p>
+<h2>Шахты и трубы</h2>
+<ul>
+<li><b>Шахта А</b> — в кладовой, в углу у наружной стены (короб 40×30 см): 2 трубы Ø160 с кровли. В потолке кладовой — тройники: на детскую (крыло) и через потолок санузла на комнату родителей.</li>
+<li><b>Шахта Б</b> — в общем санузле, у стены детской (короб 30×50 см): 2 трубы Ø160 с кровли → детская (центр). При резерве продолжается вниз в санузел 1-го этажа.</li>
+<li>Внутри дома — гибкие гофрированные трубы; лучше полужёсткие с гладкой внутренней стенкой. Каждый отвод — не длиннее 3–4 м, натянут без провисов, поворотов минимум.</li>
+<li>На каждом отводе — ирисовый клапан для настройки расхода, доступ через лючок в подшивном потолке санузла или кладовой.</li>
+<li>Шумоглушители Ø160 длиной 1 м на притоке и вытяжке сразу под кровлей (в шахте или потолке кладовой). Решётки двух спален с общей магистрали разнести так, чтобы между ними было ≥ 1,5 м трубы — меньше «переговоров» между комнатами.</li>
+<li>На кровле — трубы в утеплителе 50 мм с металлическим кожухом, на опорах 15–25 см. Проходки через кровлю — заводские, с герметизацией.</li>
+</ul>
+</div>
+<div>
+<h2>Электрика — что оставить (на каждую половину дома)</h2>
+<table><tr><th>№</th><th>Что</th><th>Где, высота</th><th>Кабель</th></tr>{rows_elec}</table>
+<h2>В щите (на каждый рекуператор)</h2>
+<table><tr><th>Линия</th><th>Автомат</th><th>Кабель</th><th>Куда</th></tr>
+<tr><td>1. Рекуператор</td><td>по паспорту агрегата (обычно 1P C16–C25 или 3P C16)</td><td>5×4 мм²</td><td>выключатель IP65 на раме (2)</td></tr>
+<tr><td>2. Розетка и обогрев дренажа</td><td>дифавтомат 1P C16, 30 мА</td><td>3×2,5 мм²</td><td>розетка IP65 (3) и коробка греющего кабеля (4)</td></tr></table>
+<p class="muted">В каждой шахте — ещё пустая гофра Ø32 с протяжкой на запас. Слаботочные кабели ведите отдельно от силовых (не в одной гофре). Точное сечение и номинал автомата — по паспорту выбранной модели. Без электроподогревателя агрегату хватает 3×2,5 мм², но в Ташкенте зимой бывает −10…−15 °C, и пластинчатый рекуператор без подогрева обмерзает — поэтому кабель с запасом.</p>
 </div></div></body></html>"""
 
 
 if __name__ == "__main__":
     os.makedirs(mp.OUT, exist_ok=True)
     for name, fn in (("vent-1-etazh-2.svg", sheet_floor2), ("vent-2-krovlya.svg", sheet_roof),
-                     ("vent-3-etazh-1.svg", sheet_floor1)):
+                     ("vent-3-etazh-1.svg", sheet_floor1), ("vent-5-elektrika.svg", sheet_elec)):
         with open(os.path.join(mp.OUT, name), "w", encoding="utf-8") as fh:
             fh.write(fn())
         print("ok", name)
