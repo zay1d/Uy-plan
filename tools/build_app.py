@@ -14,6 +14,11 @@ out = src.replace("__HOUSE_JSON__", house)
 for f in (1, 2):
     with open(os.path.join(APP, f"underlay-{f}.jpg"), "rb") as fh:
         out = out.replace(f"__UNDERLAY_{f}__", "data:image/jpeg;base64," + base64.b64encode(fh.read()).decode())
+# PDF-чертежи рядом со страницей (ссылки «Чертежи в PDF» в панели)
+import shutil
+os.makedirs(os.path.join(APP, "plan"), exist_ok=True)
+for name in ("ventilyaciya.pdf", "plan-doma.pdf"):
+    shutil.copyfile(os.path.join(ROOT, "plan", name), os.path.join(APP, "plan", name))
 with open(os.path.join(APP, "index.html"), "w", encoding="utf-8") as fh:
     fh.write(out)
 print("app/index.html", len(out) // 1024, "KB")
