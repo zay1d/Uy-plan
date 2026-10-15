@@ -33,6 +33,7 @@ WIN = []      # окна / витражи (ориентация определя
 OPEN = []     # дверные проёмы (для подписи ширины): (x, y, ширина, 'h'|'v')
 ROOMS = []    # (название, [прямоугольники площади], (размер-прямоугольник), (lx, ly))
 EXTRA = []    # прочие svg-элементы
+GAPS = []     # вырезанные проёмы стен (для перемычек в 3D)
 
 
 def wall(lst, x0, x1, y0, y1, gaps=(), axis=None):
@@ -42,6 +43,7 @@ def wall(lst, x0, x1, y0, y1, gaps=(), axis=None):
     a0, a1 = (x0, x1) if axis == "h" else (y0, y1)
     cur = a0
     for g0, g1 in sorted(gaps):
+        GAPS.append((x0, x1, g0, g1) if axis == "v" else (g0, g1, y0, y1))
         if g0 > cur:
             lst.append((x0, x1, cur, g0) if axis == "v" else (cur, g0, y0, y1))
         cur = g1
@@ -284,7 +286,7 @@ def area(rs):
 
 
 def build(floor):
-    for lst in (EXT, PART, COL, WIN, OPEN, ROOMS, EXTRA):
+    for lst in (EXT, PART, COL, WIN, OPEN, ROOMS, EXTRA, GAPS):
         lst.clear()
     (floor1 if floor == 1 else floor2)()
 
