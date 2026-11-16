@@ -15,7 +15,7 @@ import pypdfium2 as pdfium
 from PIL import Image
 
 import make_plan as mp
-import vent
+import samvent as vent
 
 APP = os.path.join(mp.ROOT, "app")
 

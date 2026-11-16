@@ -167,21 +167,18 @@ label.file input{position:absolute;inset:0;opacity:0;cursor:pointer}
     </section>
 
     <section aria-label="Вентиляция">
-      <h2>Вентиляция спален</h2>
-      <label class="chk"><input type="checkbox" id="showVent" checked> Показать рекуператоры, короба и трубы</label>
-      <label class="chk"><input type="checkbox" id="showElec" checked> Электрика: кабели, розетка, пульт, датчики</label>
-      <label class="chk"><input type="checkbox" id="showReserve" checked> Резерв: комната 1-го этажа</label>
+      <h2>Вентиляция спален «СамВент»</h2>
+      <label class="chk"><input type="checkbox" id="showVent" checked> Показать клапаны, трубы и вентилятор</label>
+      <label class="chk"><input type="checkbox" id="showElec" checked> Электрика: вентилятор и регулятор</label>
+      <label class="chk" hidden><input type="checkbox" id="showReserve" checked> Резерв</label>
       <ul class="legend" aria-label="Обозначения">
-        <li><i style="background:var(--sup)"></i>Приток в спальню</li>
-        <li><i style="background:var(--eta)"></i>Вытяжка из спальни</li>
-        <li><i style="background:var(--oda)"></i>Забор наружного воздуха</li>
-        <li><i style="background:var(--eha)"></i>Выброс на улицу</li>
-        <li><i class="sq" style="background:var(--shaft)"></i>Узел / короб на фасаде</li>
-        <li><i style="background:var(--power)"></i>Силовой кабель</li>
-        <li><i style="background:var(--lv)"></i>Витая пара</li>
+        <li><i style="background:var(--sup)"></i>Клапан притока в стене</li>
+        <li><i style="background:var(--eta)"></i>Вытяжка, трубы Ø90</li>
+        <li><i style="background:var(--eha)"></i>Выброс во двор</li>
+        <li><i style="background:var(--power)"></i>Кабель вентилятора</li>
       </ul>
       <div class="vtable-wrap"><table class="vtable" id="ventTable"></table></div>
-      <p class="note">Кровлю не сверлим: трубы входят в дом сквозь заднюю стену и идут в коробах под потолком лестницы, холла и коридора. Нажмите на трубу, решётку, узел, рекуператор или точку ⚡ — внизу появятся диаметр, расход, высота или кабель. Решётки стоят в стенах спален, трубы идут через подшивной потолок санузлов и кладовых.</p>
+      <p class="note">Свежий воздух входит в спальни через клапаны в наружных стенах, проходит под дверями и вытягивается вентилятором из санузлов и кладовой во двор. Кровлю не сверлим. Нажмите на клапан, решётку, трубу или вентилятор — внизу появятся подробности.</p>
     </section>
 
     <section aria-label="Объекты" id="objSection" hidden>
@@ -206,8 +203,8 @@ label.file input{position:absolute;inset:0;opacity:0;cursor:pointer}
 
     <section aria-label="Чертежи">
       <h2>Чертежи в PDF — для мастеров</h2>
-      <a class="btn dl" id="dlVent" href="plan/ventilyaciya.pdf" target="_blank" rel="noopener">
-        <b>Вентиляция спален</b><span>7 листов A3: 2-й этаж, двор, фасад и разрез, электрика, резерв, спецификация · 0,9 МБ</span></a>
+      <a class="btn dl" id="dlVent" href="plan/samvent.pdf" target="_blank" rel="noopener">
+        <b>Вентиляция «СамВент» — для мастеров</b><span>1 лист A3: клапаны, трубы, вентилятор, электрика, что купить · простой чертёж</span></a>
       <a class="btn dl" id="dlPlan" href="plan/plan-doma.pdf" target="_blank" rel="noopener">
         <b>Планы этажей с размерами</b><span>2 листа A3, масштаб 1:100 · 0,4 МБ</span></a>
       <p class="note">Откроется в новой вкладке. Там нажмите «Скачать» или «Печать» (A3, без масштабирования — тогда 1 см на бумаге = 1 м).</p>
@@ -504,7 +501,8 @@ function buildHouse(){
 const VENT_COLORS = {sup:0x2f7fd6, eta:0xde8a2c, oda:0x3f9e4d, eha:0x8a5a44};
 const VENT_NAMES = {sup:"Приток", eta:"Вытяжка", oda:"Забор наружного воздуха", eha:"Выброс"};
 const ZONE_NAMES = {roof:"на кровле, в теплоизоляции 50 мм и защитном кожухе",
-  riser:"в утеплённом коробе на фасаде (задний двор)", box:"сквозь стену Г, в коробе под потолком лестницы / холла / коридора", yard:"во дворе, колпак сеткой вниз на высоте 2 м",
+  riser:"в утеплённом коробе на фасаде (задний двор)", flex:"гибкая антибактериальная труба Ø90 под потолком (короб ~10 см)",
+  outlet:"сквозь заднюю стену во двор, снаружи решётка с обратным клапаном", box:"сквозь стену Г, в коробе под потолком лестницы / холла / коридора", yard:"во дворе, колпак сеткой вниз на высоте 2 м",
   ceil2:"в подшивном потолке санузла / кладовой 2-го этажа", ceil1:"в подшивном потолке санузла 1-го этажа"};
 const ventMats = {};
 function ventMat(type, reserve){
@@ -573,6 +571,7 @@ function buildVent(){
     // трубы
     for (const d of side.ducts){
       const lvl = (d.zone === "ceil1" || d.zone === "riser" || d.zone === "yard") ? 1 : 2;
+      if (d.type === "eha" && d.zone === "outlet"){ /* короткий выброс сквозь стену */ }
       const r = d.d / 2000 + ((d.zone === "roof" || d.zone === "riser") ? 0.05 : 0);
       const mat = ventMat(d.type, d.reserve);
       const pts = d.pts.map(V3);
@@ -584,7 +583,7 @@ function buildVent(){
         const j = new THREE.Mesh(new THREE.SphereGeometry(r, 12, 8), mat); j.position.copy(pts[i]);
         addVent(lvl, j, {kind:"duct", side, duct:d}, d.reserve);
       }
-      if (d.type === "oda" || d.type === "eha"){
+      if ((d.type === "oda" || d.type === "eha") && d.zone !== "outlet"){
         const end = pts[pts.length - 1];
         const cap = new THREE.Mesh(new THREE.ConeGeometry(r * 2.2, 0.25, 16), mat);
         cap.position.copy(end).add(new THREE.Vector3(0, 0.2, 0));
@@ -595,15 +594,28 @@ function buildVent(){
     // решётки в стенах спален
     for (const g of side.grilles){
       const lvl = g.reserve ? 1 : 2;
-      const w = 0.25, h = 0.12, t = 0.04;
-      const along = g.n[0] === 0 ? [w, t] : [t, w];
-      const geo = new THREE.BoxGeometry(along[0], h, along[1]);
-      const m = new THREE.Mesh(geo, ventMat(g.type, g.reserve));
       const [X, Z] = P(g.pos[0], g.pos[1]);
-      m.position.set(X + g.n[0] * t / 2, mm(g.pos[2]), Z - g.n[1] * t / 2);
+      let m;
+      if (g.kind === "ceiling"){
+        m = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.03, 0.3), ventMat(g.type, g.reserve));
+        m.position.set(X, mm(g.pos[2]), Z);
+        addVent(lvl, m, {kind:"grille", side, grille:g}, g.reserve);
+        ventLabel(lvl, m.position.clone().add(new THREE.Vector3(0, -0.25, 0)), `${g.id} · ${g.flow}`, g.type, g.reserve);
+        continue;
+      }
+      if (g.kind === "valve"){
+        m = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.06, 24), ventMat(g.type, g.reserve));
+        if (g.n[0] === 0) m.rotation.x = Math.PI / 2; else m.rotation.z = Math.PI / 2;
+        m.position.set(X + g.n[0] * 0.03, mm(g.pos[2]), Z - g.n[1] * 0.03);
+      } else {
+        const w = 0.25, h = 0.12, t = 0.04;
+        const along = g.n[0] === 0 ? [w, t] : [t, w];
+        m = new THREE.Mesh(new THREE.BoxGeometry(along[0], h, along[1]), ventMat(g.type, g.reserve));
+        m.position.set(X + g.n[0] * t / 2, mm(g.pos[2]), Z - g.n[1] * t / 2);
+      }
       addVent(lvl, m, {kind:"grille", side, grille:g}, g.reserve);
       ventLabel(lvl, m.position.clone().add(new THREE.Vector3(g.n[0] * 0.35, -0.3, -g.n[1] * 0.35)),
-        `${g.type === "sup" ? "П" : "В"} ${g.flow}`, g.type, g.reserve);
+        g.kind === "valve" ? `К ${g.flow}` : `${g.type === "sup" ? "П" : "В"} ${g.flow}`, g.type, g.reserve);
     }
     // гильзы в отверстиях стен
     const FLv = V.levels.fl2;
@@ -650,13 +662,14 @@ function buildVent(){
   renderVentTable();
 }
 
+function g_kind(info){ return info.grille && info.grille.kind; }
 function renderVentTable(){
   const V = HOUSE.vent, t = $("ventTable"); if (!V || !t) return;
   const side = V.sides[0];
   const rows = side.rooms.map(r => `<tr class="${r.reserve ? "res" : ""}"><td></td><td class="n">${r.flow}</td></tr>`);
   t.innerHTML = `<thead><tr><th>Спальня (на половину дома)</th><th>м³/ч</th></tr></thead><tbody>${rows.join("")}
-    <tr class="tot"><td>Итого на рекуператор</td><td class="n">${side.total}</td></tr>
-    <tr class="res"><td>С резервом 1-го этажа</td><td class="n">${side.totalWithReserve}</td></tr></tbody>`;
+    <tr class="tot"><td>Итого на вентилятор</td><td class="n">${side.total}</td></tr>
+    </tbody>`;
   t.querySelectorAll("tbody tr").forEach((tr, i) => { if (i < side.rooms.length) tr.cells[0].textContent = side.rooms[i].name; });
 }
 
@@ -664,7 +677,12 @@ function showVent(info){
   const el = $("info"); el.hidden = false; el.innerHTML = "";
   const side = info.side, lines = [];
   let title = "";
-  if (info.kind === "unit"){
+  if (info.kind === "unit" && HOUSE.vent.system === "samvent"){
+    title = `${side.unit.name} + коллектор`;
+    lines.push(`тянет ${side.total} м³/ч из санузлов и кладовой`, "канальный, тихий, 350–400 м³/ч, с глушителем",
+      side.unit.where, "коллектор на 8 труб Ø90 с дросселями — настройка по каждой решётке",
+      "выброс Ø160 сквозь заднюю стену во двор");
+  } else if (info.kind === "unit"){
     title = `${side.unit.name} (${HOUSE.vent.unitCapacity} м³/ч)`;
     lines.push(`расчёт: ${side.total} м³/ч приток = ${side.total} м³/ч вытяжка`,
       `с резервом 1-го этажа: ${side.totalWithReserve} м³/ч`,
@@ -687,6 +705,16 @@ function showVent(info){
     if (d.type === "oda") lines.push("во дворе, колпак сеткой вниз на высоте 2 м от земли");
     if (d.type === "eha") lines.push("в коробе по фасаду вверх и снаружи по стене, дефлектор на 1 м выше кровли (кровлю не сверлим)");
     if (d.reserve) lines.push("резерв: прокладывать, если комната станет спальней");
+  } else if (info.kind === "grille" && g_kind(info) === "valve"){
+    const g = info.grille;
+    title = `Приточный клапан · ${roomName(side, g.room)}`;
+    lines.push(`~${g.flow} м³/ч, без электричества, фильтр от пыли и насекомых`, g.wall,
+      `центр на ${fmt((g.pos[2] - HOUSE.vent.levels.fl2) / 1000)} м от пола`, "отверстие Ø130, заслонка регулируется рукой");
+  } else if (info.kind === "grille" && g_kind(info) === "ceiling"){
+    const g = info.grille;
+    title = `Вытяжка ${g.id} · ${g.where}`;
+    lines.push(`${g.flow} м³/ч — воздух приходит из спальни «${roomName(side, g.room)}» под дверью`,
+      "решётка в подшивном потолке, 2,45 м", "трубы Ø90 к коллектору у вентилятора");
   } else if (info.kind === "grille"){
     const g = info.grille;
     title = `Решётка: ${g.type === "sup" ? "приток" : "вытяжка"} · ${roomName(side, g.room)}`;

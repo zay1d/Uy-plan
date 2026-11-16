@@ -17,7 +17,7 @@ for f in (1, 2):
 # PDF-чертежи рядом со страницей (ссылки «Чертежи в PDF» в панели)
 import shutil
 os.makedirs(os.path.join(APP, "plan"), exist_ok=True)
-for name in ("ventilyaciya.pdf", "plan-doma.pdf"):
+for name in ("samvent.pdf", "plan-doma.pdf"):
     shutil.copyfile(os.path.join(ROOT, "plan", name), os.path.join(APP, "plan", name))
 with open(os.path.join(APP, "index.html"), "w", encoding="utf-8") as fh:
     fh.write(out)
