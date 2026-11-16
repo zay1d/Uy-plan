@@ -28,6 +28,6 @@
 на каждую половину дома: гибкие трубы Ø90 из санузлов и кладовой через коллектор, выброс через заднюю
 стену во двор. Кровлю не сверлим.
 
-- `plan/samvent.pdf` / `samvent.png` — простой чертёж для мастеров (1 лист A3)
+- `plan/samvent.pdf` / `samvent.png` — простой чертёж для мастеров: оба этажа на 1 листе A3
 - модель — `tools/samvent.py`, чертёж — `tools/make_samvent.py` + `tools/render_samvent.js`
 - прежний вариант с рекуператором (не используется): `tools/vent.py`, `tools/make_vent.py`, `plan/ventilyaciya.pdf`

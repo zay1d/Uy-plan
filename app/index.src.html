@@ -167,7 +167,7 @@ label.file input{position:absolute;inset:0;opacity:0;cursor:pointer}
     </section>
 
     <section aria-label="Вентиляция">
-      <h2>Вентиляция спален «СамВент»</h2>
+      <h2>Вентиляция «СамВент»</h2>
       <label class="chk"><input type="checkbox" id="showVent" checked> Показать клапаны, трубы и вентилятор</label>
       <label class="chk"><input type="checkbox" id="showElec" checked> Электрика: вентилятор и регулятор</label>
       <label class="chk" hidden><input type="checkbox" id="showReserve" checked> Резерв</label>
@@ -204,7 +204,7 @@ label.file input{position:absolute;inset:0;opacity:0;cursor:pointer}
     <section aria-label="Чертежи">
       <h2>Чертежи в PDF — для мастеров</h2>
       <a class="btn dl" id="dlVent" href="plan/samvent.pdf" target="_blank" rel="noopener">
-        <b>Вентиляция «СамВент» — для мастеров</b><span>1 лист A3: клапаны, трубы, вентилятор, электрика, что купить · простой чертёж</span></a>
+        <b>Вентиляция «СамВент» — для мастеров</b><span>1 лист A3: оба этажа, клапаны, трубы, вентиляторы, электрика, что купить</span></a>
       <a class="btn dl" id="dlPlan" href="plan/plan-doma.pdf" target="_blank" rel="noopener">
         <b>Планы этажей с размерами</b><span>2 листа A3, масштаб 1:100 · 0,4 МБ</span></a>
       <p class="note">Откроется в новой вкладке. Там нажмите «Скачать» или «Печать» (A3, без масштабирования — тогда 1 см на бумаге = 1 м).</p>
@@ -545,13 +545,14 @@ function buildVent(){
   const FL2 = V.levels.fl2;
   for (const side of V.sides){
     // рекуператор
-    const u = side.unit;
-    const um = box(u.rect, mm(u.z[0]), mm(u.z[1]), unitMat);
-    um.add(new THREE.LineSegments(new THREE.EdgesGeometry(um.geometry), new THREE.LineBasicMaterial({color:0x2b3338})));
-    const ul = u.z[1] < FL2 ? 1 : 2;
-    addVent(ul, um, {kind:"unit", side});
-    const [ux, uz] = P((u.rect[0] + u.rect[1]) / 2, (u.rect[2] + u.rect[3]) / 2);
-    ventLabel(ul, new THREE.Vector3(ux, mm(u.z[1]) + 0.25, uz), `${u.name} · ${side.total} м³/ч`, "unit");
+    for (const u of side.units || [side.unit]){
+      const um = box(u.rect, mm(u.z[0] + (u.floor === 2 ? FL2 * 0 : 0)), mm(u.z[1]), unitMat);
+      um.add(new THREE.LineSegments(new THREE.EdgesGeometry(um.geometry), new THREE.LineBasicMaterial({color:0x2b3338})));
+      const ul = u.floor || (u.z[1] <= FL2 ? 1 : 2);
+      addVent(ul, um, {kind:"unit", side, unit:u});
+      const [ux, uz] = P((u.rect[0] + u.rect[1]) / 2, (u.rect[2] + u.rect[3]) / 2);
+      ventLabel(ul, new THREE.Vector3(ux, mm(u.z[1]) + 0.25, uz), `${u.name} · ${u.flow || side.total} м³/ч`, "unit");
+    }
     if (side.riser){
       const rm = box(side.riser.rect, mm(side.riser.z[0]), mm(side.riser.z[1]), shaftMat, false);
       rm.add(new THREE.LineSegments(new THREE.EdgesGeometry(rm.geometry), new THREE.LineBasicMaterial({color:0x5d6b75})));
@@ -570,7 +571,7 @@ function buildVent(){
     }
     // трубы
     for (const d of side.ducts){
-      const lvl = (d.zone === "ceil1" || d.zone === "riser" || d.zone === "yard") ? 1 : 2;
+      const lvl = d.floor || ((d.zone === "ceil1" || d.zone === "riser" || d.zone === "yard") ? 1 : 2);
       if (d.type === "eha" && d.zone === "outlet"){ /* короткий выброс сквозь стену */ }
       const r = d.d / 2000 + ((d.zone === "roof" || d.zone === "riser") ? 0.05 : 0);
       const mat = ventMat(d.type, d.reserve);
@@ -593,7 +594,7 @@ function buildVent(){
     }
     // решётки в стенах спален
     for (const g of side.grilles){
-      const lvl = g.reserve ? 1 : 2;
+      const lvl = g.floor || (g.reserve ? 1 : 2);
       const [X, Z] = P(g.pos[0], g.pos[1]);
       let m;
       if (g.kind === "ceiling"){
@@ -667,8 +668,8 @@ function renderVentTable(){
   const V = HOUSE.vent, t = $("ventTable"); if (!V || !t) return;
   const side = V.sides[0];
   const rows = side.rooms.map(r => `<tr class="${r.reserve ? "res" : ""}"><td></td><td class="n">${r.flow}</td></tr>`);
-  t.innerHTML = `<thead><tr><th>Спальня (на половину дома)</th><th>м³/ч</th></tr></thead><tbody>${rows.join("")}
-    <tr class="tot"><td>Итого на вентилятор</td><td class="n">${side.total}</td></tr>
+  t.innerHTML = `<thead><tr><th>Комната (на половину дома)</th><th>м³/ч</th></tr></thead><tbody>${rows.join("")}
+    <tr class="tot"><td>Итого (оба этажа)</td><td class="n">${side.total}</td></tr>
     </tbody>`;
   t.querySelectorAll("tbody tr").forEach((tr, i) => { if (i < side.rooms.length) tr.cells[0].textContent = side.rooms[i].name; });
 }
@@ -678,9 +679,11 @@ function showVent(info){
   const side = info.side, lines = [];
   let title = "";
   if (info.kind === "unit" && HOUSE.vent.system === "samvent"){
-    title = `${side.unit.name} + коллектор`;
-    lines.push(`тянет ${side.total} м³/ч из санузлов и кладовой`, "канальный, тихий, 350–400 м³/ч, с глушителем",
-      side.unit.where, "коллектор на 8 труб Ø90 с дросселями — настройка по каждой решётке",
+    const u = info.unit || side.unit;
+    title = `${u.name} + коллектор`;
+    lines.push(`тянет ${u.flow} м³/ч из санузлов${u.floor === 2 ? " и кладовой" : ""} ${u.floor}-го этажа`,
+      `канальный, тихий, ${u.floor === 2 ? "350–400" : "300–350"} м³/ч, с глушителем`,
+      u.where, "коллектор с дросселями — настройка по каждой трубе",
       "выброс Ø160 сквозь заднюю стену во двор");
   } else if (info.kind === "unit"){
     title = `${side.unit.name} (${HOUSE.vent.unitCapacity} м³/ч)`;
